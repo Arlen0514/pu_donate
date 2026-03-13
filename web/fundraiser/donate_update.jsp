@@ -1,15 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/jspf/config.jspf"%>
+<%@include file="/WEB-INF/jspf/csrf_token.jspf"%>
 <%@include file="/web/include/encryption.jsp"%>
 <%
 	String page_code = "donate";														// 功能識別碼
 	String action = StringTool.validString(request.getParameter("action"));
+	
+	// 僅允許 POST 方法
+	if (!"POST".equalsIgnoreCase(request.getMethod())) {
+		response.sendError(405, "Method Not Allowed");
+		return;
+	}
 	
 	try{
 		AESDataEncryption ade = new AESDataEncryption();
 		
 		/*-- 新增捐款紀錄 --*/
 		if("add".equals(action)){
+			// CSRF 驗證
+			if (!validateCSRFToken(session, request.getParameter("csrfToken"), "normalform")) {
+				response.sendError(403, "CSRF token validation failed");
+				return;
+			}
 			// A. 捐款項目
 			String dh_total 				  = StringTool.validString(request.getParameter("dh_total"));
 			String dh_donate_project_category = StringTool.validString(request.getParameter("dh_donate_project_category"));

@@ -77,28 +77,27 @@
 		<dispatcher>ERROR</dispatcher>
 	</filter-mapping>
 
-	<!-- 設定 CSP 20230530 Miles -->
-<!-- 	<filter> -->
-<!-- 	    <filter-name>ContentSecurityPolicyFilter</filter-name> -->
-<!-- 	    <filter-class>com.genesis.filter.cspFilter</filter-class> -->
-<!-- 	</filter> -->
+	<!-- 設定 CSP 20230530 Miles / 20260313 enabled -->
+	<filter>
+	    <filter-name>ContentSecurityPolicyFilter</filter-name>
+	    <filter-class>com.genesis.filter.cspFilter</filter-class>
+	</filter>
 	
-<!-- 	<filter-mapping> -->
-<!-- 	    <filter-name>ContentSecurityPolicyFilter</filter-name> -->
-<!-- 	    <url-pattern>/comm/*</url-pattern> -->
-<!-- 		<url-pattern>/htmleditor/*</url-pattern> -->
-<!-- 		<url-pattern>/jQuery/*</url-pattern> -->
-<!-- 		<url-pattern>/js/*</url-pattern> -->
-<!-- 		<url-pattern>/uploads/*</url-pattern> -->
-<!-- 		<url-pattern>/web/*</url-pattern> -->
-<!-- 		<url-pattern>/404.jsp</url-pattern> -->
-<!-- 		<url-pattern>/403.jsp</url-pattern> -->
-<!-- 		<url-pattern>/400.jsp</url-pattern> -->
-<!-- 		<url-pattern>/500.jsp</url-pattern> -->
-<!-- 		<url-pattern>/home.jsp</url-pattern> -->
-<!-- 		<url-pattern>/index.jsp</url-pattern> -->
-<!-- 		<url-pattern>/robots.txt</url-pattern> -->
-<!-- 	</filter-mapping> -->
+	<filter-mapping>
+	    <filter-name>ContentSecurityPolicyFilter</filter-name>
+	    <url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- Spring4Shell / ClassLoader 注入防護 20260313 -->
+	<filter>
+	    <filter-name>ClassLoaderProtectionFilter</filter-name>
+	    <filter-class>com.genesis.filter.ClassLoaderProtectionFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+	    <filter-name>ClassLoaderProtectionFilter</filter-name>
+	    <url-pattern>/*</url-pattern>
+	</filter-mapping>
  
     <!-- 設定 SQL Injection 過濾器 -->
 <!-- 	<filter> -->

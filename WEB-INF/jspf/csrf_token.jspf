@@ -1,0 +1,30 @@
+<%-- CSRF Token Helper
+     generateCSRFToken(session, type) : returns existing or new token, stored in session
+     validateCSRFToken(session, token, type) : validates submitted token using constant-time comparison
+     type "normalform" -> session key "csrfToken_n"
+--%>
+<%!
+public String generateCSRFToken(javax.servlet.http.HttpSession sess, String type) {
+    String key = "csrfToken_" + type.charAt(0);
+    String existing = (String) sess.getAttribute(key);
+    if (existing != null && !existing.isEmpty()) {
+        return existing;
+    }
+    String token = java.util.UUID.randomUUID().toString();
+    sess.setAttribute(key, token);
+    return token;
+}
+
+public boolean validateCSRFToken(javax.servlet.http.HttpSession sess, String token, String type) {
+    String key = "csrfToken_" + type.charAt(0);
+    String stored = (String) sess.getAttribute(key);
+    if (stored == null || token == null || token.trim().isEmpty()) return false;
+    try {
+        byte[] storedBytes = stored.getBytes("UTF-8");
+        byte[] submittedBytes = token.getBytes("UTF-8");
+        return java.security.MessageDigest.isEqual(storedBytes, submittedBytes);
+    } catch (java.io.UnsupportedEncodingException e) {
+        return stored.equals(token);
+    }
+}
+%>

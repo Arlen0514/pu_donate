@@ -1,11 +1,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/jspf/config.jspf" %>
+<%@ include file="/WEB-INF/jspf/csrf_token.jspf" %>
 <%
 
 String page_code = "qa";
 String code = "qa";
-String dm_id = StringTool.validString(request.getParameter("dm_id"),"");
+// XSS防護：dm_id 僅允許英數字與連字號，防止反射型 XSS
+String dm_id_raw = StringTool.validString(request.getParameter("dm_id"),"");
+String dm_id = dm_id_raw.matches("[A-Za-z0-9\\-_]*") ? dm_id_raw : "";
 
 //常見問題類別
 Vector<TableRecord> left_menu_qa_dms = app_sm.selectAll(tbldm, "dm_code=? and dm_lang=? ",
@@ -24,6 +27,7 @@ int page_items=10;
 app_dp = new DataPager(qas,page_items);    							//設定資料分頁每頁筆數
 qas = app_dp.getPageContent(pageno);
 
+String csrfToken = generateCSRFToken(session, "normalform");
 
 %>
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/in.dwt" codeOutsideHTMLIsLocked="false" -->
@@ -193,7 +197,7 @@ qas = app_dp.getPageContent(pageno);
 							<form name="pageform" id="pageform" method="post" action="<%=request.getRequestURI()%>">
 								<input type="hidden" name="npage" id="npage" value="<%=pageno %>" />
 								<input type="hidden" name="dm_id" id="dm_id" value="<%=dm_id %>" />
-								
+								<input type="hidden" name="csrfToken" value="<%=csrfToken %>" />
 							</form>
 							</div>
                         </div>

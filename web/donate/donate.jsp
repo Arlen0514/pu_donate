@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jspf/config.jspf"%>
+<%@ include file="/WEB-INF/jspf/csrf_token.jspf"%>
 <%@ include file="/web/include/words.jsp"%>
 <%@ include file="/web/include/encryption.jsp"%>
 <% 
@@ -91,6 +92,8 @@
 	
 	// 數字格式
 	DecimalFormat df = new DecimalFormat("00");
+	
+	String csrfToken = generateCSRFToken(session, "normalform");
 		  
 %>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-TW">
@@ -730,6 +733,7 @@
                         
 						<form name="form0" id="form0" method="post" action="donate_update.jsp?action=add" onsubmit="return checkform(this);">                        
 <!--                         <form name="form0" id="form0" method="post" enctype="multipart/form-data" action="donate_update.jsp?action=add" onsubmit="return checkform(this);">                         -->
+                        <input type="hidden" name="csrfToken" value="<%=csrfToken %>" />
                         <div class="right_contentBg">
             
                             <div class="form_remark">

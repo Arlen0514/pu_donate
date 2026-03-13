@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.genesis.utils.StringTool"%>
 <%@ include file="/WEB-INF/jspf/config.jspf"%>
+<%@ include file="/WEB-INF/jspf/csrf_token.jspf"%>
 <%@ include file="/web/include/words.jsp"%>
 <%!
 public static String maskName(String name) {
@@ -148,6 +149,7 @@ public static String maskName(String name) {
 	page_items = "N".equals(SiteSetup.getValue("ss.pageno").trim()) ? 9999 : page_items;	   														// 預設列表分頁筆數設定
 	app_dp = new DataPager(drs, page_items);
 	drs = app_dp.getPageContent(pageno);
+	String csrfToken = generateCSRFToken(session, "normalform");
 %>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-TW">
 <head>
@@ -295,6 +297,7 @@ public static String maskName(String name) {
                         </div>
                         
                         <form name="form0" id="form0" method="post" onsubmit="return checkform(this);">
+                        <input type="hidden" name="csrfToken" value="<%=csrfToken %>" />
                         <div class="directory_filter_area">
 						    
                             <!--勸募專案-->
@@ -425,6 +428,7 @@ public static String maskName(String name) {
 								<form name="pageform" id="pageform" method="post" action="<%=request.getRequestURI()%>">
 									<input type="hidden" name="npage" id="npage" value="<%=pageno%>" />
 									<%out.println(HtmlCoder.hiddenInputs(names, values)); %>
+									<input type="hidden" name="csrfToken" value="<%=csrfToken %>" />
 								</form>
 								<!-- 分頁-END -->
 				            </div> 
