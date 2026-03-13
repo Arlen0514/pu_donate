@@ -1,0 +1,135 @@
+
+/* ============================================================= */
+/* 院系募款院系_內頁 css */
+/* ============================================================= */
+
+
+
+/*========================================================*/
+/*-------內頁網編樣式_共用區塊--------*/
+/*========================================================*/
+
+.text_bottom {
+}
+	
+.text_bottom .tabs_btn_now {
+    border-bottom-color: var(--primary_color);
+	background-color: var(--primary_color);
+	color: #fff;
+}
+.text_bottom  .tab_area {
+    border-bottom: none;
+}
+	.text_bottom  .img-scroll {
+		height: auto;
+	}
+		.text_bottom  .img-scroll .tabs{
+			display: flex;
+			flex-wrap: wrap;
+		}
+.text_bottom .tabs li {
+    float: none;
+	border-right-color: #fff;
+	border-bottom: #fff 1px solid;
+}
+
+	
+.text_bottom .tabs a, 
+.text_bottom .tabs span {
+    background: var(--third_color);
+    background: #ddd;
+    color: var(--dark_color);
+	font-size: 18px;
+		font-size: min(max(0.9375vw, 1rem), 1.125rem); /*字體大小 0.9375vw、最小值 16px、最大值 18px*/
+}
+.text_bottom .tabs li.active span {
+	position: relative;
+    box-shadow:none;
+    background: var(--primary_color);
+    color: #fff;
+	/* font-size:1.25rem; */
+	font-size: min(max(1.0417vw, 1rem), 1.25rem); /*字體大小 1.0417vw、最小值 16px、最大值 20px*/
+}
+.text_bottom .tabs li a:hover, 
+.text_bottom .tabs li span:hover {
+    background: var(--primary_color);
+    color: #fff;
+    font-size:1.25rem; /*20px*/
+}
+
+
+.text_bottom ~ .p_tab_text_area {
+    padding: 59px 0px 10px;
+}
+    .text_bottom ~ .p_tab_text_area > div {
+        border-top: none;
+    }
+
+
+	.text_bottom .p_tab_text_area {
+		background: #fff0;
+		padding: 0px;
+		margin-top: 25px;
+	}
+
+
+@media screen and (min-width: 761px){
+	.text_bottom .tabs li span::before{
+		position: absolute;
+		font-family: 'bootstrap-icons';
+		content: '\F229';
+		color: var(--primary_color);
+		font-size: 20px;
+		line-height: 1;
+		left: 50%;
+		transform: translateX(-50%) translateY(0px);
+		bottom: 0px;
+		opacity: 0;
+		transition: 0.3s ease all;
+		z-index: 1;
+	}
+	.text_bottom .tabs li.active span::before ,
+	.text_bottom .tabs li span:hover::before{
+		bottom: -14px;
+		opacity: 1;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.dept_fund_infoArea{
+
+}
+
+    .dept_fund_infoArea table{
+        
+    }
+
+        .dept_fund_infoArea table tbody{
+            
+        }
+        .dept_fund_infoArea table tbody td:not(:last-of-type){
+            text-align: left;
+        }
+        .dept_fund_infoArea table tbody td a{
+            color: inherit;
+        }

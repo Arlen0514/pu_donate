@@ -1,0 +1,32 @@
+/* 匯入共用捐款表單.css */
+@import url("../style_donate/style_donate.css");
+
+/* ===================================================== */
+/*表單結果頁*/
+/* ===================================================== */
+
+
+.valuationBg{
+    display: flex;
+    flex-direction: column;
+    gap: 1.875rem; /*30px*/
+}
+
+.valuationBg .valuationArea:last-of-type {
+	padding: 0;
+}
+
+.valuationBg .form_outcome .no_input {
+	color: var(--primary_color);
+    font-weight: 300;
+}
+
+
+
+
+
+
+
+
+
+

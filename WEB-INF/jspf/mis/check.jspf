@@ -1,0 +1,57 @@
+<%@page pageEncoding="UTF-8"%>
+<%
+   	// Login user.
+   	TableRecord app_user = (TableRecord) session.getAttribute("app_user");
+   	if (app_user == null) {
+       	out.println("<script> alert('您已登出，請重新登入!!'); location='" + request.getContextPath() + "/mis/index.jsp'; </script>");
+       	return;
+   	}
+   	
+   	// Last login
+   	TableRecord lastlogin = (TableRecord) session.getAttribute("lastlogin");
+   	if (lastlogin == null) {
+       	lastlogin = new TableRecord(tblal);
+   	}
+   	
+   	// This login
+   	TableRecord thislogin = (TableRecord) session.getAttribute("thislogin");
+   	if (thislogin == null) {
+       	thislogin = new TableRecord(tblal);
+   	}
+   	
+   	// Top functinos.
+   	Vector app_tmfs = (Vector) session.getAttribute("top_function");
+   	//Vector app_tmfs = (Vector) application.getAttribute("top_function");
+   	
+   	// Left functions.
+   	Vector app_lmfs = (Vector) session.getAttribute("left_function");
+   	//Vector app_lmfs = (Vector) application.getAttribute("left_function");
+
+   	// Current top function.
+   	TableRecord app_ctmf = (TableRecord) session.getAttribute("current_top");
+
+   	// Node to be expanded.
+   	String snode = StringTool.validString((String) session.getAttribute("node"), "0");
+   	String node = StringTool.validString(request.getParameter("node"), snode);
+   	session.setAttribute("node", node);
+   
+   	// Login account.
+   	String app_account = app_user.getString("au_account");
+   	
+   	// Locale.
+   	String app_locale = StringTool.validString((String) session.getAttribute("app_locale"));
+
+   	// 若是在後台版頭的下拉選單 選擇其它後台語系則做更換
+   	if(request.getParameter("mis_language") != null) {
+		session.setAttribute("language", request.getParameter("mis_language"));
+   	}
+
+   	// 前後台語系分開 
+   	lang = StringTool.validString((String)session.getAttribute("language")).trim();  
+%>
+<script src="<%=request.getContextPath()%>/js/DataCheck.js"></script>
+<%-- 後台 Title 使用之 ICON --%>
+<link rel="shortcut icon" href="../images/favicon.png" /><!--電腦版icon-->
+<link rel="apple-touch-icon" href="../images/icon.png" /><!--手機版icon  57x57px-->
+<link rel="apple-touch-icon" sizes="72x72" href="../images/icon-72.png" /><!--手機版icon  72x72px-->
+<link rel="apple-touch-icon" sizes="114x114" href="../images/icon@2.png" /><!--手機版icon  114x114px-->

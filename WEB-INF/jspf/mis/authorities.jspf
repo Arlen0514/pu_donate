@@ -1,0 +1,147 @@
+<%@page pageEncoding="UTF-8"%>
+<script>
+<!--
+function selectall(F,C) {
+<% // First level functions.
+   for (int i = 0; i < app_tmfs.size(); i++) {
+       TableRecord tmf = (TableRecord)app_tmfs.get(i);
+       String tmfid = tmf.getString("mf_id");
+%>
+
+   if(C == '1'){
+	   F.<%=tmfid%>.checked = false;
+	   change<%=tmfid%>(F);
+   }else{	   
+   	   F.<%=tmfid%>.checked = true;   	   
+   	   change<%=tmfid%>(F);   	   
+   }
+   
+<% } %>
+}
+<%-- For first level changing. --%>
+<% // First level functions.
+   for (int i = 0; i < app_tmfs.size(); i++) {
+       TableRecord tmf = (TableRecord)app_tmfs.get(i);
+       String tmfid = tmf.getString("mf_id");
+%>
+// <%=tmf.getString("mf_name")%>
+function change<%=tmfid%>(F) {
+   var chosen = F.<%=tmfid%>.checked;
+<% // Second level functions.
+   Vector mfs2 = app_sm.selectAll("mis_function", "mf_status='N' and mf_upfunction=?", new Object[] { tmfid }, "mf_priority");
+   for (int j = 0; j < mfs2.size(); j++) {
+       TableRecord mf2 = (TableRecord)mfs2.get(j);
+       String mfid2 = mf2.getString("mf_id");
+%>
+   // <%=mf2.getString("mf_name")%>
+   F.<%=mfid2%>.checked = chosen;
+<% // Third level functions.
+   Vector mfs3 = app_sm.selectAll("mis_function", "mf_status='N' and mf_upfunction=?", new Object[] { mfid2 }, "mf_priority");
+   for (int k = 0; k < mfs3.size(); k++) {
+       TableRecord mf3 = (TableRecord)mfs3.get(k);
+       String mfid3 = mf3.getString("mf_id");
+%>
+   // <%=mf3.getString("mf_name")%>
+   F.<%=mfid3%>.checked = chosen;
+<% } %>
+<% } %>
+}
+<% } %>
+
+<%-- For second level changing. --%>
+<% // First level functions.
+   for (int i = 0; i < app_tmfs.size(); i++) {
+       TableRecord tmf = (TableRecord)app_tmfs.get(i);
+       String tmfid = tmf.getString("mf_id");
+       // Second level functions.
+       Vector mfs2 = app_sm.selectAll("mis_function", "mf_status='N' and mf_upfunction=?", new Object[] { tmfid }, "mf_priority");
+       for (int j = 0; j < mfs2.size(); j++) {
+          TableRecord mf2 = (TableRecord)mfs2.get(j);
+          String mfid2 = mf2.getString("mf_id");
+%>
+// <%=mf2.getString("mf_name")%>
+function change<%=mfid2%>(F) {
+   var chosen = F.<%=mfid2%>.checked;
+<% // Third level functions.
+   Vector mfs3 = app_sm.selectAll("mis_function", "mf_status='N' and mf_upfunction=?", new Object[] { mfid2 }, "mf_priority");
+   for (int k = 0; k < mfs3.size(); k++) {
+       TableRecord mf3 = (TableRecord)mfs3.get(k);
+       String mfid3 = mf3.getString("mf_id");
+%>
+   // <%=mf3.getString("mf_name")%>
+   F.<%=mfid3%>.checked = chosen;
+<% } %>
+<% // Change upper level.
+    StringBuffer sb = new StringBuffer();
+    for (int k = 0; k < mfs2.size(); k++) {
+       TableRecord mf21 = (TableRecord)mfs2.get(k);
+       sb.append("F."+mf21.getString("mf_id")+".checked || ");
+    }
+    if (mfs2.size() > 0) {
+       sb.delete(sb.length() - 4, sb.length());
+%>
+   if (<%=sb.toString()%>) {
+       F.<%=tmfid%>.checked = true;
+   } else {
+       F.<%=tmfid%>.checked = false;
+   }
+<% } %>
+}
+<% } %>
+<% } %>
+
+<%-- For third level changing. --%>
+<% // First level functions.
+   for (int i = 0; i < app_tmfs.size(); i++) {
+       TableRecord tmf = (TableRecord)app_tmfs.get(i);
+       String tmfid = tmf.getString("mf_id");
+       // Second level functions.
+       Vector mfs2 = app_sm.selectAll("mis_function", "mf_status='N' and mf_upfunction=?", new Object[] { tmfid }, "mf_priority");
+       for (int j = 0; j < mfs2.size(); j++) {
+          TableRecord mf2 = (TableRecord)mfs2.get(j);
+          String mfid2 = mf2.getString("mf_id");
+          // Third level functions.
+          Vector mfs3 = app_sm.selectAll("mis_function", "mf_status='N' and mf_upfunction=?", new Object[] { mfid2 }, "mf_priority");
+          for (int k = 0; k < mfs3.size(); k++) {
+             TableRecord mf3 = (TableRecord)mfs3.get(k);
+             String mfid3 = mf3.getString("mf_id");
+%>
+// <%=mf3.getString("mf_name")%>
+function change<%=mfid3%>(F) {
+   var chosen = F.<%=mfid3%>.checked;
+<% // Change upper level.
+    StringBuffer sb = new StringBuffer();
+    for (int l = 0; l < mfs3.size(); l++) {
+       TableRecord mf31 = (TableRecord)mfs3.get(l);
+       sb.append("F."+mf31.getString("mf_id")+".checked || ");
+    }
+    if (mfs3.size() > 0) {
+       sb.delete(sb.length() - 4, sb.length());
+%>
+   if (<%=sb.toString()%>) {
+       F.<%=mfid2%>.checked = true;
+   } else {
+       F.<%=mfid2%>.checked = false;
+   }
+<% } %>
+<% // Change upper level.
+    sb = new StringBuffer();
+    for (int l = 0; l < mfs2.size(); l++) {
+       TableRecord mf21 = (TableRecord)mfs2.get(l);
+       sb.append("F."+mf21.getString("mf_id")+".checked || ");
+    }
+    if (mfs2.size() > 0) {
+       sb.delete(sb.length() - 4, sb.length());
+%>
+   if (<%=sb.toString()%>) {
+       F.<%=tmfid%>.checked = true;
+   } else {
+       F.<%=tmfid%>.checked = false;
+   }
+<% } %>
+}
+<% } %>
+<% } %>
+<% } %>
+//-->
+</script>

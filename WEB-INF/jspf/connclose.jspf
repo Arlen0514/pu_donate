@@ -1,0 +1,6 @@
+<%
+   // Note: Please invoke this segment in each jsp file.
+   // Return back the connection.
+   // Usually is a part of config.jspf
+   app_sm.close();
+%>

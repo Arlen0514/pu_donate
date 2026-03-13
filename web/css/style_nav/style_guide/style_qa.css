@@ -1,0 +1,127 @@
+/* 引入 guide.css 更改左側選單顏色 */
+@import url('../style_guide/style_guide.css'); 
+
+
+/* .numberPage_middleList.active a {
+    background-color: var(--second_color);
+} */
+
+/* .qaL_tit:before {
+    background-color: var(--second_color);
+}
+
+.qaL_text:before {
+    background-color: var(--third_color);
+} */
+
+
+
+
+
+
+
+
+
+
+
+/*/////////////////////////////////////////////////////////*/
+/*-------常見問題--------*/
+/*/////////////////////////////////////////////////////////*/
+
+	/*常見問題列表*/
+	.qa_list_area {
+		/* padding:23px 0px 10px 0px; */
+	}
+		.qa_list {
+			border-bottom: solid 1px #dadada;
+			font-size: 1rem;
+		}
+			.qaL_tit {
+				/* font-size: inherit; */
+				font-size: 1.0625rem; /*17px*/
+				line-height: 1.46;
+				color:#333;
+				position:relative;
+				padding:.6875rem 1.6875rem .6875rem 2.75rem;
+				cursor:pointer;
+			}
+				.qaL_tit:before {
+					content:'?';
+					position:absolute;
+					font-size:.8125rem;
+					color:#fff;
+					border-radius:100%;
+					background: var(--primary_color);
+					width:1.5625rem;
+					/* height:25px; */
+                    aspect-ratio: 1;
+					text-align:center;
+					line-height:1.5625rem;
+					font-weight:bold;
+					top:.5625rem;
+					left:.5rem;
+					box-sizing: border-box;
+					padding: 0px 0px 0px .125rem;
+					font-family: var(--foreign_foreign);
+				}
+				.qaL_tit:after {
+					content:'+';
+					position: absolute;
+					font-size:19px;
+					color: #585858;
+					top: 9px;
+					right: 8px;
+					transition:0.3s ease all;
+					transform-origin:center center;
+				}
+				
+			.qaL_text {
+				position:relative;
+				font-size: 0.9rem;
+				line-height: 1.46;
+				color:#464545;
+				padding:.6875rem 1.6875rem .6875rem 2.75rem;
+				display:none;
+			}
+				.qaL_text:before {
+					/* content:'！'; modify by david 20220914*/
+					content: 'A';
+					position:absolute;
+					border-radius:100%;
+					text-align:center;
+					width:1.5625rem;
+					/* height:25px; */
+                    aspect-ratio: 1;
+					line-height:1.5625rem;
+					font-size:.8125rem; /*13px*/
+					color:#fff;
+					background:#b62a2e;
+					box-sizing: border-box;
+					padding: 0px 0px 0px .125rem;
+					top:.5625rem;
+					left:.5rem;
+					font-family: var(--foreign_foreign);
+				}
+				/*hover*/
+				.qaL_tit:hover {
+					/*background:#eaeaea;*/
+					background-color: #e5e9ea;
+				}
+				/*當前模式*/
+				.qa_list.active .qaL_tit {
+					background-color: #e5e9ea;
+					/*background:#eaeaea;*/
+					border-radius:5px;
+				}
+					.qa_list.active .qaL_tit:after {
+						-webkit-transform: rotate(45deg);
+						transform: rotate(45deg);
+						top:.6875rem;
+						font-size:1.3125rem;
+					}
+					
+
+
+
+
+

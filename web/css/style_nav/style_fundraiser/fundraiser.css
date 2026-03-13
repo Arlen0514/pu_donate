@@ -1,0 +1,587 @@
+/*====================================================*/
+/*-------首頁輪播--------*/
+/*====================================================*/
+
+
+.indexBannerArea{
+    position: relative;
+	width: 100%;
+	/*max-width: 73.125rem;*/ /*1170*/
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+
+.indexBannerArea #particles-js{
+	position:absolute;
+	z-index: 2;
+	width: 100%;
+	/*height: 100vh;*/
+	height: 100%;
+	/* background-color: #2c2e43; */
+	background-size: cover;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;	
+	
+	pointer-events: none;
+}
+
+.indexBannerArea .banner_down{
+	z-index: 10;
+}
+	.indexBannerArea .banner_down .indexBannerList .indexBannerIn{
+		/* display: none; */
+	}
+/* .indexBannerArea .banner_up{
+	z-index: 11 !important;
+	position: absolute !important;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: #fff0 !important;
+
+	display: none;
+}
+	.indexBannerArea .banner_up .indexBannerList .pcBanner ,
+	.indexBannerArea .banner_up .indexBannerList .mobileBanner{
+		background-image:none !important;
+	}
+	
+.indexBannerArea .swiper-button-prev{		
+	background-image: url(../index/images/left_arrow2.png);
+}
+.indexBannerArea .swiper-button-next{
+	background-image: url(../index/images/right_arrow2.png);
+} */
+
+
+
+.indexBannerList{
+	position: relative;
+	display: flex;
+	flex-direction: column;
+}
+	.indexBannerList  .pcBanner{
+		display: flex;
+		flex-direction: column;
+		padding: 0;
+		aspect-ratio: 2.5 / 1;
+		flex-grow: 1;
+		justify-content: center;
+	}
+	.indexBannerList a{
+		display: block;
+		flex-grow: 1;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		/* padding-left: 7%; */
+		padding: 0;
+		text-decoration: none;
+		flex-grow: 1;
+	}
+
+
+
+	.indexBannerIn{
+		max-width: 23.125rem; /*370px*/
+		width: 90%;
+		width: 100%;
+		max-height: 100%;
+		/* 20250328 移除文字發光效果 by tom */
+		/* text-shadow: rgb(255, 255, 255) 0px 0px 10px; */
+		backdrop-filter: blur(2px);
+		z-index: inherit;
+		margin-left: 11%;
+		background-color: rgb(255 255 255 / 70%);
+		padding: 0.9375rem; /*15px*/
+		border-radius: 0.9375rem; /*15px*/
+	}
+		/* 首頁banner列表標題  */
+		h2.indexBanner_title{
+			padding: 0;
+			margin: 0;
+			display: inline-block;
+			font-weight: bolder;
+			font-size: clamp(1.2500em, 1.5625vw, 1.8750em); /* 字體 最小值 20.00px、大小約 1.5625vw、最大值 30.00px */
+			line-height: 1.5;
+			color: #343434;
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 2;
+			overflow: hidden;
+			/* backdrop-filter: blur(3px); */
+		}
+		/* 首頁banner列表文字 */
+		.indexBanner_remark{
+			font-size: clamp(0.8125em, 0.7813vw, 0.9375em); /* 字體 最小值 13.00px、大小約 0.7813vw、最大值 15.00px */
+			line-height: 1.5;
+			color: #343434;
+			margin-top: .625rem; /*10px*/
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 3;
+			overflow: hidden;
+			/* backdrop-filter: blur(3px); */
+		}
+		
+		/* 首頁banner列表按鍵 */
+		.indexBannerList .btn{
+			width: 100%;
+			margin-top: 1.25rem; /*20px*/
+			margin-left: auto;
+			text-align: right;
+		}
+			.indexBannerList .btn label{
+				display: flex;
+				justify-content: flex-end;
+				align-items: center;
+			}
+			.indexBannerList .btn strong ,
+			.indexBannerList .btn input{
+				background: var(--primary_color);
+				width: 9.375rem; /*150px*/
+				height: 2.625rem; /*42px*/
+				line-height: 2.375rem; /*38px*/
+				border-radius: 1.875rem; /*30px*/
+				display: block;
+				color: #fff;
+				text-align: center;
+			}
+			
+
+
+	.indexBannerList a:focus {
+		background-color: var(--focus_outline-color);
+	}
+	.indexBannerList a:focus .pcBanner{
+		opacity: 0.5;
+		background-color: var(--focus_outline-color);
+	}
+
+		
+@media (max-width: 990px){
+
+	.indexBannerList  .pcBanner{
+		display: none;
+	}
+	.indexBannerList  .mobileBanner{
+		display: flex;
+		flex-direction: column;
+		padding: 0;
+		/* aspect-ratio: 1 / 1; */
+		aspect-ratio:  1 / 1.5;
+		justify-content: center;
+		aspect-ratio: 1 / 1.2;
+	}
+
+
+	.indexBannerIn{		
+		/* max-width: 50%; */
+		margin-left: 2.5%;
+		width: 90%;
+        max-width: unset;
+	}
+		/* 首頁banner列表標題  */
+		h2.indexBanner_title{
+			/* font-size: 25px; */
+		}
+		/* 首頁banner列表文字 */
+		.indexBanner_remark{		
+			/* font-size: 14px;	 */
+		}
+		.indexBannerList .btn label input {
+			/* font-size: 14px;
+			width: 120px;
+			height: 40px;
+			line-height: 40px;
+			border-radius: 6px; */
+		}
+
+		.indexBannerArea .swiper-button-prev, 
+		.indexBannerArea .swiper-button-next {
+			display: none;
+		}
+}
+
+
+
+
+
+		
+@media (max-width: 640px){
+	
+	.indexBannerIn{		
+		margin: 0 auto;
+		width: 80%;
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.header .wrap{
+    padding: .625rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+
+
+ul.headerRight_topArea{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    list-style-type: none;
+    box-sizing: border-box;
+    /* padding: 0 10px; */
+}
+ul.headerRight_topArea li a{
+            font-size: clamp(1rem, 0.734rem + 0.43vw, 1.25rem);
+			display: block;
+			text-decoration: none;
+			color: #fff;
+            padding: .9375rem 1.25rem;
+            border-radius: 14.125rem;
+			border-radius: 3.125rem; /*50px*/
+			border: 1px rgb(255 255 255) solid;
+			/* background-color: #fff; */
+			transition: 0.3s ease all;
+		}
+		ul.headerRight_topArea a:hover{
+			color: var(--second_color);
+			background-color: #fff;
+			transition: 0.3s ease all;
+		}
+.right_contentBg{
+    padding: 0;
+}
+
+.pageContent{
+    padding: 0;
+}
+
+
+/* 活動捐款介紹 */
+.index_NAbg{
+	/* display: flex; */
+	padding: 0 10%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	position: relative;
+}
+.index_NAbg:before {
+    /* position: absolute; */
+    content: "";
+    /* filter: grayscale(90%); */
+    backdrop-filter: blur(1px);
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255 255 255 / 60%);
+    /* z-index: 0; */
+    left: 0;
+	top: 0;
+	opacity: 0;
+}
+.index_NAbg > div{
+	/* position: relative; */
+	/* z-index: 2; */
+}
+
+.index_tit{
+	padding-bottom: clamp(1.1291rem, 1.8229vw, 2.1875rem); /* 最小值 18.07px、大小約 1.8229vw、最大值 35.00px */
+	font-size: clamp(1.2500rem, 1.7708vw, 2.1250rem); /* 字體 最小值 20.00px、大小約 1.7708vw、最大值 34.00px */
+	line-height: 1.1;
+	color: var(--dark_color);
+	text-align: center;
+	letter-spacing: 6px;
+
+	/* display: none; */
+}
+	.index_tit h2{
+		padding: 0;
+		margin: 0;
+		font-size: inherit;
+		line-height: inherit;
+		display: inline-block;
+		position: relative;
+		z-index: 2;
+	}
+
+
+
+
+
+@media (max-width: 1280px){
+
+	/* 首頁_News_video */
+	.index_NAbg{
+		padding: 0 7.5%;
+	}
+
+}
+
+@media (max-width: 990px){
+	.header .wrap{
+    padding: 0;
+    
+	}
+
+	ul.headerRight_topArea{
+		margin: 0px;
+        padding: 0px;
+        border-top: none;
+        display: block;
+        flex-wrap: unset;
+        flex-direction: unset;
+        align-items: unset;
+        justify-content: unset;
+        width: auto !important;
+        display: flex;
+        flex-direction: column;
+		gap: 0;
+	}
+
+	ul.headerRight_topArea li{
+        float: none;
+        width: auto;
+        padding: 0px;
+        border-bottom: solid 1px #767676;
+    }
+
+	ul.headerRight_topArea li a{
+		border-radius:0px;
+		border: none;
+        padding: 15px 20px;
+    }
+}
+
+
+@media (max-width: 640px){
+
+    
+
+			
+}
+/* 
+	.index_tit_icon{
+		position: absolute;
+		top: 50%;
+		left: 0;
+		transform: translateY(-50%);
+	}
+		.index_tit_icon i{
+			font-size: 28px;
+			line-height: 1;
+			position: absolute;
+			color: #f39800;
+		}   */
+
+
+
+
+
+
+
+/* 活動介紹 */
+
+.index_NAbg{
+	box-sizing: border-box;
+	/* width: 60%; */
+	/* width: calc(100% - 600px); */
+	padding: 60px 0px;
+	/* padding-right: 50px; */
+}
+
+.index_NAarea{
+    background-color: #fff;
+    border-radius: 20px;
+	/* display: flex; */
+    padding: 2.5rem;
+    gap: 1.25rem;
+	
+	/* margin: -15px 0;	 */
+}
+
+.pI_top{
+    
+	display: flex;
+    /* padding: 2.5rem; */
+    gap: 1.25rem;
+	
+	/* margin: -15px 0;	 */
+}
+
+.pI_bottom {
+    padding-top: 1.875rem;
+}
+.product_addBtn{
+    text-align: end;
+}
+
+
+          
+
+@media (max-width: 1280px){
+
+	.index_NAbg{
+		/* width: calc(100% - 400px);		 */
+		/* padding-right: 20px; */
+	}
+}
+             
+          
+
+@media (max-width: 990px){
+
+	.index_NAbg{
+		width: 100%;
+		padding: 30px 0;
+		padding-right: 0px;
+	}
+	/* 首頁_News_video */
+	.index_NAbg{
+		display: block;
+		padding: 5%;
+		/* background-image: none !important; */
+	}
+	
+}
+ 
+
+
+
+
+
+/* 線上捐款 */
+
+.donateContent_bg{
+    padding: 60px 0px;
+}
+
+
+
+
+/* --- 募款進度條區塊樣式 --- */
+
+/* 外層區塊，控制上下間距與背景 (可選) */
+.fundraising_progress_section {
+    width: 100%;
+    padding: 40px 0; /* 與下方捐款區塊保持距離 */
+    position: relative;
+    z-index: 5;
+}
+
+/* 進度條卡片容器 */
+.progress_card {
+    background-color: #fff;
+    border-radius: 20px; /* 配合原本網站的圓角風格 */
+    padding: 2rem 2.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); /* 輕微陰影增加層次感 */
+    /* max-width: 1000px; */ /* 限制最大寬度，避免在大螢幕太長 */
+    margin: 0 auto;    /* 置中 */
+}
+
+/* 上方資訊列 (用途 + 人數) */
+.progress_info_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 10px;
+}
+
+.project_target_name {
+    font-size: 1.25rem;
+    color: #333;
+    font-weight: 500;
+    margin: 0;
+}
+
+.donor_count {
+    font-size: 1.125rem;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.donor_count i {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+/* 下方進度列 (條 + 百分比) */
+.progress_bar_row {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* 進度條與百分比之間的距離 */
+}
+
+/* 進度條軌道 (灰色底) */
+.progress_track {
+    flex-grow: 1; /* 佔滿剩餘空間 */
+    height: 24px; /* 進度條高度，依截圖調整較厚實 */
+    background-color: #eee;
+    border-radius: 50px;
+    overflow: hidden; /* 確保內部填充不溢出圓角 */
+}
+
+/* 進度條填充 (橘色) */
+.progress_fill {
+    height: 100%;
+    background: linear-gradient(90deg, #79dcdc 0%, #1265b2 100%); /* 漸層橘色 */
+    background-color: #3776AF; /* 備用純色 */
+    border-radius: 50px;
+    transition: width 1s ease-in-out; /* 動畫效果 */
+}
+
+/* 百分比文字 */
+.progress_percentage {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #555;
+    min-width: 50px; /* 避免數字變動時跳動 */
+    text-align: right;
+}
+
+/* --- RWD 手機版調整 --- */
+@media (max-width: 768px) {
+    .progress_card {
+        padding: 1.5rem;
+        border-radius: 15px;
+    }
+    
+    .project_target_name {
+        font-size: 1.1rem;
+    }
+    
+    .progress_bar_row {
+        gap: 10px;
+    }
+    
+    .progress_percentage {
+        font-size: 1rem;
+    }
+}
+
+

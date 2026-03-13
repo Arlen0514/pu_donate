@@ -1,0 +1,232 @@
+
+            
+/*===========================================*/
+/*-------關於我們_數據區塊--------*/
+/*===========================================*/
+
+	
+.dataBg{
+    width: 100%;
+    z-index: 1;
+    position: relative;
+}
+
+
+
+
+	.data_area{
+		justify-content: center;
+		align-items: center;
+		display: grid;
+		grid-template-columns: repeat(4, minmax(3.125rem, 1fr));
+		/* grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)); */
+		gap: 0 10px;
+		padding: 0;
+	}
+
+	/* 關於我們_數據_項目 */
+	.data_item{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 10px 21px;
+		text-align: center;
+		color: var(--dark_color);
+		font-size: clamp(0.875rem, 0.9375vw, 1.125rem); /*字體 最小值 14px、大小約 0.9375vw、最大值 18px*/
+		font-size: 72px;
+		line-height: 1;
+		font-weight: 700;
+	}
+	.data_item:not(:last-child) {
+		/* border-right: 1px dashed rgba(255 255 255 / 15%); */
+	}
+	.data_item:not(:last-child) {
+		/* border-right: 1px dashed rgba(255 255 255 / 50%); */
+	}
+		
+	
+		/* 關於我們_數據_數字 */
+		.data_item  .num{
+			font-family: var(--foreign_font);
+			font-size: inherit;
+			position: relative;
+			display: inline-flex;
+			gap: .625rem; /*10px*/
+			text-align: center;
+			justify-content: center;
+			align-items: baseline;
+			font-size: clamp(1.1250rem, 1.2500vw, 1.5000rem); /* 字體 最小值 18.00px、大小約 1.2500vw、最大值 24.00px */
+			line-height: 1;
+		}
+		
+			.data_item  .num strong{
+				color: inherit;
+				font-size: inherit;
+				line-height: 1;
+				font-weight: normal;
+				font-size: clamp(2.3227rem, 3.7500vw, 4.5000rem); /* 字體 最小值 37.16px、大小約 3.7500vw、最大值 72.00px */
+				font-weight: 900;
+			}
+			.data_item  .num  span{
+				line-height: 1;
+				font-weight: 700;
+			}
+		
+		/* 關於我們_數據_副標 */
+		.data_item  .sub_title{
+			line-height: 1.2;
+			/* font-family: var(--foreign_font); */
+			font-size: clamp(1.1250rem, 1.2500vw, 1.5000rem); /* 字體 最小值 18.00px、大小約 1.2500vw、最大值 24.00px */
+			color: inherit;
+			font-weight: 500;
+			word-wrap: break-word;
+			/* word-break: break-all; */
+			display: inline-flex;
+			justify-content: unset;
+			flex-direction: column;
+			align-items: center;
+			flex-wrap: wrap;
+			gap: 2.1875rem; /* 35px */
+			width: auto;
+		}
+		.data_item  .data_line{
+			border-radius: 10px;
+			width: 8px;
+			height: 0;
+			background-color: var(--primary_color);
+			/* transition: height 0.5s ease; */
+			animation-fill-mode:forwards;  /*動畫播放結束後，停留在最後一個影格*/
+		}
+		.active_height_animate{	
+			animation-name: active_height_animate;
+			animation-duration:2s;
+			animation-delay: 2.5s;
+			animation-iteration-count:1; /*infinite*/
+			animation-timing-function:ease;	
+			animation-fill-mode:forwards;  /*動畫播放結束後，停留在最後一個影格*/
+		}
+		@keyframes active_height_animate {
+			from {
+				height: 0; 
+			}
+
+			to {
+				height: 80px;
+			}
+		}
+
+
+		.data_item  .data_line.data_fade-in{
+			/* height: 80px; */
+			/* transition: height 0.5s ease; */
+			/* animation: fade-in linear both; */
+			/* animation-timeline: view();
+			animation-range: entry 20% cover 50%; */
+		}
+
+				
+		.active_height_animate_no{
+				
+			/* clip-path: inset(0 0 0 100%);
+			-webkit-transition: 0.6s cubic-bezier(0.63, 0.25, 0.25, 1);
+			-khtml-transition: 0.6s cubic-bezier(0.63, 0.25, 0.25, 1);
+			-moz-transition: 0.6s cubic-bezier(0.63, 0.25, 0.25, 1);
+			-ms-transition: 0.6s cubic-bezier(0.63, 0.25, 0.25, 1);
+			-o-transition: 0.6s cubic-bezier(0.63, 0.25, 0.25, 1);
+			transition: 0.6s cubic-bezier(0.63, 0.25, 0.25, 1); */
+		}
+		.active_height_animate {
+			/* clip-path: inset(0 0 0 0); */
+			/* animation-delay: 0.5s;
+			animation-name: active_height_animate; */
+		}
+
+
+		
+
+		   
+@media (max-width: 768px){
+
+	.dataBg{
+		bottom: unset;
+        position: unset;
+		background-color:transparent;
+	}
+		.dataBg .wrap{
+			width: auto;
+		}
+			.data_area {
+				grid-template-columns: unset;
+				padding: 0 0;
+				background-color:inherit;
+				gap: clamp(1.2904rem, 2.0833vw, 2.5000rem); /* 最小值 20.65px、大小約 2.0833vw、最大值 40.00px */
+			}
+			
+				/* 關於我們_數據_項目 */
+				.data_item{
+					/* background-color: var(--third_color); */
+					font-size: 1.0625rem;     /*字體 17px*/
+					margin: 0;
+					align-items: center;
+					padding: 0;
+				}
+
+				.data_item .sub_title{
+					row-gap: 10px;
+				}
+
+				@keyframes active_height_animate {
+					from {
+						height: 0; 
+					}
+		
+					to {
+						height: 50px;
+					}
+				}
+}
+
+
+
+@media (max-width: 640px){
+
+	.dataBg {
+		/* padding: 60px 0px 65px 0px; */
+	}
+
+	.index_data-decorate.top{
+		/* top: -14px; */
+	}
+	.index_data-decorate.bottom{
+		/* bottom: -14px; */
+	}
+		.index_data-decorate img{
+			/* height: 15px; */
+		}
+
+
+
+		.data_area{
+			/* display: flex; */
+			/*justify-content: space-between; */
+			/* align-items: center; */
+			/* flex-direction: column; */
+			/* grid-template-columns: unset; */
+			/* flex-wrap: wrap; */
+			/* gap: 0px 0px; */
+		}
+
+		.data_item ,
+		.data_item:not(:last-child){
+			border-right: none;
+		}
+		
+		/* 關於我們_數據_icon */
+		.data_item .icon{
+			font-size: 2.1875rem;  /*35px*/
+		}
+}
+
+
+
+

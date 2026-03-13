@@ -1,0 +1,244 @@
+
+
+/*/////////////////////////////////////////////////////////*/
+/*-------募款專案--------*/
+/*/////////////////////////////////////////////////////////*/
+
+ul.donate_projectArea{
+	padding: 0;
+	margin: 0;
+	display: block;
+	list-style-type: none;
+	/* display: flex; */
+	/* margin: 0 -15px; */
+	/* margin-bottom: -30px; */
+	display: grid;
+	flex-wrap: wrap;
+	grid-template-columns: repeat(3 , 1fr);
+	gap: clamp(0.6452rem, 1.0417vw, 1.2500rem); /* 最小值 10.32px、大小約 1.0417vw、最大值 20.00px */
+}
+
+    /* 募款專案第一層列表 */
+	ul.donate_projectArea li{
+		padding: 0;
+		margin: 0;
+		display: block;
+		list-style-type: none;
+		box-sizing: border-box;
+		/* width: 33.3%;
+		padding: 0 15px;	 */
+		/* padding-bottom: 30px; */
+		width: 100%;
+	}
+		.donate_projectList{
+			height: 100%;
+			display: flex;
+			align-items: center;
+			/* display: grid;			
+			grid-template-columns: 350px auto; */
+			/* box-shadow: 1px 1px 15px #00000038; */
+			box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+			border-radius: 10px;
+			overflow: hidden;
+			background-color: #fff;
+			/* vertical-align: middle; */
+			/* text-align: center;		 */
+			display: flex;
+			flex-direction: column;
+		}	
+		ul.donate_projectArea li:nth-of-type(2n) .donate_projectList{
+			/* flex-direction:row-reverse; */
+		}	
+            /* 募款專案第一層圖片 */
+			.donate_project_img{
+				/* min-width: 350px; */
+				box-sizing: border-box;
+				width: 100%;
+			}
+				.donate_project_img a{
+					display: block;
+					text-decoration: none;
+					position: relative;
+					/* padding-top: 100%; modify by david 20220913  */
+					padding-top: 66%;
+					overflow: hidden;
+					transition: 0.5s ease all;
+				}
+					.donate_project_img img{
+						position: absolute;
+						top: 0;
+						left: 0;
+						bottom: 0;
+						right: 0;
+						float: none;
+						width: 100% !important;
+						height: 100% !important;
+						object-fit: cover;
+						transition: 0.5s ease all;
+						transform-origin: center;
+					}
+
+
+					.donate_project_img a:hover img{
+						transform: scale(1.1);
+						transition: 0.5s ease all;
+					}
+					
+
+			/* 募款專案第一層右側 */
+            .dP_listInR{
+				/* padding: 15px 55px; */
+				padding: .9375rem; /*15px*/
+				box-sizing: border-box;
+				width: 100%;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				gap: clamp(0.6452rem, 1.0417vw, 1.2500rem); /* 最小值 10.32px、大小約 1.0417vw、最大值 20.00px */
+				justify-content: space-between;
+			}
+				/* 募款專案第一層標題 */
+				.dP_listInR h3{
+					padding: 0;
+					margin: 0;
+					display: block;
+					font-size: clamp(1.1250rem, 1.1979vw, 1.4375rem); /* 字體 最小值 18.00px、大小約 1.1979vw、最大值 23.00px */
+							line-height: 1.5;
+					/* margin-bottom: 20px; */
+					display: -webkit-box;
+					-webkit-box-orient: vertical;
+					-webkit-line-clamp: 2;
+					overflow: hidden;
+					width: 100%;
+				}    
+					.dP_listInR h3 a{
+						display: block;
+						text-decoration: none;
+						color: #181818;
+					}   
+				
+						.donate_projectArea span.en{
+							font-size: 1rem; 
+							line-height: 1.5;
+							color: #818181;
+							font-family: var(--foreign_foreign);
+						}
+
+				.dP_listInR .dP_remark{
+					font-size: 1rem;
+					line-height: 1.5;
+					color: #ffffff;
+					display: -webkit-box;
+					-webkit-box-orient: vertical;
+					-webkit-line-clamp: 5;
+					overflow: hidden;
+					margin-bottom: 20px;
+					display: none;
+				}  
+
+                /* 首頁募款專案按鈕 */
+				.dP_btn{
+					/* margin-top: 15px; */
+					text-align: right;
+					/* position: absolute; */
+					/* right: 20px; */
+					bottom: 19px;
+					font-size: 16px;
+				}
+					.dP_btn a{
+						background-color: var(--primary_color);
+						color: #fff;
+						padding: 15px 30px;
+						padding: clamp(0.4839rem, 0.7813vw, 0.9375rem); /* 最小值 7.74px、大小約 0.7813vw、最大值 15.00px */
+						padding-left:clamp(0.9678rem, 1.5625vw, 1.8750rem); /* 最小值 15.48px、大小約 1.5625vw、最大值 30.00px */
+						padding-right:clamp(0.9678rem, 1.5625vw, 1.8750rem); /* 最小值 15.48px、大小約 1.5625vw、最大值 30.00px */
+						display: inline-block;
+						text-decoration: none;
+						border-radius: 1.875rem; /*30px*/
+					}	
+							
+				
+	/* 內頁募款專案區_第二層------------------------- */
+	ul.inxDPArea{
+		flex-wrap: wrap;
+		margin: 0 -15px -30px;
+	}
+            /* 首頁募款專案列表 */
+			ul.inxDPArea li{
+				padding: 0 15px 30px;
+			}
+				
+			
+
+
+
+
+
+
+@media (max-width: 990px){
+
+	ul.donate_projectArea{
+		grid-template-columns: repeat(2 , 1fr);
+	}
+
+
+	/* 募款專案第一層右側 */
+	.dP_listInR{
+		/* padding: 15px 30px; */
+	}
+		/* 募款專案第一層標題 */
+		.dP_listInR h3{
+			/* font-size: 27px;
+			line-height: 1.2;
+			margin-bottom: 10px; */
+		}
+		.dP_listInR .dP_remark {
+			/* font-size: 15px;
+			line-height: 1.5;
+			-webkit-line-clamp: 4; */
+			/* margin-bottom: 10px; */
+		}
+		.dP_btn a {
+			/* padding: 10px 20px; */
+			/* border-radius: 30px; */
+		}
+}
+
+
+
+@media (max-width: 640px){
+
+
+	ul.donate_projectArea{
+		grid-template-columns: repeat(1 , 1fr);
+		gap: 1.25rem; /*20px*/
+	}
+
+	/* .donate_projectList{
+		display: block;
+		align-items: unset;
+		grid-template-columns: none;
+	} */
+	/* .donate_projectList  ,
+	ul.donate_projectArea li:nth-of-type(2n) .donate_projectList{		
+		display: block;
+		align-items: unset;
+		flex-direction:row;
+	}	
+	.donate_project_img {
+		min-width: unset;
+		width: 100%;
+	}
+	.dP_listInR {
+		padding: 15px 15px;
+	}
+		.dP_listInR h3 {
+			font-size: 22px;
+		} */
+
+}
+
+
+
+
+

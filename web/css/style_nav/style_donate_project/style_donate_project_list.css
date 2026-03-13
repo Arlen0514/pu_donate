@@ -1,0 +1,201 @@
+
+
+/*====================================================*/
+/*-------首頁募款專案內容區塊--------*/
+/*====================================================*/
+
+
+/* 首頁募款專案內容區塊 */        
+.indexDonateProjectBg{	
+}
+	.indexDonateProjectBg .wrap{	
+	}
+	
+        /* 首頁募款專案區 */
+		ul.indexDPArea{
+			padding: 0;
+			margin: 0;
+			display: block;
+			list-style-type: none;
+
+			display: flex;
+			margin: 0 -15px;
+		}
+            /* 首頁募款專案列表 */
+			ul.indexDPArea li{
+				padding: 0;
+				margin: 0;
+				display: block;
+				list-style-type: none;
+
+				box-sizing: border-box;
+				width: 33.3%;
+				padding: 0 15px;
+			}
+				.indexDPlist{
+					height: 100%;
+					box-shadow: 1px 1px 15px #00000038;
+					display: flex;
+					flex-direction: column;
+				}
+					/* 首頁募款專案圖片 */
+                    .indexDPimg{						
+					}
+						.indexDPimg a{
+							display: block;
+							text-decoration: none;
+							position: relative;
+							padding-top: 45%;
+							overflow: hidden;
+							transition: 0.5s ease all;				
+						}
+						.indexDPimg img{	
+							position: absolute;
+							top: 0;
+							left: 0;
+							bottom: 0;
+							right: 0;
+							float: none;
+							width: 100% !important;
+							height: 100% !important;
+							object-fit: cover;
+							transition: 0.5s ease all;
+							transform-origin: center;					
+						}
+						.indexDPimg a:hover img{	
+							transform: scale(1.1);
+							transition: 0.5s ease all;					
+						}
+						
+                   .indexDP_indexBottom{
+						border-bottom: 6px #6cc solid;
+						position: relative;
+						padding: 20px 20px calc(20px + 36px);  /*36是按鈕高度*/
+						height: calc(100% - 20px * 2);  /*20是padding上下高度*/
+				   }
+				   		/* 首頁募款專案標題 */
+						.indexDP_indexBottom h3{
+							padding: 0;
+							margin: 0;
+							display: block;
+							font-size: 23px;
+							line-height: 1.5;
+							margin-bottom: 10px;
+							display: -webkit-box;
+							-webkit-box-orient: vertical;
+							-webkit-line-clamp: 2;
+							overflow: hidden;
+						}		
+							.indexDP_indexBottom h3 a{
+								display: block;
+								text-decoration: none;
+								color: #333;
+							}	
+							.indexDP_indexBottom h3 a:hover{
+								color: #6cc;
+								transition: 0.5s ease all;
+							}						
+						
+						.indexDP_indexBottom .indexDP_remark{
+							font-size: 16px;
+							line-height: 1.5;
+							color: #818181;
+							display: -webkit-box;
+							-webkit-box-orient: vertical;
+							-webkit-line-clamp: 3;
+							overflow: hidden;
+							margin-bottom: 10px;
+						}	
+
+						/* 首頁募款專案按鈕 */						
+						.indexDP_indexBottom .btn{
+							/* margin-top: 15px; */
+							/* text-align: right; */
+							position: absolute;
+							right: 20px;
+							bottom: 20px;
+						}
+							.indexDP_indexBottom .btn a{
+								background-color: #6cc;
+								color: #fff;
+								padding: 10px 25px;
+								display: inline-block;
+								text-decoration: none;
+								border-radius: 30px;
+							}	
+							
+
+
+
+
+@media (max-width: 990px){
+
+	/* 首頁募款專案區 */
+	ul.indexDPArea{
+		margin: 0 -10px;
+	}
+		/* 首頁募款專案列表 */
+		ul.indexDPArea li{
+			/* width: 33.3%; */
+			padding: 0 10px;
+		}
+			.indexDP_indexBottom {
+				/* padding: 10px; */
+				padding: 10px 10px calc(10px + 36px);  /*36是按鈕高度*/
+				height: calc(100% - 10px * 2);  /*10是padding上下高度*/
+			}
+				/* 首頁募款專案標題 */
+					.indexDP_indexBottom h3{
+					font-size: 20px;
+					margin-bottom: 5px;
+				}		
+				.indexDP_indexBottom .indexDP_remark{
+					font-size: 15px;
+				}	
+				/* 首頁募款專案按鈕 */						
+				.indexDP_indexBottom .btn{
+					right: 10px;
+					bottom: 10px;
+					/* margin-top: 10px; */
+				}
+				
+				
+}
+
+@media (max-width: 768px){
+
+	/* 首頁募款專案區 */
+	ul.indexDPArea{
+		display: block;
+		margin: 0 0 -30px;
+	}
+		/* 首頁募款專案列表 */
+		ul.indexDPArea li{
+			width: 100%;
+			padding: 0 0 30px;
+		}
+		.indexDP_indexBottom {
+			position: unset;
+			padding: 10px;
+			height: calc(100% - 10px * 2);  /*10是padding上下高度*/
+		}
+			/* 首頁募款專案按鈕 */						
+			.indexDP_indexBottom .btn{
+				text-align: right;
+				right: unset;
+				bottom: unset;
+				position: unset;
+			}
+				.indexDP_indexBottom .btn a {
+					padding: 8px 10px;
+				}
+}							
+							
+
+
+
+
+
+
+
+

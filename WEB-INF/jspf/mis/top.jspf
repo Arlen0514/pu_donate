@@ -1,0 +1,199 @@
+<%@page pageEncoding="UTF-8" %>
+                    <tr class="default_table_top">
+                        <td align="left" colspan="1" class="bk-1" style="">
+                            <table cellpadding="0" cellspacing="0" border="0">
+                                <tbody>
+                                
+<%
+	// 版本字串
+	String version_str = "Ver25.0402";
+	// Begin year
+	String beginyear = "2025";
+	// End year
+	String endyear = String.valueOf(DateTimeTool.getYear());
+	
+	// 取得語系設定 
+	String[] ss_lang_text = app_sm.select(tblss, "ss_title=? AND ss_keyword=?", new Object[]{ "可用語言版本", "web.language.offer" }).getString("ss_text").split(";");
+	String[] ss_lang_value = app_sm.select(tblss, "ss_title=? AND ss_keyword=?", new Object[]{ "可用語言版本", "web.language.offer" }).getString("ss_value").split(";");
+
+	// 重新抓取當前程式所在頁籤模組id
+	TableRecord left_topmf;
+	String left_topmfid="";
+	String left_mispage = request.getServletPath();
+	String left_misurl  = left_mispage.substring(left_mispage.lastIndexOf("/mis/")+5);
+	if(left_misurl.equals("default.jsp")) {
+		left_topmfid = StringTool.validString(request.getParameter("mfid"));
+		left_topmf = app_sm.select(tblmf,left_topmfid);
+	} else {
+		String left_mffolder = left_misurl.substring(0, left_misurl.indexOf("/"));
+		String left_mfurl = left_misurl.substring(left_misurl.indexOf("/") + 1);
+		left_topmf = app_sm.select(tblmf, "mf_folder=?", new Object[]{ left_mffolder });
+		left_topmfid = left_topmf.getString("mf_id");
+	}
+	
+	// 重新塞入所屬頁籤模組
+	if(!left_topmf.getString("mf_id").isEmpty()) {
+		session.setAttribute("current_top", left_topmf);
+	}
+
+   	// Current top function.
+   	TableRecord ses_ctmf = (TableRecord) session.getAttribute("current_top");
+
+	// 倒數分鐘數
+	int timeout = (int) session.getMaxInactiveInterval();	// 抓取 session存在時間
+	int back_time = timeout / 60;
+	
+%>
+		<script type="text/javascript">
+			document.addEventListener("leftmenuLoaded", function(){
+				<%if(left_misurl.equals("default.jsp")) { %>
+				document.getElementById("show").src="leftmenu.jsp?mf_top=<%=left_topmfid %>&node=<%=node%>"
+				<%} else { %>
+				document.getElementById("show").src="../leftmenu.jsp?mf_top=<%=left_topmfid %>&node=<%=node%>"
+				<%} %>
+			});
+		
+			var _outcount = <%=back_time %>;
+			var _outflag = setTimeout("_out_timedCount()",1000*60);
+			function _out_timedCount() {
+				document.getElementById('_outtime').innerHTML=_outcount;
+				document.getElementById('_outtime2').innerHTML=_outcount;
+				_outcount 	= _outcount - 1;
+				if(_outcount > 0) {
+					_outflag	= setTimeout("_out_timedCount()",1000*60);
+				} else {
+					clearTimeout(_outflag);
+					document.location.href="<%=request.getContextPath()%>/mis/logout.jsp";
+				}
+			}
+		</script>                                
+<%-- top nemu --%>
+                                    <tr class="admin_info_header">
+                                        <td>
+                                            <div class="logo" >
+                                                <img src="../images/logo_01.png" alt="logo">
+                                            </div>
+                                            <!--手機menu按鍵-->
+                                            <div class="menu_btn">
+                                                <span>
+                                                </span>
+                                                <span>
+                                                </span>
+                                                <span>
+                                                </span>
+                                            </div>
+                                        </td>
+                                        
+                                        <td>
+                                            <div class="user_session_info pc">
+                                                <ul>
+                                                    <li data-info="目前管理語系：" class="language">
+                                                    
+                                                        <div class="language_select">
+<%if(ss_lang_value.length > 1) { 
+	String now_mislang=(String)session.getAttribute("language");
+%>
+														<form name="change_mislang" method="post" action="<%=code %>.jsp">                                                        
+                                                        
+                                                            <select name="mis_language" id="mis_language" onchange="change_mislang.submit();">
+                                                            <%for(int i = 0; i < ss_lang_value.length; i++) {  %>
+																<option value="<%=ss_lang_value[i] %>" <%=now_mislang.equals(ss_lang_value[i])?"selected":""%> ><%=ss_lang_text[i] %></option>
+															<%} %>
+                                                            </select>
+														</form>                                                            
+<%}else { %>
+															<%=(String)session.getAttribute("language_str")%>
+<%} %>                                                                
+                                                        </div>       
+                                                        
+                                                                                                     
+                                                    </li>
+                                                    <li data-info="系統將於" data-info2="分後自動登出 " class="time"><strong id="_outtime"><%=back_time %></strong></li>
+                                                    <li data-info="登入者:"><%=app_user.getString("au_name")%></li>
+                                                    <li data-info="登入時間:"><%=thislogin.getString("al_logdate")%></li>
+                                                    <li data-info="登入IP:"><%=thislogin.getString("al_remoteip")%></li>
+                                                    <li data-info="上次登入:"><%=lastlogin.getString("al_logdate")%></li>
+                                                    <li data-info="系統版本別:"><%=version_str %></li>
+                                                    <li class="signOut_m">
+                                                        <a href="<%=request.getContextPath()%>/mis/logout.jsp">
+                                                            <i class="material-symbols-outlined">
+                                                                logout
+                                                            </i>
+                                                            <span class="">
+                                                                登出
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="admin_navbar">
+                                        <td>
+                                            <div class="leave_blank_area"></div>
+                                            <div class="header_rightArea default_tab_area">
+
+                                                <!--主按鍵 navbar-->
+                                                <div class="navbar">
+					<%
+   					for(int i = 0; i < app_tmfs.size(); i++) {
+       					TableRecord _mf = (TableRecord)app_tmfs.get(i);
+       					boolean is_function = _mf.getString("mf_id").equals(ses_ctmf.getString("mf_id"));
+					%>
+                                                    <!-- 系統管理模組 -->
+                                                    <div class="nav<%=is_function?" active":"" %>" > 
+                                                        <a href="<%=request.getContextPath()%>/mis/default.jsp?mfid=<%=_mf.getString("mf_id")%>" <%=is_function?" style='background-color:var(--active_color);'":"" %>> 
+                                                            <%=_mf.getString("mf_name") %>
+                                                        </a>
+                                                    </div>
+					<%} %>
+                                                    
+                                                    <!-- 登出 -->
+                                                    <div class="nav">
+                                                        <a href="<%=request.getContextPath()%>/mis/logout.jsp">
+                                                            登出
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="user_session_info mobile">
+                                                    <ul>
+                                                        <li data-info="目前管理語系：" class="language">
+                                                            <div class="language_select">
+<%if(ss_lang_value.length > 1) { 
+	String now_mislang=(String)session.getAttribute("language");
+%>                                                            
+														<form name="change_mislang_mob" method="post" action="<%=code %>.jsp">                                                        
+                                                        
+                                                            <select name="mis_language" id="mis_language_mob" onchange="change_mislang_mob.submit();">
+                                                            <%for(int i = 0; i < ss_lang_value.length; i++) {  %>
+																<option value="<%=ss_lang_value[i] %>" <%=now_mislang.equals(ss_lang_value[i])?"selected":""%> ><%=ss_lang_text[i] %></option>
+															<%} %>
+                                                            </select>
+														</form>
+<%}else{ %>
+<%=(String)session.getAttribute("language_str")%>
+<%} %>                                                                    
+                                                            </div>                                                    
+                                                        </li>
+                                                        <li data-info="系統將於" data-info2="分後自動登出 " class="time"><strong id="_outtime2"><%=back_time %></strong></li>
+                                                        <li data-info="登入者："><%=app_user.getString("au_name")%></li>
+                                                        <li data-info="登入時間："><%=thislogin.getString("al_logdate")%></li>
+                                                        <li data-info="登入IP："><%=thislogin.getString("al_remoteip")%></li>
+                                                        <li data-info="上次登入："><%=lastlogin.getString("al_logdate")%></li>
+                                                        <li data-info="系統版本別："><%=version_str %></li>
+
+                                                        <li class="copyright mobile">
+                                                            <p>© <%=beginyear%><%=(endyear.equals(beginyear))?"":"-"+endyear%> Greatest Idea Strategy Co.,Ltd All rights reserved.</p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>

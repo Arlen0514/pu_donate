@@ -1,0 +1,304 @@
+
+
+/*========================================================*/
+/*-------登入口樣式--------*/
+/*========================================================*/
+
+
+.loginImg{
+	background: var(--fourth_color);
+	width: 100%;
+	height: 100vh;
+	object-fit: cover;
+	padding-top: 10%;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+
+    .loginImg .wrap{
+        flex-grow: 1;
+        display: flex; 
+        flex-direction: column;
+    }
+
+
+
+
+
+
+
+
+
+    .login_in{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+        flex-grow: 1;
+    }
+
+        .login_area{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 99.99%;
+            /* max-width:520px; */
+            max-width:32.5rem; /*520px*/
+            margin: 0px auto;
+            /* padding: 20px; */
+            padding: clamp(1.2891rem, 2.0833vw, 2.5000rem); /* 最小值 20.63px、大小約 2.0833vw、最大值 40.00px */
+            box-sizing: border-box;
+            background-color: rgba(255, 255, 255, 1);
+            border-radius: 6px;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            gap: 1.875rem; /*30px*/
+        }
+.right_side{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .625rem; /*10px*/
+}
+
+    .logoImg{
+        width:100%;
+        /* max-width: 220px; */
+        max-width: 13.75rem; /*220px*/
+        height:auto;
+        
+    }
+    .logoImg img{
+        width:100%;
+        height:auto;        
+    }
+
+
+
+    
+.input_list{
+    display: flex;
+    /*gap: 22px;*/
+    gap: clamp(0.9375rem, 1.1458vw, 1.3750rem); /* 最小值 15.00px、大小約 1.1458vw、最大值 22.00px */
+    flex-direction: column;
+    width: 100%;
+}
+.input_in{
+    background-color: white;
+    display: flex;
+    line-height: 1.5;
+    flex-direction: row;
+    /* height: 58px; */
+    border-radius: 13px;
+    align-items: center;
+    /* gap: 20px;*/
+    gap:clamp(0.625rem, 1.0417vw, 1.25rem); /* 最小值 10px、大小約 1.0417vw、最大值 20.00px */
+    /* padding: 10px 20px; */
+}
+
+    .input_in .icon{
+        
+    }
+        .input_in .icon img{
+            width: 1.875rem; /*30px*/
+            height: auto;
+        }
+
+
+
+
+
+.login_captcha{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: clamp(1.0000rem, 0.9375vw, 1.1250rem); /* 字體 最小值 16.00px、大小約 0.9375vw、最大值 18.00px */
+}
+    .login_captcha input[type="text"] {
+        width: auto;
+        /* height: 58px; */
+        border-radius: 5px;
+        border: 0px;
+        height: auto;
+        background-color: var(--fourth_color);
+        line-height: 2.5;
+    }
+    .login_captcha a{
+        background: none;
+    }
+
+.login_text{
+    font-weight: 700;
+    font-size: clamp(1.2500rem, 1.7708vw, 2.1250rem); /* 字體 最小值 20.00px、大小約 1.7708vw、最大值 34.00px */
+    line-height: 1.4;
+    color: #00253d;
+}
+.input_in input[type="text"] , 
+.input_in input[type="password"]  , 
+.input_in select {     /*-- 新增 password 類型 20240827 May --*/
+    border: none;
+    width: 100%;
+    height: 100%;
+    /* border-left: 1px solid black; */
+    border-radius: 5px;
+    line-height: 2.5;
+    height: auto;
+    /* border: 0px; */
+    background-color: var(--fourth_color);
+    padding: 0 10px;
+}
+.input_in input[type="password"] {
+    padding-right: 40px;
+}
+
+
+.input_in.password{
+    position: relative;
+}
+.input_in.password i#check_eye {
+    position: absolute;
+    color: #333;
+    font-size: 1.25rem; /*10px*/
+    top: 50%;
+    right: 10px;
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    transition: 0.3sease all;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+.loginBtn {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 0.625rem; /*10px*/
+    font-size: clamp(1.1111rem, 1.0417vw, 1.2500rem); /* 字體 最小值 17.78px、大小約 1.0417vw、最大值 20.00px */
+    display: flex;
+    justify-content: center;
+    gap: 0.625rem; /*10px*/
+}
+
+    .loginBtn button{
+        margin-top: 0;
+        width: 100%;
+        line-height: normal;
+        height: auto;
+        aspect-ratio: 5 / 2;
+        background: var(--primary_color);
+        border: none;
+        border-radius: 30px;
+        padding: 0;
+        font-size: inherit;
+        color: white;
+        cursor: pointer;
+        font-size: inherit;
+        max-width: 6.25rem; /*100px*/
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 2px;
+    }
+    .loginBtn button.reset{
+        background: var(--dark_color2);
+        /* color: white; */
+    }
+    .loginBtn button:hover{
+        opacity: 0.7;
+    }
+    .login_captcha span{
+        color: black;
+    }
+
+
+ @media(max-width:1200px){
+
+    .left{
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+ }
+
+ @media(max-width:640px){
+
+    .left_in{
+        width: 90%;
+    }
+    .login_captcha input[type="text"] {
+        width: 40%;
+        /* height: 50px; */
+    }
+    .login_captcha span{
+        display: none;
+    }
+    .logoImg{
+        width: 80%;
+    }
+    .login_text {
+        font-size: 24px;
+    }
+    .input_in,.loginBtn button {
+        /* height: 50px; */
+    }
+    
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*========================================================*/
+/*-------登入口_版腳樣式--------*/
+/*========================================================*/
+
+
+
+
+.copyright{
+	color: #fff;
+	/* font-family: var(--foreign_font); */
+	font-size: clamp(0.6250rem, 0.7292vw, 0.8750rem); /* 字體 最小值 10.00px、大小約 0.7292vw、最大值 14.00px */
+	line-height: 1.2;
+	text-align: center;
+	padding: .625rem 0; /*10px*/
+    gap: .3125rem; /*5px*/
+	box-sizing: border-box;
+	margin-top: auto;
+	display: flex;
+	flex-direction: column;
+}
+.copyright a{
+	color: inherit;
+    font-size: inherit;
+    display: inline;
+    text-decoration: none;
+}
+.copyright p:first-of-type{
+	font-family: var(--foreign_font);
+}

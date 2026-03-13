@@ -1,0 +1,29 @@
+<%@page pageEncoding="UTF-8" %>
+<script>
+function goaction(FORM, JSP) {
+    FORM.action = JSP;
+    FORM.submit();
+}
+
+function godelete(FORM, JSP) {
+    if (confirm("確定刪除嗎？")) {
+        FORM.action = JSP;
+        FORM.submit();
+    }
+}
+
+function goselectedpage(page) {
+    if (!isNaN(page) && parseInt(page) > 0 && parseInt(page) <= <%=app_dp.getTotalPages() %>) {
+        if (document.pageform != null) {
+            document.pageform.npage.value = page;
+            pageform.submit();
+        }
+        if (document.pageForm != null) {
+            document.pageForm.npage.value = page;
+            pageForm.submit();
+        }
+    } else {
+        alert("頁碼不正確，請重新輸入!! (有效頁碼為： 1 ~ <%=app_dp.getTotalPages() %>)");
+    }
+}
+</script>

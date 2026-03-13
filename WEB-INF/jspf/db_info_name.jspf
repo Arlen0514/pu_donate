@@ -1,0 +1,28 @@
+<%@page pageEncoding="UTF-8"%>
+<%
+	// 主檔區										for donate_ntou 海洋大學捐款網站
+	String tblap = "ad_profile"; 				// 首頁輪播 廣告 相簿
+	String tblcp = "content_profile"; 			// 文案 檔案下載
+	String tbldm = "down_menu"; 				// 類別資料
+	String tblmp = "member_profile"; 			// 會員資料
+	String tblfd = "file_detail";				// 相關檔案/圖檔資訊
+	String tblnp = "news_profile";				// 相關檔案/圖檔資訊
+
+	// 款項相關
+	String tblrs = "receipt_sheet";				// 收據主檔
+	String tblrl = "receipt_list";				// 收據明細
+	String tbldh = "donate_history";			// 捐款紀錄
+	String tbldr = "donate_record";				// 芳名錄
+	String tblph = "payment_history";			// 付款紀錄
+	String tblwh = "write_history";				// 沖銷紀錄
+	
+	// 系統區
+	String tblal  = "admin_log";				// 管理者登入記錄
+	String tblamf = "admin_map_function"; 		// 管理者權限
+	String tblau  = "admin_user"; 				// 管理者帳號
+	String tblmf  = "mis_function"; 			// 後台功能選單
+	String tblnk  = "number_keeper"; 			// 相關表單流水號記錄表 (for IDTool.geUID 元件使用)
+	String tblss  = "site_setup"; 				// 全域通用設定
+	String tblic  = "ip_config";				// 登入IP白名單
+	String tblnr  = "night_run"; 				// night run 用
+%>

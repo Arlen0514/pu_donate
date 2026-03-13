@@ -1,0 +1,81 @@
+<%@page pageEncoding="UTF-8"%>
+<%
+	String pp_1 = "", pp_2 = "", pp_3 = "", pp_4 = "", pp_5 = "", pp_6 = "";
+	if ("tw".equals(lang)) {
+		pp_1 = "第一頁";
+		pp_2 = "上一頁";
+		pp_3 = "下一頁";
+		pp_4 = "最末頁";
+		pp_5 = "跳頁";
+		pp_6 = "頁次";
+	} else if ("cn".equals(lang)) {
+		pp_1 = "第一页";
+		pp_2 = "上一页";
+		pp_3 = "下一页";
+		pp_4 = "最末页";
+		pp_5 = "跳页";
+		pp_6 = "页次";
+	} else if ("en".equals(lang)) {
+		pp_1 = "first page";
+		pp_2 = "previous";
+		pp_3 = "next";
+		pp_4 = "last";
+		pp_5 = "Jump pages";
+		pp_6 = "Page";
+	} else if ("jp".equals(lang)) {
+		pp_1 = "先頭ページ";
+		pp_2 = "前";
+		pp_3 = "次";
+		pp_4 = "ラスト";
+		pp_5 = "ジャンプページ";
+		pp_6 = "ページ";
+	}
+%>
+<%
+	if (app_dp.getTotalPages() > 1) {
+%>
+<br>
+<%
+	if (app_dp.isFirstPage() && !app_dp.isNextPage()) {
+%>
+<a href="javascript:goselectedpage(1)">&nbsp;<%=pp_1%>&nbsp;</a>
+|
+<%
+	}
+%>
+<%
+	if (app_dp.isPreviousPage()) {
+%>
+<a href="javascript:goselectedpage(<%=(pageno - 1)%>)">&nbsp;<%=pp_2%>&nbsp;</a>
+|
+<%
+	}
+%>
+<%
+	if (app_dp.isNextPage()) {
+%>
+<a href="javascript:goselectedpage(<%=(pageno + 1)%>)">&nbsp;<%=pp_3%>&nbsp;</a>
+|
+<%
+	}
+%>
+<%
+	if (app_dp.isLastPage() && !app_dp.isPreviousPage()) {
+%>
+<a href="javascript:goselectedpage(<%=app_dp.getTotalPages()%>)">&nbsp;<%=pp_4%>&nbsp;</a>
+|
+<%
+	}
+%>
+<%=pp_6%>
+:
+<%=pageno%>
+/
+<%=app_dp.getTotalPages()%>
+&nbsp;<input name="pageno" id="pageno" type="text" size="5">&nbsp;
+<input name="gopage" id="gopage" type="button" class="button"
+	value="<%=pp_5%>"
+	onclick="javascript:goselectedpage(document.getElementById('pageno').value)">
+<%
+	}
+%>

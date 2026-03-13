@@ -1,0 +1,290 @@
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	background-color: #fff;
+}
+hr {
+	margin-top: 6px;
+	margin-bottom: 6px;
+	height:1px;
+	border:none;
+}
+td {
+	font-size: 16px;
+	color: #333333;
+	line-height: 15px; 
+    font-family: "Arial", "Helvetica", "sans-serif"; 
+}
+.button {
+	background-color: #DDDDDD;
+	border: 1px solid #333333;
+	font-size: 16px;
+	color: #333333;
+}
+input {
+	font-size: 16px;
+}
+a:link {
+	font-size: 16px;
+	color: #333333;
+	text-decoration: none;
+}
+a:visited {
+	font-size: 16px;
+	color: #333333;
+	text-decoration: none;
+}
+a:hover {
+	font-size: 16px;
+	color: #066095;
+	text-decoration: underline;
+}
+.bk-1 {
+	background-color: #FFFFFF;
+}
+.bk-1w {
+	background-color: #D1D1D1;
+}
+.word-wbk {
+	font-size: 16px;
+	color: #FFFFFF;
+}
+.bk-2r {
+	background-color: #FFFFFF;
+}
+.word-g {
+	font-size: 20px;
+	line-height: 24px;
+	font-weight: bold;
+	color: #3C7F3B;
+}
+
+
+#test img{
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+	-moz-opacity:0.5;
+	background-image:url(../images/mis_login_skin.gif);
+	background-repeat:no-repeat;
+}
+
+
+.side{
+filter:alpha(opacity=80);
+background-image:url(../images/mis_login_skin.gif);
+background-repeat:no-repeat;
+background-repeat: no-repeat;
+background-size: 330px 270px;
+}
+.system_bk-2bk {
+	background-color: #919191;  
+}
+
+/*-- 新增編框 20250718 May --*/
+.system_bk-2bk table tr td {
+	border: 1px solid #919191; 
+}
+
+.system_bk-2p {
+	background-color: #FFFFFF;  
+}
+.system_table-2-1 {
+	background-color: #EFF7FF;  
+}
+.system_bk-2b {
+	background-color: #52A0EB;  
+}
+.system_title-1 {
+	font-size: 15px;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #0D66B2;
+	line-height: 18px;  
+}
+
+.system_bk-2 {
+	background-color: #CDE7FF; 
+}
+.system_bigword {
+	font-size: 20px;
+	font-weight: bold;
+	color: #002685;
+	line-height: 28px; 
+}
+.system_td{
+	font-size: 12px;
+	font-weight: bold;
+	color: #002685;
+}
+.human_table-2-1 {
+	background-color: #FFEED4;  
+}
+.human_bk-2b {
+	background-color: #FF8400;  
+}
+.human_title-1 {
+	font-size: 15px;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #FF7E00;  
+	line-height: normal;  
+}
+
+.human_bk-2 {
+	background-color: #FCE2AB; 
+}
+.human_bigword {
+	font-size: 20px;
+	font-weight: bold;
+	color: #663200;
+	line-height: 28px; 
+}
+.market_table-2-1 {
+	background-color: #FFE6DD;  
+}
+.market_bk-2b {
+	background-color: #E33500;  
+}
+.market_title-1 {
+	font-size: 15px;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #C9310E;  
+	line-height: 18px;  
+}
+
+.market_bk-2 {
+	background-color: #FFC0BB; 
+}
+.market_bigword {
+	font-size: 20px;
+	font-weight: bold;
+	color: #991D00;
+	line-height: 28px; 
+}
+.basic_table-2-1 {
+	background-color: #F9E8FC;  
+}
+.basic_bk-2b {
+	background-color: #AD55C0;  
+}
+.basic_title-1 {
+	font-size: 15px;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #8F3BAE;  
+	line-height: 18px;  
+}
+
+.basic_bk-2 {
+	background-color: #EBCFEF; 
+}
+.basic_bigword {
+	font-size: 20px;
+	font-weight: bold;
+	color: #680C88;
+	line-height: 28px; 
+}
+.information_table-2-1 {
+	background-color: #E8F7CC;  
+}
+.information_bk-2b {
+	background-color: #49A314;  
+}
+.information_title-1 {
+	font-size: 15px;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #419128;  
+	line-height: 18px;  
+}
+
+.information_bk-2 {
+	background-color: #DDF4B2; 
+}
+.information_bigword {
+	font-size: 20px;
+	font-weight: bold;
+	color: #005D0B;
+	line-height: 28px; 
+}
+.admini_table-2-1 {
+	background-color: #E3F5FF;  
+}
+.admini_bk-2b {
+	background-color: #3E8EB7;  
+}
+.admini_title-1 {
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #257A9E;  
+	line-height: 18px;  
+}
+
+.admini_bk-2 {
+	background-color: #D1EBF9; 
+}
+.admini_bigword {
+	font-size: 17px;
+	font-weight: bold;
+	color: #0C4563;
+	line-height: 28px;
+}
+
+td.leftcol	{
+
+	background-color:#333333;
+
+}
+
+.web_table-2-1 {
+	background-color: #FFEED4;  
+}
+.web_bk-2b {
+	background-color: #FF8400;  
+}
+.web_title-1 {
+	font-size: 15px;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #FF7E00;  
+	line-height: 20px;  
+}
+
+.web_bk-2 {
+	background-color: #FFE2B6; 
+}
+.web_bigword {
+	font-size: 20px;
+	font-weight: bold;
+	color: #663200;
+	line-height: 28px; 
+}
+
+.style3 {color: #666666}
+        .style4 {color: #333333}
+
+		.password{
+			position: relative;							
+		}
+		/*閉眼*/
+		.password i#check_eye ,
+		.password i#check_eye2{
+			position: absolute !important;
+			color: #333;
+			font-size: 16px;
+			top: 50%;
+			right: 10px;
+			-webkit-transform: translate(0, -50%);
+			transform: translate(0, -50%);	
+			transition: 0.3s ease all;	
+			cursor: pointer;
+		}
+#left_select {
+    height: auto;
+    width: 100%;
+}		
+		
+		

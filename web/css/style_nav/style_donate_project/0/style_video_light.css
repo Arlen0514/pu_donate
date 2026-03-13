@@ -1,0 +1,265 @@
+
+/*/////////////////////////////////////////////////////////*/
+/*-------燈箱--------*/
+/*/////////////////////////////////////////////////////////*/
+
+	
+	
+/*燈箱*/
+.lightboxArea {
+	position:fixed;
+	width:100%;
+	z-index:99999;
+	top:0px;
+	left:0px;
+	box-sizing:border-box;
+	/* padding:124px 0px; */
+	display:none;
+}
+	/*燈箱黑底*/
+	.lightboxBG {
+		background:rgba(0,0,0,0.8);
+		width:100%;
+		height:100%;
+		position: absolute;
+		top:0px;
+	}
+	
+	/*燈箱主體*/
+	.lightboxMain {
+		/* height:360px; */
+		/* width:80%; */
+		margin:0 auto;
+		background:#000;
+		border-radius:5px;
+		position: relative;
+		transition:0.3s ease all;
+		/* transform:scale(0); */
+		top:0px;
+		box-sizing:border-box;
+		font-size:0px;
+		margin: 0;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%) scale(0);
+		width: 75vw;
+		height: calc(75vw * 9 / 16);
+	}
+		/*關閉燈箱按鍵*/
+		.lightboxCloseBtn {
+			position: absolute;
+			font-size: 15px;
+			font-weight: bold;
+			letter-spacing: 0px;
+			text-align: center;
+			width: 45px;
+			height: 45px;
+			line-height: 45px;
+			color: #fff;
+			background: var(--primary_color);
+			/* right: 20px;
+			top: 20px; */
+			right: 0px;
+			top: 0px;
+			border: solid var(--primary_color) 1px;
+			box-shadow: 0px 0px 6px rgb(0 0 0 / 10%);
+			cursor: pointer;
+			transition: 0.3s ease all;
+			display: flex;
+			transition: 0.3s ease all;
+			/* font-size:17px;
+			font-weight:bold;
+			width:48px;
+			height:48px;
+			line-height:48px;
+			border-radius:100%;
+			color:#fff;
+			text-align:center;
+			background:#2a6695;
+			cursor: pointer;
+			position:absolute;
+			top:-24px;
+			right:-24px;
+			transition:0.3s ease all;
+			z-index: 2; */
+		}
+		.lightboxCloseBtn svg{
+			fill: #fff;
+			width: 25px;
+			height: 25px;
+			margin: auto;
+			transition: 0.3s ease all;
+		}
+			.lightboxCloseBtn:hover {
+				/* background: var(--fourth_color); */
+				/* border-color: var(--fourth_color); */
+				transition: 0.3s ease all;
+			}
+			.lightboxCloseBtn:hover svg{
+				fill: var(--dark_color);
+				transform: rotate(15deg);
+				transition: 0.3s ease all;
+			}
+			/* .lightboxCloseBtn:hover {
+				background:#221912;
+				color:#fff;
+			} */
+			
+		/*燈箱資料區*/
+		.lightboxContentArea {
+			/* height: 100%; */
+			/* height: 80vh; */
+			height: inherit;
+		}
+		
+/* .index_video_list {
+	position:relative;
+	float:left;
+	cursor:pointer;
+	background:#000;
+	margin:28px 0px 0px 0px;
+}
+	.index_video_list > img {
+		opacity:0.6;
+		transition:0.3s ease all;
+		width:100%;
+		height:auto;
+	}
+	.vL_text_area {
+		position:absolute;
+		width:100%;
+		max-width: 15%;
+		text-align:center;
+		left: 50%;
+		top: 50%;
+		-webkit-transform:translateX(-50%) translateY(-50%);
+		transform:translateX(-50%) translateY(-50%);
+		box-sizing: border-box;
+		color:#fff;
+		text-shadow: 1px 1px 0px rgba(0,0,0,0.75);
+	}
+		.vL_text_area img {
+			width:100%;
+			height:auto;
+		} */
+		/*hover*/
+		/* .index_video_list:hover > img {
+			opacity:1;
+		} */
+
+/* .video_list_area {
+	display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+	font-size:0px;
+	margin:0 -12px -30px;
+} */
+/*firefox hack*/
+/* @-moz-document url-prefix() { 
+  .video_list_area {
+	  padding:8px 0px 0px 0px;
+  }
+} */
+
+	/* .video_list {
+		box-sizing:border-box;
+		padding: 0px 12px 30px;
+		width:33.3%;
+	}
+
+	.video_list2{
+		width:100%;
+		padding: 0px 0px 30px;
+	} */
+
+
+	/*firefox hack*/
+	/* @-moz-document url-prefix() { 
+	  .video_list {
+		  padding:65px 11px 0px 11px;
+	  }
+	}
+		.video_list .index_video_list {
+			float:none;
+			margin:0px;
+			border-radius: 5px;
+			overflow: hidden;
+		}
+			.video_list_remark {
+				font-size: 18px;
+				line-height: 24px;
+				color: #3d3d3d;
+				padding: 10px 0px 0px 0px;
+				font-weight: bold;
+			} */
+			
+	/*影音燈箱顯示時才會加*/
+	.video_use {
+		/* padding: 100px 0px; */
+	}
+		.video_use .lightboxMain {
+			/* height:450px; */
+		}
+	
+	/*影音燈箱*/
+	.video {
+		height:100%;
+	}
+		.video iframe {
+			height:1px;
+			height:100%;
+			width:100%;
+		}
+
+
+@media (max-width: 990px){	
+	/*燈箱主體*/
+	.lightboxMain {
+		width: 90vw;
+		height: calc(90vw * 9 / 16);
+	}
+}
+
+@media (max-width: 950px){	
+
+	/*燈箱資料區*/
+	.lightboxContentArea {
+		height: 100%;
+	}
+
+}
+
+@media (max-width: 600px){	
+
+/* .video_list_area {
+    display: block;
+    flex-wrap: unset;
+    flex-direction: unset;
+} */
+
+	/*---Video---*/
+	/* .video_list {
+		width: 100%;
+		padding:0 0 30px;
+	} */
+	/*.video_list:nth-child(2n+1) {
+		padding: 35px 0px 30px 0px;
+	}
+	.video_list:nth-child(2n+0) {
+		padding: 35px 0px 30px 0px;
+	}*/
+	
+
+	
+	
+}
+
+
+
+
+
+
+
+
+
+

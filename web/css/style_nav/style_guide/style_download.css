@@ -1,0 +1,158 @@
+
+
+/*/////////////////////////////////////////////////////////*/
+/*-------下載--------*/
+/*/////////////////////////////////////////////////////////*/
+
+/*下載列表*/
+.downloadArea{
+	/* margin: 0px -10px -20px; */
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	row-gap: 1.25rem; /*20px*/
+	/* margin: 0 -0.625rem; */ /*0 -10px*/
+	/* display: grid;
+	grid-template-columns: repeat(2 , 1fr); */
+}
+	/*下載列表_清單*/
+	.dLA_list{
+		/* padding: 0px 10px 20px; */
+		/* float: left; */
+		/* width: 50%; */
+		box-sizing: border-box;
+		/* padding: 0 0.625rem; */ /*0 10px*/
+		width: 100%;
+	}
+	
+		/*下載列表_清單_in*/
+		.dLA_list_in{
+			background: rgba(230, 230, 230, 0.7);
+			padding: 1.5625rem 1.5625rem;
+			border-radius: 7px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+		
+		
+		/*下載列表_清單_左側*/
+		.dLAL_left{
+			/* float:left; */
+			box-sizing:border-box;
+			width: calc(100% - 8.4375rem);
+		}
+			/*下載_標題*/
+			.dLALL_tit{				
+				color: #333;
+				font-size: clamp(1.0000rem, 0.9896vw, 1.1875rem); /* 字體 最小值 16.00px、大小約 0.9896vw、最大值 19.00px */
+				line-height: 1.2;
+				/* font-weight: bolder; */
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+			/*下載_內容*/
+			.dLALL_text{
+				padding-top:5px;
+				/* font-family: 'Raleway', sans-serif; */
+				color: #6a6a6a;
+				font-size: .875rem;
+				line-height:1.28;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				/* display: none; */
+				font-family: var(--foreign_foreign);
+			}
+		
+		/*下載_按鈕*/
+		.download_btn{
+			/* float: right; */
+			box-sizing: border-box;
+			width: 6.25rem;
+			text-align: center;
+		}
+			.download_btn a{
+				/* font-weight: lighter; */
+				display:
+				block;
+				color: #ffffff;
+				/* font-weight:
+				bold; */
+				font-size: 1rem;
+				text-decoration: none;
+				padding: .875rem .3125rem;
+				background: var(--primary_color);
+				border-radius: 30px;
+				/* border:1px solid #1d2087; */
+				transition: 0.2s ease all;
+			}
+			.download_btn:hover a{
+				color:#fff;
+				/* background-color:#1d2087; */
+				background-color: var(--second_color);
+				transition: 0.2s ease all;
+			}
+
+
+
+
+			
+
+
+
+@media (max-width:860px){
+	
+/*下載列表*/
+.downloadArea{
+	margin: 0px 0px 0px;
+    display: flex;
+    flex-wrap: unset;
+    flex-direction: column;
+}
+	/*下載列表_清單*/
+	.dLA_list{
+		/* padding: 0px 0px 15px; */
+		width: 100%;
+		padding: 0;
+	}
+
+}
+
+@media (max-width:640px){
+	
+	/*下載列表_清單_in*/
+	.dLA_list_in{
+		display:block;
+		align-items:unset;
+		justify-content:unset;
+		padding: .9375rem; /*15px*/
+	}
+		/*下載列表_清單_左側*/
+		.dLAL_left{
+			width: 100%;
+		}
+		/*下載_按鈕*/
+		.download_btn{
+			width: 100%;
+			margin: 15px 0 0;
+		}
+			.download_btn a {
+				/* padding: 5px 5px; */
+				/* border-radius: 4px; */
+			}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,164 @@
+<%@ page pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/jspf/import.jspf"%>
+<%@ include file="/WEB-INF/jspf/db_info_name.jspf" %>
+<%@ page import="org.json.JSONObject"%>
+<%@ page import="org.json.JSONArray"%>
+<%@ page import="java.net.URL" %>
+<%@ page import="java.net.HttpURLConnection" %>
+<%@ page import="java.net.URLEncoder"%>
+<%@ page import="java.net.URLDecoder"%>
+<%@page import="java.util.regex.Matcher"%>
+<%@page import="java.util.regex.Pattern"%>
+<%!
+
+public  boolean inValidFileExtension(String fileName) {
+    String allowedExtensions = "exe|rar|zip|jsp|java|class";
+    String regex = "([^\\s]+(\\.(?i)(" + allowedExtensions + "))$)";
+    Pattern pattern = Pattern.compile(regex);
+    Matcher matcher = pattern.matcher(fileName);
+    return matcher.matches();
+}
+%>
+<%
+	// 專案代號
+	String projectName = "donate_ntou";
+	String encoded = "zh_TW";
+
+	// 防止 XSS 		Alan 20201117
+	try {
+		String queryString_1 = "";															//取得參數
+		if(request.getQueryString() != null) queryString_1 = StringTool.validString(request.getQueryString());
+		
+		
+		
+		if(queryString_1.indexOf("%21")>-1 || queryString_1.indexOf("!")>-1 || queryString_1.indexOf("!s")>-1 || queryString_1.indexOf("!n")>-1){
+			//Server name.	
+			String servername = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+			if( request.getServerPort()== 80 ||  request.getServerPort()== 443){
+				servername = request.getScheme()+"://"+request.getServerName();
+			} 
+			String localname = request.getScheme()+"://"+request.getLocalName()+":"+request.getLocalPort();
+			String url = servername + request.getContextPath();
+			
+			response.setStatus(400);
+			response.setHeader("Location","/400.jsp");
+			response.setHeader("Connection", "close");
+			return;
+		}
+		
+		StringBuffer	urlpath = request.getRequestURL();	 								// 取得路徑
+		String    		queryString = StringTool.validString(request.getQueryString());		// 取得參數
+// 		String 			clientIPAddress = StringTool.validString(request.getRemoteAddr());	// 取得IP
+
+
+		System.out.println("queryString :"+queryString);
+
+		queryString = urlpath + URLDecoder.decode(queryString, "UTF-8"); 					// url解碼
+		queryString = queryString.replace("&_", "").replace("%", "").replace("&", "");
+		if ((queryString.indexOf("(") > -1) ||(queryString.indexOf(")") > -1) ||(queryString.indexOf("<") > -1) ||(queryString.indexOf(">") > -1) ||(queryString.indexOf("\'") > -1) ||(queryString.indexOf("\"") > -1)) {
+			System.out.println("Project:" + projectName + " url = " + urlpath.toString()+"?"+queryString);
+			
+			response.setStatus(400);
+			response.setHeader("Location","/400.jsp");
+			response.setHeader("Connection", "close");
+			return;
+		} 
+	} catch (Exception e) {
+		StringBuffer pathE = request.getRequestURL();	 									// 取得路徑
+		System.out.println("Doweb url Error info:["+e+"]Path:["+pathE.toString()+"]Time:["+DateTimeTool.dateTimeString()+"]");
+		
+		response.setStatus(400);
+		response.setHeader("Location","/400.jsp");
+		response.setHeader("Connection", "close");
+		return;
+	}
+
+	// 301重定向	
+	if((!"localhost".equals(request.getServerName()))&&(!"".equals(SiteSetup.getSetup("seo.301url").getString("ss_value")))&&(request.getRequestURL().indexOf(SiteSetup.getSetup("seo.301url").getString("ss_value"))<0)){
+		response.setStatus(301);
+	 	response.setHeader("Location",SiteSetup.getSetup("seo.301url").getString("ss_value"));
+	 	response.setHeader( "Connection", "close" );
+	 	return;
+	}
+
+	// 取得時間
+	String get_datetime = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+	String now_time[] = get_datetime.split("-");
+
+	// Default SQL Manager.
+   	SqlManager app_sm = new SqlManager();
+	
+	// Language.    語系取徝 Marco 20140225
+	// 前後台語系分開為不同session
+ 	String lang = "";
+	try {
+		lang = StringTool.validString(request.getParameter("lang")).trim();      								// 從 URL 上取值
+	} catch(Exception e){
+		response.setStatus(400);
+		response.setHeader("Location","/400.jsp");
+		response.setHeader("Connection", "close");
+		return;
+	}
+	
+	// 判斷語系值是否有在設定內 20240109 May
+	Vector<String> lang_value = new Vector<String>(Arrays.asList(SiteSetup.getValue("web.language.offer").split(";")));
+	if(!"".equals(lang) && lang_value.indexOf(lang)==-1){
+		response.setStatus(400);
+		response.setHeader("Location","/400.jsp");
+		response.setHeader("Connection", "close");
+		return;
+	}
+	
+	lang = "".equals(lang)?StringTool.validString((String)session.getAttribute("web_language")).trim():lang;  		// 第二順位從 session 取值
+	if("".equals(lang)) {
+		String[] temp_value = app_sm.select(tblss, "ss_keyword=?", new Object[]{"web.language.offer"}).getString("ss_value").split(";");
+		if (temp_value.length > 0) lang = temp_value[0]; else lang = "tw";											// 第三順位從 DB 取預設值 , 第四順位為預設 tw
+	}
+	session.setAttribute("web_language", lang);
+
+	// 前後台 title 
+	String app_mistitle = SiteSetup.getSetup("mis_title"+"."+lang).getString("ss_text");
+	if(("".equals(app_mistitle)) && (!"tw".equals(lang))) app_mistitle = SiteSetup.getSetup("mis_title.tw").getString("ss_text");
+	String app_webtitle = SiteSetup.getSetup("web_title"+"."+lang).getString("ss_text");
+
+   	// Upload file relative path.
+   	String _filespath = AppConfig.getProperty("folder.upload");
+   	// Upload file absolute path.
+   	String app_uploadpath = request.getRealPath(_filespath);
+   	// Show file relative path.
+   	String app_fetchpath = request.getContextPath() + _filespath;
+   	// Today
+   	String app_today = DateTimeTool.dateString();
+
+ 	// The page number.
+    String npage = "";
+    int pageno = 1;
+    
+ 	try{
+ 		npage = StringTool.validString(request.getParameter("npage")).trim();
+ 		if (npage != null && !"".equals(npage)) {
+ 			/*-- 參數長度判斷 20240926 May --*/
+ 			if(npage.length()>100){
+ 				response.setStatus(400);
+ 				response.setHeader("Location","/400.jsp");
+ 				response.setHeader("Connection", "close");
+ 				return;
+ 			}
+ 			pageno = Integer.parseInt(npage);
+ 		}
+ 	} catch (Exception e) {
+ 		response.setStatus(400);
+ 		response.setHeader("Location","/400.jsp");
+ 		response.setHeader("Connection", "close");
+ 		return;
+ 	}
+
+   	// The data pager.
+   	DataPager app_dp = null;
+
+   	// The integer format.
+   	DecimalFormat app_df = new DecimalFormat(",###");
+
+   	// Default menu status. 0 - Whole(全部顯示), 1 - Optional(只顯示有權限的選單)
+   	String app_menu = "1";
+%>

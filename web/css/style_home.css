@@ -1,0 +1,941 @@
+
+
+/*====================================================*/
+/*-------首頁--------*/
+/*====================================================*/
+
+.indexMain{
+	position: relative;
+}
+
+
+/*首頁內容區塊*/	
+.mainContent{
+	
+	/* padding: clamp(1.1291rem, 1.8229vw, 2.1875rem) 0 0;  */
+	/* 最小值 18.07px、大小約 1.8229vw、最大值 35.00px */
+	/* background-color: #222; */
+}
+
+/* 首頁各區域 */
+.indexitem{
+	/* padding: 80px 0 0; */
+	padding: 0;
+	padding-top: lamp(2.5807rem, 4.1667vw, 5.0000rem); /* 最小值 41.29px、大小約 4.1667vw、最大值 80.00px */
+	overflow: hidden;
+}
+
+/* 首頁標題 ------------------*/
+.index_tit{
+	padding-bottom: clamp(1.1291rem, 1.8229vw, 2.1875rem); /* 最小值 18.07px、大小約 1.8229vw、最大值 35.00px */
+	font-size: clamp(1.2500rem, 1.7708vw, 2.1250rem); /* 字體 最小值 20.00px、大小約 1.7708vw、最大值 34.00px */
+	line-height: 1.1;
+	color: var(--primary_color);
+	text-align: center;
+	letter-spacing: 6px;
+
+	/* display: none; */
+}
+	.index_tit h2{
+		padding: 0;
+		margin: 0;
+		font-size: inherit;
+		line-height: inherit;
+		display: inline-block;
+		position: relative;
+		z-index: 2;
+	}
+	.index_tit h2:before{
+		position: absolute;
+		content: "";
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: contain;
+		bottom: -100px;
+		left: -68px;
+		width: 100px;
+		padding: 50% 0;
+		z-index: -1;
+		opacity: 0;
+	}
+	
+
+
+	
+/* 首頁標題2 ------------------*/
+.index_tit2{
+	/* padding-bottom: 35px; */
+	font-size: 20px;
+	line-height: 1.1;
+	color: #66CCCC;
+	font-family: 'Noto Serif TC', serif;
+	text-align: center;
+	letter-spacing: 6px;
+}
+	.index_tit2 h2{
+		padding: 0;
+		margin: 0;
+		font-size: inherit;
+		line-height: inherit;
+		display: inline-block;
+		position: relative;
+		z-index: 2;
+		/* border-bottom: 1px #999999 solid; */
+	}
+
+	
+
+
+@media (max-width: 990px){
+	
+	.main {
+		/* padding-top: 69px; */
+	}	
+	.indexMain::before {
+		display: none;
+	}
+
+	.indexitem{
+		/* padding: 30px 0 0; */
+	}
+
+	/* 首頁標題 ------------------*/
+	.index_tit{
+		/* padding-bottom: 20px;
+		font-size: 30px; */
+		letter-spacing: 3px;
+	}
+
+
+}
+
+
+
+@media (max-width: 768px){
+	
+	/* 首頁標題2 ------------------*/
+	.index_tit2{
+		text-align: center;
+		padding-bottom: 20px;
+		font-size: 30px;
+		letter-spacing: 3px;
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*====================================================*/
+/*-------首頁輪播--------*/
+/*====================================================*/
+
+/*====================================================*/
+/*-------首頁輪播--------*/
+/*====================================================*/
+
+
+.indexBannerArea{
+    position: relative;
+	width: 100%;
+	/*max-width: 73.125rem;*/ /*1170*/
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+
+.indexBannerArea #particles-js{
+	position:absolute;
+	z-index: 2;
+	width: 100%;
+	/*height: 100vh;*/
+	height: 100%;
+	/* background-color: #2c2e43; */
+	background-size: cover;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;	
+	
+	pointer-events: none;
+}
+
+.indexBannerArea .banner_down{
+	z-index: 10;
+}
+	.indexBannerArea .banner_down .indexBannerList .indexBannerIn{
+		/* display: none; */
+	}
+/* .indexBannerArea .banner_up{
+	z-index: 11 !important;
+	position: absolute !important;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: #fff0 !important;
+
+	display: none;
+}
+	.indexBannerArea .banner_up .indexBannerList .pcBanner ,
+	.indexBannerArea .banner_up .indexBannerList .mobileBanner{
+		background-image:none !important;
+	}
+	
+.indexBannerArea .swiper-button-prev{		
+	background-image: url(../index/images/left_arrow2.png);
+}
+.indexBannerArea .swiper-button-next{
+	background-image: url(../index/images/right_arrow2.png);
+} */
+
+
+
+.indexBannerList{
+	position: relative;
+	display: flex;
+	flex-direction: column;
+}
+	.indexBannerList  .pcBanner{
+		display: flex;
+		flex-direction: column;
+		padding: 0;
+		aspect-ratio: 2.5 / 1;
+		flex-grow: 1;
+		justify-content: center;
+	}
+	.indexBannerList a{
+		display: block;
+		flex-grow: 1;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		/* padding-left: 7%; */
+		padding: 0;
+		text-decoration: none;
+		flex-grow: 1;
+	}
+
+
+
+	.indexBannerIn{
+		max-width: 23.125rem; /*370px*/
+		width: 90%;
+		width: 100%;
+		max-height: 100%;
+		/* 20250328 移除文字發光效果 by tom */
+		/* text-shadow: rgb(255, 255, 255) 0px 0px 10px; */
+		backdrop-filter: blur(2px);
+		z-index: inherit;
+		margin-left: 11%;
+		background-color: rgb(255 255 255 / 70%);
+		padding: 0.9375rem; /*15px*/
+		border-radius: 0.9375rem; /*15px*/
+	}
+		/* 首頁banner列表標題  */
+		h2.indexBanner_title{
+			padding: 0;
+			margin: 0;
+			display: inline-block;
+			font-weight: bolder;
+			font-size: clamp(1.2500em, 1.5625vw, 1.8750em); /* 字體 最小值 20.00px、大小約 1.5625vw、最大值 30.00px */
+			line-height: 1.5;
+			color: #343434;
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 2;
+			overflow: hidden;
+			/* backdrop-filter: blur(3px); */
+		}
+		/* 首頁banner列表文字 */
+		.indexBanner_remark{
+			font-size: clamp(0.8125em, 0.7813vw, 0.9375em); /* 字體 最小值 13.00px、大小約 0.7813vw、最大值 15.00px */
+			line-height: 1.5;
+			color: #343434;
+			margin-top: .625rem; /*10px*/
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 3;
+			overflow: hidden;
+			/* backdrop-filter: blur(3px); */
+		}
+		
+		/* 首頁banner列表按鍵 */
+		.indexBannerList .btn{
+			width: 100%;
+			margin-top: 1.25rem; /*20px*/
+			margin-left: auto;
+			text-align: right;
+		}
+			.indexBannerList .btn label{
+				display: flex;
+				justify-content: flex-end;
+				align-items: center;
+			}
+			.indexBannerList .btn strong ,
+			.indexBannerList .btn input{
+				background: var(--primary_color);
+				width: 9.375rem; /*150px*/
+				height: 2.625rem; /*42px*/
+				line-height: 2.375rem; /*38px*/
+				border-radius: 1.875rem; /*30px*/
+				display: block;
+				color: #fff;
+				text-align: center;
+			}
+			
+
+
+	.indexBannerList a:focus {
+		background-color: var(--focus_outline-color);
+	}
+	.indexBannerList a:focus .pcBanner{
+		opacity: 0.5;
+		background-color: var(--focus_outline-color);
+	}
+
+		
+@media (max-width: 990px){
+
+	.indexBannerList  .pcBanner{
+		display: none;
+	}
+	.indexBannerList  .mobileBanner{
+		display: flex;
+		flex-direction: column;
+		padding: 0;
+		/* aspect-ratio: 1 / 1; */
+		aspect-ratio:  1 / 1.5;
+		justify-content: center;
+		aspect-ratio: 1 / 1.2;
+	}
+
+
+	.indexBannerIn{		
+		/* max-width: 50%; */
+		margin-left: 2.5%;
+		width: 90%;
+        max-width: unset;
+	}
+		/* 首頁banner列表標題  */
+		h2.indexBanner_title{
+			/* font-size: 25px; */
+		}
+		/* 首頁banner列表文字 */
+		.indexBanner_remark{		
+			/* font-size: 14px;	 */
+		}
+		.indexBannerList .btn label input {
+			/* font-size: 14px;
+			width: 120px;
+			height: 40px;
+			line-height: 40px;
+			border-radius: 6px; */
+		}
+
+		.indexBannerArea .swiper-button-prev, 
+		.indexBannerArea .swiper-button-next {
+			display: none;
+		}
+}
+
+
+
+
+
+		
+@media (max-width: 640px){
+	
+	.indexBannerIn{		
+		margin: 0 auto;
+		width: 80%;
+	}
+
+}
+
+
+
+
+
+
+/*====================================================*/
+/*-------首頁_about--------*/
+/*====================================================*/
+
+.indexAboutBg{
+	display: none;
+}
+	.indexAboutBg .wrap{
+		
+	}
+
+
+	/*----- 內頁標題塊2 -----*/
+	.indexAboutBg .right_title2 {
+		font-size: 45px;
+		font-size: clamp(1.9375rem, 2.3438vw, 2.8125rem);  /*字體 最小值 31px、大小約 2.3438vw、最大值 45px*/
+		line-height: 1.2; /*55px*/
+		color: var(--primary_color);
+		font-weight: 700;
+		position: relative;
+		margin: 0 auto;
+		margin: clamp(3.7098rem, 5.9896vw, 7.1875rem) auto; /* 最小值 59.36px、大小約 5.9896vw、最大值 115px */
+		width: fit-content;
+		border-bottom: none;
+		padding-bottom: 0;
+	}	
+
+		.indexAboutBg .right_title2  .right_title_content{
+			position: relative;
+			display: flex;
+			flex-direction: column-reverse;
+			gap: 0.625rem; /*10px*/
+			align-items: center;
+			padding: 0 clamp(1.9355rem, 3.1250vw, 3.7500rem); /* 最小值 30.97px、大小約 3.1250vw、最大值 60px */
+			text-align: center;
+		}
+
+
+		
+		.indexAboutBg  .right_title2 strong{
+			font-size: inherit;
+			line-height: initial;
+			padding: 0;
+			margin: 0;
+			display: inline-block;
+			font-weight: inherit;
+			/* margin-bottom: calc(22px - 16px); */
+		}	
+	
+		.indexAboutBg .right_title2  .index_sub_title{
+			color: var(--primary_color);
+			font-size: clamp(1.2500rem, 1.6667vw, 2.0000rem); /* 字體 最小值 20.00px、大小約 1.6667vw、最大值 32.00px */
+			line-height: 1.13;
+			font-family: var(--foreign_foreign);
+		}
+		.indexAboutBg .right_title2:after {
+			display: none;
+		}
+		
+		.indexAboutBg .right_title2 p {
+			font-size: clamp(0.875rem, 0.8333vw, 1rem); /*字體 最小值 14px、大小約 0.8333vw、最大值 16px*/
+			color: var(--primary_color);
+			line-height: 1.5;
+			font-weight: normal;
+		}
+
+		.indexAboutBg .right_title2  .right_title_decorate{
+			width: clamp(1.6130rem, 2.6042vw, 3.1250rem); /* 最小值 25.81px、大小約 2.6042vw、最大值 50px */
+			position: absolute;
+			/* top: 50%;
+			background-color: #ddd; */
+		}
+			.indexAboutBg .right_title2  .right_title_decorate img{
+				width: 100%;
+				height: auto;
+			}
+
+			.indexAboutBg .right_title2  .right_title_decorate1{
+				width: clamp(1.9355rem, 3.1250vw, 3.7500rem); /* 最小值 30.97px、大小約 3.1250vw、最大值 60px */
+				right: clamp(-1.9355rem, -3.1250vw, -3.7500rem); /* 最小值 30.97px、大小約 3.1250vw、最大值 60px */
+				transform: translateX(0%) translateY(-50%) rotate(331deg);
+			}
+		.indexAboutBg .right_title2  .right_title_decorate2{
+			left: clamp(-1.6130rem, -2.6042vw, -3.1250rem); /* 最小值 25.81px、大小約 2.6042vw、最大值 50px */
+			transform: translateX(0%) translateY(-50%);
+		}
+
+
+
+
+
+
+
+
+
+/*====================================================*/
+/*-------首頁_最新消息--------*/
+/*====================================================*/
+
+.index_NAbg{
+	/* display: flex; */
+	padding: 0 10%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	position: relative;
+}
+.index_NAbg:before {
+    /* position: absolute; */
+    content: "";
+    /* filter: grayscale(90%); */
+    backdrop-filter: blur(1px);
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255 255 255 / 60%);
+    /* z-index: 0; */
+    left: 0;
+	top: 0;
+	opacity: 0;
+}
+.index_NAbg > div{
+	/* position: relative; */
+	/* z-index: 2; */
+}
+
+
+
+
+
+
+
+@media (max-width: 1280px){
+
+	/* 首頁_News_video */
+	.index_NAbg{
+		padding: 0 7.5%;
+	}
+
+}
+
+
+@media (max-width: 990px){
+
+	/* 首頁_News_video */
+	.index_NAbg{
+		display: block;
+		padding: 0 5%;
+		/* background-image: none !important; */
+	}
+
+}
+
+
+/* 
+	.index_tit_icon{
+		position: absolute;
+		top: 50%;
+		left: 0;
+		transform: translateY(-50%);
+	}
+		.index_tit_icon i{
+			font-size: 28px;
+			line-height: 1;
+			position: absolute;
+			color: #f39800;
+		}   */
+
+
+
+
+
+.index_NAbg{
+	box-sizing: border-box;
+	/* width: 60%; */
+	/* width: calc(100% - 600px); */
+	padding: 60px 0px;
+	/* padding-right: 50px; */
+}
+
+ul.index_NAarea{
+	padding: 0;
+	margin: 0;
+	display: block;
+	list-style-type: none;
+	padding-bottom: 30px;
+	/* margin: -15px 0;	 */
+}
+
+    /* 首頁_最新消息_列表 */
+	ul.index_NAarea li{
+		padding: 0;
+		margin: 0;
+		/* display: block; */
+		list-style-type: none;
+		display: flex;
+		flex-direction: column;
+		/* align-items: center; */
+		position: relative;
+		padding: 20px 0;
+		padding-left: 95px;
+		border-bottom: 1px #d7d7d7 dashed;
+		
+		gap: 10px;
+	}
+        /* 最新消息_張貼日期 */
+		ul.index_NAarea .time{
+			/* position: absolute; */
+			left: 0;
+			top: 50%;
+			/* transform: translateY(-50%); */
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			/* font-family: poppins, sans-serif; */
+			font-weight: 500;
+			font-style: normal;
+			/* font-size: 16px; */
+			text-align: center;
+			color: var(--primary_color);
+			gap: 10px;
+		}
+			ul.index_NAarea .time .year{
+			/* padding-bottom: 10px; */
+			}
+			ul.index_NAarea .time .date{
+			/* font-size: 19px; */
+			}
+
+       /* 最新消息_標題 */
+	   ul.index_NAarea h3.title{
+			padding: 0;
+			margin: 0;
+			display: inline-block;
+			font-size: inherit;
+			line-height: inherit;
+			/* overflow: hidden;
+			text-overflow:ellipsis;
+			white-space: nowrap; */
+			font-weight: normal;
+			font-size: 19px;
+			line-height: 1.5;
+		}
+			ul.index_NAarea h3.title a{		
+				display: block;
+				text-decoration: none;
+				color: #333;						
+				transition: 0.3s ease all;
+
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				-webkit-line-clamp: 1;
+				overflow: hidden;
+			}        
+			ul.index_NAarea h3.title a:hover{
+				opacity: 0.5;
+				transition: 0.3s ease all;
+			}  
+			
+
+.index_NAbg .btn_area input {
+		background:var(--second_color);
+		border-color: transparent;
+		color: #fff;
+		box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+	}
+
+
+          
+
+@media (max-width: 1280px){
+
+	.index_NAbg{
+		/* width: calc(100% - 400px);		 */
+		/* padding-right: 20px; */
+	}
+}
+             
+          
+
+@media (max-width: 990px){
+
+	.index_NAbg{
+		width: 100%;
+		padding: 30px 0;
+		padding-right: 0px;
+	}
+
+	ul.index_NAarea li{
+		padding-left: 0px;
+	}
+}
+ 
+@media (max-width: 640px){
+
+  /* 首頁_最新消息_列表 */
+  ul.index_NAarea li{
+	position: unset;
+    padding: 15px 0;
+}
+	/* 最新消息_張貼日期 */
+	ul.index_NAarea .time{
+		position: unset;
+		left: unset;
+		top: unset;
+		transform: unset;
+		flex-direction: row;		
+		text-align: left;
+		font-size: 15px;
+		margin-bottom: 5px;
+		/* color: #F39800; */
+	}
+		ul.index_NAarea .time .year{
+			/* padding-bottom: 10px; */
+			padding: 0;
+		}
+		ul.index_NAarea .time .date{
+			font-size: 15px;
+			position: relative;
+			padding-left: 10px;
+		}
+		ul.index_NAarea .time .date:before {
+			position: absolute;
+			content: "/";
+			transform: translate(0,-50%);
+			left: 0px;
+			top: 50%;
+		}
+			
+}
+
+/* 修改這段 CSS */
+.index_NAbg .btn_area input {
+    background: var(--second_color); 
+    
+    color: #fff;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    
+    cursor: pointer; 
+    transition: 0.3s;  
+}
+
+
+.index_NAbg .btn_area input:hover {
+    opacity: 0.8;
+}
+
+
+
+/*====================================================*/
+/*-------首頁募款專案內容區塊--------*/
+/*====================================================*/
+
+
+/* 首頁募款專案內容區塊 */        
+.indexDonateProjectBg{	
+	overflow: hidden;
+	background: #f0f1f1;
+	padding: clamp(1.6130rem, 2.6042vw, 3.1250rem) 0; /*最小值 25.81px、大小約 2.6042vw、最大值 50.00px */
+	position: relative;
+}
+	.indexDonateProjectBg .wrap{
+	position: relative;
+	z-index: 3;
+	}
+	
+
+	.indexDonateProjectBg .btn_area input {
+		background:#fff;
+		border-color: transparent;
+		color: var(--second_color);
+		box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+	}
+
+
+        /* 首頁募款專案區 */
+		ul.indexDPArea{
+			padding: 0;
+			margin: 0;
+			display: block;
+			list-style-type: none;
+
+			display: grid;
+			grid-template-columns: repeat(3 , 1fr);
+			gap: .9375rem; /*15px*/
+			/* margin: 0 -15px; */
+		}
+            /* 首頁募款專案列表 */
+			ul.indexDPArea li{
+				padding: 0;
+				margin: 0;
+				display: block;
+				list-style-type: none;
+
+				box-sizing: border-box;
+				width: 100%;
+				/* width: 33.3%; */
+				/* padding: 0 10px 17px;
+				flex: 0 0 calc(100% / 12* 4); */
+
+			}
+				.indexDPlist{
+					/* height: 100%; */
+					box-shadow: 1px 1px 15px #00000038;
+					display: flex;
+					flex-direction: column;
+				}
+					/* 首頁募款專案圖片 */
+                    .indexDPimg{						
+					}
+						.indexDPimg a{
+							display: block;
+							text-decoration: none;
+							position: relative;
+							/* padding-top: 45%; */
+							padding-top: 66%;
+							overflow: hidden;
+							transition: 0.5s ease all;				
+						}
+						.indexDPimg img{	
+							position: absolute;
+							top: 0;
+							left: 0;
+							bottom: 0;
+							right: 0;
+							float: none;
+							width: 100% !important;
+							height: 100% !important;
+							object-fit: cover;
+							transition: 0.5s ease all;
+							transform-origin: center;					
+						}
+						.indexDPimg a:hover img{	
+							transform: scale(1.1);
+							transition: 0.5s ease all;					
+						}
+						
+                   .indexDP_indexBottom{
+						border-bottom: 6px var(--second_color) solid;
+						position: relative;
+						/*padding: 20px 20px calc(20px + 36px);*/  /*36是按鈕高度*/
+						padding: 5px 20px;
+						height: calc(100% - 20px * 2);  /*20是padding上下高度*/
+						background-color: #fff;
+						}
+				   		/* 首頁募款專案標題 */
+						.indexDP_indexBottom h3{
+							padding: 0;
+							margin: 0;
+							display: block;
+							font-size: clamp(1.1250rem, 1.1979vw, 1.4375rem); /* 字體 最小值 18.00px、大小約 1.1979vw、最大值 23.00px */
+							line-height: 1.5;
+							margin-bottom: 5px;
+							display: -webkit-box;
+							-webkit-box-orient: vertical;
+							-webkit-line-clamp: 2;
+							overflow: hidden;
+						}		
+							.indexDP_indexBottom h3 a{
+								display: block;
+								text-decoration: none;
+								color: #333;
+							}	
+							.indexDP_indexBottom h3 a:hover{
+								color: var(--second_color);
+								transition: 0.5s ease all;
+							}						
+						
+						.indexDP_indexBottom .indexDP_remark{
+							font-size: 1rem;
+							line-height: 1.5;
+							font-family: var(--foreign_foreign);
+							color: #818181;
+							display: -webkit-box;
+							-webkit-box-orient: vertical;
+							-webkit-line-clamp: 1;
+							overflow: hidden;
+							margin-bottom: 0px;
+						}	
+
+						/* 首頁募款專案按鈕 */						
+						.indexDP_indexBottom .btn{
+							/* margin-top: 15px; */
+							/* text-align: right; */
+							position: absolute;
+							right: 20px;
+							bottom: 20px;
+						}
+							.indexDP_indexBottom .btn a{
+								background-color: #6cc;
+								color: #fff;
+								padding: 10px 25px;
+								display: inline-block;
+								text-decoration: none;
+								border-radius: 30px;
+							}	
+							
+
+
+
+
+@media (max-width: 990px){
+
+	/* 首頁募款專案區 */
+	ul.indexDPArea{
+		/* margin: 0 -10px; */
+	}
+		/* 首頁募款專案列表 */
+		ul.indexDPArea li{
+			/* width: 33.3%; */
+			/* padding: 0 10px; */
+		}
+			.indexDP_indexBottom {
+				/* padding: 10px; */
+				padding: 10px 10px calc(10px + 36px);  /*36是按鈕高度*/
+				height: calc(100% - 10px * 2);  /*10是padding上下高度*/
+			}
+				/* 首頁募款專案標題 */
+					.indexDP_indexBottom h3{
+						/* font-family: var(--foreign_foreign);
+						margin-bottom: 0px; */
+					}		
+				.indexDP_indexBottom .indexDP_remark{
+					/* font-size: 15px; */
+				}	
+				/* 首頁募款專案按鈕 */						
+				.indexDP_indexBottom .btn{
+					right: 10px;
+					bottom: 10px;
+					/* margin-top: 10px; */
+				}
+				
+				
+}
+
+@media (max-width: 768px){
+
+	/* 首頁募款專案區 */
+	ul.indexDPArea{
+		/* display: block;
+		margin: 0 0 -30px; */
+		grid-template-columns: repeat(1 , 1fr);
+	}
+		/* 首頁募款專案列表 */
+		ul.indexDPArea li{
+			width: 100%;
+			padding: 0 0 0;
+		}
+		.indexDP_indexBottom {
+			height: auto;
+        	padding: 10px;
+		}
+			/* 首頁募款專案按鈕 */						
+			.indexDP_indexBottom .btn{
+				text-align: right;
+				right: unset;
+				bottom: unset;
+				position: unset;
+			}
+				.indexDP_indexBottom .btn a {
+					padding: 8px 10px;
+				}
+}				
+
+
+.indexDonateProjectBg .aos-animate{
+    /* display: flex;
+    flex-wrap: wrap; */
+}
+							

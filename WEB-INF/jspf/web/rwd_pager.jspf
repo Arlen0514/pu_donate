@@ -1,0 +1,27 @@
+<%@page pageEncoding="UTF-8"%>
+		<%if(app_dp.getTotalPages() > 1) { %>
+		<div class="page_left_arrow">
+            <%--註：如果要隱藏上一頁/下一頁按鍵 只能去掉div內的<a> 不然會跑版--%>
+			<%if(app_dp.isPreviousPage()) { %>
+            <a href="javascript:goselectedpage(<%=pageno - 1 %>);">
+                &lt;
+            </a>
+            <%} %>	
+		</div>
+		<div class="page_select">
+          	<select name="pageno" id="pageno" onchange="javascript:goselectedpage(document.all.pageno.value);">
+          		<%for(int page_num = 0; page_num < app_dp.getTotalPages(); page_num++) { %>
+            	<option value="<%=page_num + 1 %>" <%=((page_num + 1) == pageno)?"selected":"" %>>
+               		 <%=page_num + 1 %>
+            	</option>
+            	<%} %>
+       		</select>
+     	</div>
+		<div class="page_right_arrow">
+			<%if(app_dp.isNextPage()) { %>
+    		<a href="javascript:goselectedpage(<%=pageno + 1 %>);">
+            	&gt;
+    		</a>
+			<%} %>
+		</div>
+		<%} %>

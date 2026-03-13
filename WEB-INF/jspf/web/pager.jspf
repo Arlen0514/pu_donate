@@ -1,0 +1,30 @@
+<%@page pageEncoding="UTF-8"%>
+	<table>
+		<%if(app_dp.getTotalPages() > 1) { %>
+		<tr>
+			<%if(app_dp.isFirstPage()) { %>
+			<td width="55" valign="top">
+	            <a href="javascript:goselectedpage(1);">第一頁</a>
+        	</td>
+			<%} %>  
+			<%if(app_dp.isPreviousPage()) { %>
+        	<td width="55" valign="top">
+	            <a href="javascript:goselectedpage(<%=pageno - 1%>);">上一頁</a>
+        	</td>
+			<%} %>
+			<%if(app_dp.isNextPage()) { %>
+         	<td width="55" valign="top">
+	            <a href="javascript:goselectedpage(<%=pageno + 1%>);">下一頁</a>
+      		</td>
+			<%} %>
+			<%if(app_dp.isLastPage()) { %>
+          	<td width="55" valign="top">
+	        	<a href="javascript:goselectedpage(<%=app_dp.getTotalPages()%>);">最後頁</a>
+          	</td>
+			<%} %>
+	        <td width="47" align="center" style="vertical-align: top;"><div class="page_pages">頁次<br/><%=pageno %> / <%=app_dp.getTotalPages() %></div></td>
+         	<td width="41" valign="top"><input class="page_text" name="pageno" type="text" size="4" maxlength="4" /></td><td>
+         	</td><td width="40" valign="top"><a href="javascript:goselectedpage(document.all.pageno.value);">跳頁</a></td>
+   		</tr>
+   		<%} %>
+ 	</table>

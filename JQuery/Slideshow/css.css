@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+
+/*** set the width and height to match your images **/
+
+#slideshow {
+    position:relative;
+    height:359px;
+    width: 1010px;
+    clear: both;
+    
+}
+
+#slideshow IMG {
+    position:absolute;
+    top:0;
+    left:/*90px;*/0px;
+    z-index:8;
+    opacity:0.0;
+}
+
+#slideshow IMG.active {
+    z-index:10;
+    opacity:1.0;
+}
+
+#slideshow IMG.last-active {
+    z-index:9;
+}

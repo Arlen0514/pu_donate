@@ -1,0 +1,73 @@
+/* 引入 guide.css 更改左側選單顏色 */
+/* @import url('../style_guide/style_guide.css');  */
+
+
+/* 引入下載模組---------------------------- */
+@import url("../style_guide/style_download.css");
+
+
+
+
+
+/* ====================================================== */
+/* 表單下載 */
+/* ====================================================== */
+
+.guide_download_bg{
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.8750rem, 2.0833vw, 2.5000rem); /* 最小值 30.00px、大小約 2.0833vw、最大值 40.00px */
+}
+
+    .guide_downloadArea{
+        
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+.dLA_title{
+    color: var(--primary_color);
+}
+
+/*下載按鈕第一層顏色更換*/
+.download_btn a {
+    background-color: var(--primary_color);
+}
+/*下載按鈕第二層顏色更換*/
+.download_btn:hover a {
+    background-color: var(--second_color);
+}
+
+/*頁數顏色更換*/
+.numberPage_middleList.active a {
+    background-color: var(--second_color);
+}
+
+.right_title4 h2 {
+    font-weight: 600;
+    padding-left: .3125rem; /*5px*/
+}
+
+.right_title4 {
+    align-items: center;
+}
+
+
+.downloadArea_one,
+.downloadArea_two{
+    margin: 0px -10px -20px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,347 @@
+
+
+
+/*/////////////////////////////////////////////////////////*/
+/*-------套印收據共用--------*/
+/*/////////////////////////////////////////////////////////*/
+
+/*列印按鈕*/
+.btn_area{
+	padding: 32px 0px;
+	text-align: center;
+	position: relative;
+	z-index: 9;
+}
+	.btn_area input[type="submit"] {
+		-webkit-appearance: none;
+		-webkit-border-radius: 0px;
+		/* margin: 0px 45px;
+		padding: 0; 
+		height: 42px;
+		background: #0f4c81;
+		line-height: 42px; 
+		letter-spacing: 1px;*/
+		outline: none;
+		cursor: pointer;
+		vertical-align: middle;
+		border: none;
+		/* width: 100px;
+		border-radius: 5px;		 
+		transition: 0.2s ease all;*/
+		
+		/* -webkit-appearance: none;
+		-webkit-border-radius: 0px; */
+		margin: 0;
+		padding: 0;
+		outline: none;
+		cursor: pointer;
+		vertical-align: middle;
+		border: none;
+		width: 162px;
+		height: 42px;
+		line-height: 42px;
+		transition: 0.2s ease all;
+		letter-spacing: 1px;
+		background: var(--third_color);
+		color: #ffffff;
+		border-color: var(--third_color);
+		margin: 0px 10px;
+		border-radius: 30px;
+		font-weight: bold;
+	}
+
+	.printBtn{
+		cursor: pointer;
+	}
+
+/*套印頁面設定*/
+.overPrint{
+}
+
+	.overPrint ul ,
+	.overPrint  li{
+		display: unset;
+		padding: 0;
+		margin: 0;
+		list-style-type: none;
+	}
+	
+
+.page_print {
+	/* overflow: hidden; */
+	width: 206mm;
+	height: 293mm;
+	padding: 0mm 8.4mm;
+	margin: 0.2mm auto;
+	/* border-bottom: 1px #ccc solid; */
+	background: white;
+	box-sizing: border-box;
+	position: relative;
+	/* font-family: "標楷體"; */
+	
+	/*background-image:url(../images/A4.jpg);*/
+	background-position:center;
+	background-repeat:no-repeat;
+	background-size:contain;
+
+	page-break-before: always; /*在標籤前換頁*/
+	/*page-break-after: always;*/ /*在標籤後換頁*/
+}
+
+	.page_print .pageIn{
+		width: 100%;
+		height: 100%;
+		margin: 0 auto;
+		/* border-left: 1px #ababab dashed;
+    	border-right: 1px #ababab dashed; */		
+	}
+	
+
+
+
+
+
+
+
+
+	/*填空欄位*/
+	.fillBlank{
+		display: inline-flex;
+	}
+
+
+
+/*/////////////////////////////////////////////////////////*/
+/*-------套印_申辦校友證--------*/
+/*/////////////////////////////////////////////////////////*/
+
+/* .alumniCardPage{
+	font-size: 12px;
+	line-height: 1.3;
+	letter-spacing: 0.2px;
+}
+
+	.alumniCardPage h2{			
+		text-align: center;
+		padding: 0;
+		margin: 0;
+		display: block;
+		margin-bottom: 20px;
+	}
+	.alumniCardPage h3{			
+		text-align: left;
+		padding: 0;
+		margin: 0;
+		display: inline-block;
+		margin-bottom: 5px;
+	}
+
+	.alumniCardPage ul ,
+	.alumniCardPage li{	
+		padding: 0;
+		margin: 0;
+		list-style-type: none;
+		display: block;
+	} */
+	
+
+	/* .alumniCardArea{		
+	}
+	.alumniCardItem{
+		margin-bottom: 15px;	
+		border-right: 1px #ababab solid;
+		border-bottom: 1px #ababab solid;
+	}
+
+	.alumniCardArea ul{
+		display: -ms-grid;
+		display: grid;
+	}
+		.alumniCardArea li{	
+			border-left: 1px #ababab solid;
+			border-top: 1px #ababab solid;
+			display: flex;
+			padding: 5px 3px;
+		} 
+			.alumniCardArea li .content{
+				display: flex;
+				align-items: center;
+				width: 100%;
+			}
+
+		.alumniCardArea li .fillInBlank{
+			padding-right: 10px;
+		}
+		.alumniCardArea li .fillInBlank:last-of-type{
+			padding-right: 0px;
+		}*/
+
+
+/*-------套印_申辦校友證_第一塊--------*/
+
+	/* .alumniCardArea ul.fir{
+		grid-template-columns: 75px auto 65px auto 240px 90px 97px;
+	} */
+	
+
+
+
+
+
+
+/*-------套印_申辦校友證_第二塊--------*/
+
+/* .alumniCardArea ul.sce{
+	grid-template-columns: 75px auto 187px;
+} */
+
+	/* 證件大頭照 */
+	/* .alumniCardArea ul.sce li.id_photo{
+		grid-column-start: 3;
+		grid-column-end: 4;
+		grid-row-start: 1;
+		grid-row-end: 5;
+		padding: 0;
+		display: inline-block;
+		justify-content: unset;
+		align-items: unset;
+	}
+		.alumniCardArea li.id_photo  .fillInBlank{
+			display: block;
+			position: relative;
+			width: 100%;
+			padding: 128% 0 0 !important;
+		}
+			.alumniCardArea li.id_photo img{
+				position: absolute;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				float: none;
+				width: 100% !important;
+				height: 100% !important;
+				object-fit: cover;
+				transition: 0.3s ease all;
+				z-index: 2;
+				background-color: #fff;
+			}
+
+			.alumniCardArea li.id_photo span{
+				transform: translate(-50% , -50%);
+				display: block;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				z-index: 0;
+			} */
+
+
+
+
+
+
+
+
+/* .alumniCardArea ul.sce2{
+	grid-template-columns: 75px 65px auto 85px auto;
+}
+
+	.alumniCardArea ul.sce2 li.address:nth-of-type(3){
+		grid-column-start:3;
+		grid-column-end: 6;
+	}
+
+	.alumniCardArea ul.sce2 li:nth-of-type(5) ,
+	.alumniCardArea ul.sce2 li:nth-of-type(7){
+		grid-column-start:2;
+		grid-column-end: 6;
+	} */
+
+
+
+
+/*-------套印_申辦校友證_第三塊--------*/
+
+/* .alumniCardArea ul.third{
+	grid-template-columns: 75px 65px auto 85px auto;
+}
+
+.alumniCardArea ul.third li:nth-of-type(2) ,
+.alumniCardArea ul.third li:nth-of-type(4) ,
+.alumniCardArea ul.third li:nth-of-type(11){
+	grid-column-start:2;
+	grid-column-end: 6;
+} */
+
+
+
+
+/*-------套印_申辦校友證_第四塊--------*/
+
+/* .alumniCardArea ul.fourth{
+	grid-template-columns: 75px 65px auto 85px auto;
+}
+
+.alumniCardArea ul.fourth li:nth-of-type(2) ,
+.alumniCardArea ul.fourth li:nth-of-type(4) ,
+.alumniCardArea ul.fourth li:nth-of-type(14) ,
+.alumniCardArea ul.fourth li:nth-of-type(16) ,
+.alumniCardArea ul.fourth li:nth-of-type(18){
+	grid-column-start:2;
+	grid-column-end: 6;
+} */
+/* 郵寄地址 */
+/* .alumniCardArea ul.fourth li:nth-of-type(7){
+	grid-column-start:3;
+	grid-column-end: 6;
+} */
+
+
+/*-------套印_申辦校友證_第四塊2--------*/
+
+/* .alumniCardArea ul.fourth2{
+	grid-template-columns: repeat(2, 1fr) ;
+}
+	.alumniCardArea ul.fourth2 .fillInBlank{
+		width: 100%;
+    	position: relative;
+	}
+		.alumniCardArea ul.fourth2 img{
+			width: 100%;
+			height: auto;
+			position: relative;
+			z-index: 2;
+			background-color: #fff;
+		}
+		.alumniCardArea ul.fourth2 span{
+			transform: translate(-50% , -50%);
+			display: block;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			z-index: 0;
+		} */
+
+
+
+
+/*-------套印_申辦校友證_第五塊--------*/
+
+/* .alumniCardArea:last-of-type .alumniCardItem {
+    margin-bottom: 0px;
+    border-color: #fff0;
+}
+	.alumniCardArea ul.fifth{
+		grid-template-columns:repeat(4 , 81px auto);
+	}
+		.alumniCardArea ul.fifth li {
+			border-color: #fff0;
+		} */
+
+
+
+
+
+
+

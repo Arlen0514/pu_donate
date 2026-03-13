@@ -1,0 +1,132 @@
+
+/* ============================================================= */
+/* 院系募款院系列表頁 css */
+/* ============================================================= */
+
+
+
+
+
+
+
+
+.dept_fund_area {
+    margin: 0;
+    padding: 0;
+    list-style-type : none;
+    display: block;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 每行最多顯示 4 個項目 */
+    flex-wrap: wrap; /* 當超過一排時換行 */
+    gap: clamp(0.6452rem, 1.0417vw, 1.2500rem); /* 最小值 10.32px、大小約 1.0417vw、最大值 20.00px */
+}
+
+    .dept_fund_area li {
+        margin: 0;
+        padding: 0;
+        list-style-type : none;
+        display: block;
+
+       
+        /*flex: 1 1 calc(25% - 20px);*/ /* 讓每個 li 元素佔 25% 的寬度，並考慮間距 */
+        /* flex: 0 0 calc(25% - 20px); */
+    }
+    
+        .dept_fund_box {
+            /*border: 1px solid #ccc;*/ /* 可以根據需要設定邊框 */
+            /*padding: 10px;*/ /* 可設定內邊距 */
+            text-align: center; /* 使內容居中對齊 */
+        }
+            .dept_fund_box a{
+                display: block;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                gap: .625rem; /*10px*/
+                text-decoration: none;
+                transition: 0.3s ease;
+            }
+            .dept_fund_box a:hover{
+                opacity: 0.7;
+                transition: 0.3s ease;
+            }
+                .dept_fund_img{
+                    position: relative;
+                    aspect-ratio: 1.48 / 1;
+                    /* padding-top: 100%;
+                    border-radius: 10px; */
+                    display: block;
+                    overflow: hidden;
+                    width: 100%;
+                }
+                .dept_fund_img img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    bottom: 0;
+                    right: 0;
+                    float: none;
+                    width: 100% !important;
+                    height: 100% !important;
+                    object-fit: cover;
+                    transition: 0.3s ease all;
+                }
+
+
+
+                .dept_fund_box strong{
+                    font-size: clamp(1.0000rem, 0.9375vw, 1.1250rem); /* 字體 最小值 16.00px、大小約 0.9375vw、最大值 18.00px */
+                    color: #000;
+                    line-height: 1.1;
+                    display: block;
+                    text-align: center;
+                }
+
+
+
+
+
+
+
+@media (max-width: 768px){
+
+    .dept_fund_area {
+        grid-template-columns: repeat(3, 1fr); /* 每行最多顯示 4 個項目 */
+    }
+    
+    
+}
+
+
+@media (max-width: 640px){
+
+    .dept_fund_area {
+        grid-template-columns: repeat(2, 1fr); /* 每行最多顯示 4 個項目 */
+    }
+        .dept_fund_box a{
+            gap: 0.3125rem; /*5px*/
+        }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

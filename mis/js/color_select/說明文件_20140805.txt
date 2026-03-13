@@ -1,0 +1,4 @@
+參考網站：http://www.digitalmagicpro.com/jPicker/
+
+1.如彈出的色票選擇器太高，在jpicker-1.1.6.js內搜尋"top: win.position.y"
+2.如圖片路徑有變，在html內搜尋"$.fn.jPicker.defaults.images.clientPath='images/';"，以便修改路徑

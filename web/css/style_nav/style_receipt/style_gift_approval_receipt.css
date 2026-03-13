@@ -1,0 +1,554 @@
+
+/* ============================================= */
+/* 立臺灣海洋大學_受贈財物簽辦單------------- */
+/* ============================================= */
+
+.page_print {
+    /* background-image:url(../../../receipt/images/demo2.png); */
+    page-break-before:unset; /*在標籤前換頁*/
+    /*page-break-before: always;/* /*在標籤前換頁*/
+    /*page-break-after: always;*/ /*在標籤後換頁*/
+    background-size: 212mm;
+
+    line-height: 1.3;
+}
+
+
+
+/*通用樣式-----------------------------------*/
+
+
+/*表單header-----------------------------------*/
+.donation_form_header{
+    padding-top: 13px;
+    padding-bottom: 5px;
+    font-family: "標楷體";
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px 0;
+    position: relative;
+}
+
+    .donation_form_header strong{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 19px;
+        letter-spacing: 1.5px;
+    }
+        .donation_form_header .logo{
+            width: 65px;
+        }
+            .donation_form_header .logo img{
+                
+            }
+
+        .donation_form_header .couplet{
+            
+text-align: center;
+            
+font-size: 13.2px;
+        }
+    
+        .donation_form_header .date{    
+            text-align: right;                
+            font-size: 11px;                
+            letter-spacing: 1px;
+        }
+
+        .donation_code{
+            text-align: left;
+            font-size: 11px;
+            letter-spacing: 1px;
+            position: absolute;
+            bottom: 5px;
+        }
+
+
+
+        .basic_information_area{
+
+        }
+
+
+
+.donation_red{
+    color: #ff0000;
+}
+
+
+/*tbody區塊-----------------------------------*/
+
+.basic_information{
+    font-size: 12.5px;
+    width: 100%;
+    border-bottom: 1px #000 solid;   
+}
+.basic_information:not(:last-of-type){
+    margin-bottom: 10px;
+}
+
+    .basic_information td{
+        border-right: 1px #000 solid;
+        border-top: 1px #000 solid;
+        /* padding: 9px 5px; */
+        padding: 7.8px 5px;
+    }
+
+    .basic_information td  .list{
+        display: flex;
+        flex-wrap:nowrap;
+    }
+        .basic_information td .title{
+            white-space: nowrap;
+        }
+
+        .basic_information .donation_red{
+            display: inline;
+        }
+
+
+
+
+    .basic_information td.basic_information_in{
+        padding: 0px 0px;
+    }
+    /* .basic_information tbody > tr > td{
+        padding: 9px 5px;
+    } */
+    /* .basic_information .leftSideTitle{
+    } */
+        .basic_information .basic_information_title{
+            /* -webkit-writing-mode: vertical-lr;
+            writing-mode: vertical-lr; */
+            padding: 10px 5px;
+            border-left: 1px #000 solid;
+            background-color: #ffcccc;
+        }
+
+        .basic_information .basic_information_title .title{
+            display: flex;
+            justify-content: center;
+            white-space: normal;
+        }
+
+        .basic_information_in table{
+            width: 100%;
+        }
+           .basic_information_in table td{
+                border-right: none;
+                border-top:  none;
+                padding-top: 3.5px;
+                padding-bottom: 3.5px;
+            }
+
+
+
+
+
+            .notice{
+                font-size: 11.5px;
+                margin-top: 8px;
+                padding-left: 12px;
+                letter-spacing: 1.7px;
+                margin-bottom: 13px;
+            }
+
+
+
+/* ==================================================== */
+/*tbody內第一區塊-----------------------------------*/
+/* ==================================================== */
+.basic_information1{
+}
+
+.basic_information1{
+    /* background-color: #d6e3bc;
+    writing-mode: vertical-lr;
+    text-align: center; */
+}
+
+    /*身分*/
+    .basic_information1 .identity{
+        
+    }
+        .basic_information1 .identity{
+            
+        }
+
+            .basic_information1 .identity .basic_information_in{
+                
+            }
+                .basic_information1 .identity .basic_information_in td{
+                    display: flex;
+                    gap: 5px 2px;;
+                }
+
+
+                .basic_information1 .identity .fillBlank{
+                    width: 87px;
+                    border-bottom: 1px #000 solid;
+                    text-align: center;
+                    justify-content: center;
+                }
+
+                .basic_information1 .identity .fillBlank:nth-child(2){
+                    width: 202px;
+                }
+
+
+
+
+
+/* ==================================================== */
+/*tbody內第二區塊-----------------------------------*/
+/* ==================================================== */
+.basic_information2{
+}
+
+    .basic_information.basic_information2 td.basic_information_in{
+        padding: 0;
+        width: 43%;
+    }
+    .basic_information.basic_information2 td.basic_information_in > div{
+        padding: 0;
+        height: 100%;
+    }  
+    .basic_information.basic_information2 td.basic_information_in td{
+        padding: 0;
+        display: grid;
+        grid-template-columns: 28px auto;
+        border: none;
+        gap: 6px;
+        align-items: stretch;
+    } 
+        .basic_information2 .basic_information_in .basic_information_title{
+            border-left: none;
+            border-right: 1px #000 solid;
+            padding: 30px 6px;
+        }   
+            .basic_information2 .basic_information_in .basic_information_title .title{
+                display: block;
+                white-space: unset;
+                border: none;
+            }  
+            
+        .basic_information2 .basic_information_in .assetType_area{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            gap: 7px;
+            padding: 5px 0;
+            /* flex-grow: 1; */
+            /* align-content: space-between; */
+        } 
+
+            .basic_information2 .basic_information_in .assetType_area .list{
+                gap: 5px;
+                flex-wrap: wrap;
+            } 
+
+            .basic_information2 .basic_information_in .assetType_area p{
+                font-size: 10.5px;
+                padding-left: 2em;
+                line-height: 1.3;
+            } 
+
+
+
+
+            .basic_information2 tbody tr:nth-of-type(5){
+
+            }
+                .basic_information2 tbody tr:nth-of-type(5) p{
+                    width: 100%;
+                    font-size: 10.5px;
+                    margin-top: 5px;
+                }
+            
+
+            .basic_information2 tbody tr:nth-of-type(6){
+
+            }
+                .basic_information2 tbody tr:nth-of-type(6) td:nth-of-type(3){
+                    width: 22%;
+                }
+            
+
+
+
+
+            .basic_information2 tbody tr:nth-of-type(7){
+
+            }
+                .basic_information2 tbody tr:nth-of-type(7) td:last-of-type{
+                    
+                }
+                .basic_information2  .donationUse{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 5px 0;
+                }
+                .basic_information2 .donationUse .list{
+                    width: 100%;
+
+                }
+                .basic_information2 .donationUse .title{
+                    display: flex;
+                    width: 100%;
+                    gap: 5px;
+                }       
+                .basic_information2 .donationUse .fillBlank{
+                    width: 100%;
+                    border-bottom: 1px solid #000;
+                    white-space: normal;
+                } 
+                 .basic_information2 .donationUse .fillBlank p{
+
+                    /* word-wrap: break-word;
+                    word-break: break-all; */
+
+
+                    /* table-layout: fixed; */
+                    /* word-wrap: break-word;
+                    overflow: hidden;  
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;	
+                    -webkit-line-clamp: 3;	
+                    overflow: hidden; */
+                 }
+
+
+                /* 財物屬性 */
+                .propType {
+
+                }
+                    .propType .title{
+                        position: relative;
+                    }
+                    .propType .title .donation_red{
+                        position: absolute;
+                        right: -4px;
+                        top: -7px;
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==================================================== */
+/*tbody內第三區塊-----------------------------------*/
+/* ==================================================== */
+.basic_information3{
+}
+
+    .basic_information3 th{
+        border: 1px #000 solid;
+        border-bottom: none;
+        padding: 9px 10px;
+        font-size: 14px;
+        background-color: #ff9999;
+    }
+
+
+
+    .basic_information3 .basic_information_title {
+    }
+    .basic_information3 td:not(.basic_information_title) {
+        text-align: left;
+    }
+
+
+    /* .basic_information3 td:not(:first-of-type) ,
+    .basic_information3 td:not(:last-of-type) {
+       border-right: none;
+    } */
+    .basic_information3 td:nth-of-type(2) ,
+    .basic_information3 td:nth-of-type(3) {
+       border-right: none;
+    }
+    .basic_information3 tr:nth-last-child(2) td:last-of-type  ,
+    .basic_information3 tr:last-of-type td:last-of-type  {
+       border-right: 1px solid #000;
+    }
+    .basic_information3 td:first-of-type{
+        border-left: 1px solid #000;
+    }
+    .basic_information3 td:not(:first-of-type){
+        padding: 5px 5px;
+    }
+
+
+    .basic_information3 td .title {
+       width: fit-content;
+    }
+
+    .basic_information3 td .sign_area{
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .basic_information3 td .fillBlank {
+    }
+        .basic_information3 td .fillBlank img{
+            max-width: 100%;
+            height: auto;
+        }
+
+
+
+
+        .basic_information3 td {
+            padding: 13px 5px;
+        }
+        .basic_information3 td .title{
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        }
+            .basic_information3 td .title span{
+                display: block;
+                font-size: 10.5px;
+            }
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==================================================== */
+/*tbody內第四區塊-----------------------------------*/
+/* ==================================================== */
+ /* .basic_information4{
+}
+
+
+
+    .basic_information4 .basic_information_in{
+    }
+    .basic_information td.basic_information_in{
+        padding: 7px 9px;
+    }
+        .basic_information4 .basic_information_in table td {
+            border-right: 1px #000 solid;
+            border-top: 1px #000 solid;
+            border-left: 1px #000 solid;
+            padding: 7px 5px;
+        }
+        .basic_information4 .basic_information_in table td {
+        }
+
+
+            .basic_information4 .basic_information_in .regularContributions td{
+                border-bottom: 1px #000 solid;
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: column;
+                gap: 10px 0;
+            }
+           .basic_information4 .basic_information_in .regularContributions .list{
+            }
+            .basic_information4 .basic_information_in .regularContributions .list4{
+                padding-left:  2em;
+            }
+            .basic_information4 .basic_information_in .regularContributions .list .fillBlank{
+                width: 50px;
+                justify-content: center;
+                text-align: center;
+            }
+            .basic_information4 .basic_information_in .regularContributions .list4 .fillBlank{
+                border-bottom: 1px #000 solid;
+                width: 100px;
+                text-align: center;
+                justify-content: center;
+            }
+            .basic_information4 .basic_information_in .regularContributions .list4 .title:last-of-type {
+                display: flex;
+                gap: 0 8.5px ;
+            } */
+
+
+
+
+
+
+
+/* ==================================================== */
+/*tbody內第五區塊-----------------------------------*/
+/* ==================================================== */
+/* .basic_information5{
+    border-top:1px #000 solid;
+}
+    .basic_information5 td{
+        border-top:none;
+    } */
+    
+
+
+
+
+
+
+
+
+
+
+/* ==================================================== */
+/*tbody內第六區塊-----------------------------------*/
+/* ==================================================== */
+
+/* .basic_information6{
+    border-top:1px #000 solid;
+}
+    .basic_information6 td{
+        border-top:none;
+        
+    } */
+
+
+
+
+
+
+
+
+
+
+
+

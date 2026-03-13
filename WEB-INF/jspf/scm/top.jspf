@@ -1,0 +1,80 @@
+<%@page pageEncoding="UTF-8"%>
+<%
+   // Current top function.
+   TableRecord ses_ctmf = (TableRecord)session.getAttribute("scm_current_top");
+
+	//版本字串
+	String version_str = "Shop19.1012sc";
+	//倒數分鐘數
+	int timeout =  (int) session.getMaxInactiveInterval() ;	// 抓取 session存在時間
+	int back_time = timeout / 60;  
+	//int back_time = 30;
+	
+	
+%>
+		<script type="text/javascript">
+		var _outcount = <%=back_time %>;
+		var _outflag = setTimeout("_out_timedCount()",1000*60);
+		function _out_timedCount()
+		 {
+			 document.getElementById('_outtime').value=_outcount;
+			 _outcount 	= _outcount - 1;
+			 if(_outcount > 0) {
+				 _outflag	= setTimeout("_out_timedCount()",1000*60);
+			 } else {
+				 clearTimeout(_outflag);
+				 document.location.href="<%=request.getContextPath()%>/scm/logout.jsp";
+			 }
+		 }
+		</script>
+        <tr>
+          <td align="left" colspan="1" class="bk-1" style="padding-left: 5px"><img src="<%=request.getContextPath()%>/scm/images/logo_01.gif" /></td>
+
+          <td width="590" class="bk-1" valign="middle"><table width="590" border="0" align="center">
+            <tr align="left" valign="middle">
+              <td height="20">目前管理語系 ：</td>
+              <td>
+              	<B>
+              	繁體中文
+              	</B>
+              </td>
+              <td>系統將於 <input id="_outtime" style="color:red; text-align: center; text-shadow: orange;" type="text" value="<%=back_time %>" size="1" readonly> 分後自動登出
+              </td>
+            </tr>
+            <tr align="left" valign="middle">
+              <td height="20" width="200">登入者： <%=app_user.getString("sc_name")%></td>
+              <td>登入時間： <%=thislogin.getString("al_logdate")%></td>
+              <td>
+              </td>              
+            </tr>
+            <tr align="left" valign="middle">
+              <td height="20">登入IP： <%=thislogin.getString("al_remoteip")%></td>
+              <td>上次登入： <%=lastlogin.getString("al_logdate")%></td>
+              <td>系統版本別：<B> <%=version_str %></B>
+              </td>                
+            </tr>
+          </table></td>
+        
+        </tr>
+         <tr align="left">
+          <td colspan="2" class="bk-2r"><table width="986" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+<%
+   for (int i = 0; i < app_tmfs.size(); i++) {
+       TableRecord _mf = (TableRecord)app_tmfs.get(i);
+       String _image = _mf.getString("smf_id").equals(ses_ctmf.getString("smf_id")) ? _mf.getString("smf_image1") : _mf.getString("smf_image2");
+%>
+              <td width="90"><a href="<%=request.getContextPath()%>/scm/scm_default.jsp?mfid=<%=_mf.getString("smf_id")%>"><img src="<%=request.getContextPath()%>/scm/images/<%=_image%>" width="90" height="28" border="0"></a></td>
+<% } %>
+              <td width="90"><a href="<%=request.getContextPath()%>/scm/logout.jsp"><img src="<%=request.getContextPath()%>/scm/images/logout_button_1.gif" width="90" height="28" border="0"></a></td>
+<% for (int i = app_tmfs.size(); i < 13; i++) { %>
+              <td width="90" align="left"><img src="<%=request.getContextPath()%>/scm/images/blank.gif" width="90" height="28" border="0"></td>
+<% } %>
+              <td width="140" align="right">&nbsp;</td>
+              <td width="1">&nbsp;</td>
+            </tr>
+            <tr>
+              <td colspan="15" background="<%=request.getContextPath()%>/scm/images/<%=ses_ctmf.getString("smf_topimage")%>"><img src="<%=request.getContextPath()%>/scm/images/<%=ses_ctmf.getString("smf_topimage")%>" width="10" height="13"></td>
+              </tr>
+          </table></td>
+        </tr>

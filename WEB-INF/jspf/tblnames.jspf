@@ -1,0 +1,54 @@
+<%@page pageEncoding="UTF-8"%>
+<%
+   // Export htmls.
+   String app_export = StringTool.validString(request.getParameter("export"));
+
+   // Table names. (New added 2005/09/16)
+   String tblss = "site_setup";                    // 全域通用設定
+   String tblwm = "web_model";                     // 網站模版
+   String tblws = "web_style";                     // 網站風格
+   String tblwt = "web_topmenu";                   // 網站頂端選單
+
+   // Table names. (New added 2007/09/07)
+   String tblal = "admin_log";                     // 管理者登入記錄
+   
+   // Offered languages.
+   TableRecord app_offer = new SqlManager().select(tblss, "ss_keyword='web.language.offer'", new Object[0]);
+   String[] offer_langs = app_offer.getString("ss_value").split(";");
+   
+   // Default locale.
+   TableRecord xxsi = new SqlManager().select(tblss, "ss_keyword='index.default.language'", new Object[0]);
+   String deflanguage = xxsi.getString("ss_value");
+   if (StringTool.indexOf(xxsi.getString("ss_value"), offer_langs)==-1) {
+       deflanguage = offer_langs[0];
+   }
+   String app_locale = StringTool.validString((String)session.getAttribute("app_locale"), deflanguage);
+   app_locale = StringTool.validString(request.getParameter("code"), app_locale);
+   if (StringTool.indexOf(app_locale, offer_langs)==-1) {
+       app_locale = offer_langs[0];
+   }
+   if (!app_export.equals("")) {
+       app_locale = StringTool.validString(request.getParameter("code"), "tw");
+   }
+   session.setAttribute("app_locale", app_locale);
+   
+   // Table language heading.
+   String app_lang = "c";
+   if (app_locale.equals("en")) {
+       app_lang = "e";
+   }
+   if (app_locale.equals("jp")) {
+       app_lang = "j";
+   }
+   
+   // Table names.
+   String tblsi = app_lang+"_setup_info";                    // 設定檔
+   String tblml = app_lang+"_model_list";                    // 版型資料檔
+   String tblsl = app_lang+"_style_list";                    // 風格資料檔
+   String tblwf = app_lang+"_web_function";                  // 主功能選項
+   String tblci = app_lang+"_company_info";                  // 公司簡介   
+   String tblcm = app_lang+"_company_message";               // 育隆新聞 
+   String tblpc = app_lang+"_product_category";              // 產品類別
+   String tblpi = app_lang+"_product_info";                  // 產品資訊  
+   String tblsa = app_lang+"_service_area";                  // 服務據點   
+%>

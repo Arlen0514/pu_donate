@@ -1,0 +1,219 @@
+
+
+
+/*//////////////////////////////////////////////////////*/
+/*------- 芳名錄 --------*/
+/*//////////////////////////////////////////////////////*/
+
+
+
+
+
+
+
+
+/*//////////////////////////////////////////////////////*/
+/*------- 芳名錄_篩選 --------*/
+/*//////////////////////////////////////////////////////*/
+
+.right_title4 h2 {
+    font-weight: 600;
+    padding-left: .3125rem; /*5px*/
+}
+
+.right_title4 {
+    align-items: center;
+	padding-top: 1.25rem;
+}
+.directory_filter_area{
+	padding-top: 20px;
+	display: flex;
+	flex-wrap: wrap;
+	/* justify-content: space-between;*/
+	/* margin: 0 -10px; */
+	gap: clamp(0.6452rem, 1.0417vw, 1.2500rem); /* 最小值 10.32px、大小約 1.0417vw、最大值 20.00px */
+	display: grid;
+	grid-template-columns: repeat(2 , 1fr);
+}
+	.solicitationList{
+		width: auto;
+		/* padding: 5px 10px; */
+		box-sizing: border-box;
+		/* max-width: 33%; */
+		/* width: 49%; */
+	}
+	.solicitationList .fL_info {
+		/* padding-bottom: 10px; */
+		padding-bottom: 0;
+	}
+
+	.solicitationList:first-of-type{	
+		/* max-width: 150px; */
+	}
+	.donationPurpose_info input{
+		width: 100%;
+	}
+
+
+
+/*================================*/
+/*------- 芳名錄_時間區間 --------*/
+/*================================*/
+
+.courseDateRange{
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	/* margin: -5px 0; */
+	gap: 10px;
+}
+
+		.courseDateRange span{	
+			box-sizing: border-box;
+		}
+		.courseDateRange select{
+			width: 105px;
+			width: clamp(6.0625rem, 5.4688vw, 6.5625rem); /* 最小值 97px、大小約 5.4688vw、最大值 105.00px */
+			box-sizing: border-box;
+			margin: 0;
+		}
+		.courseDateRange input[type="text"]{
+			width: 115px;
+			box-sizing: border-box;
+			margin: 0 5px;
+		}
+
+	/* 開始 *//* 結束 */
+	.courseDateRange .start ,
+	.courseDateRange .finish{
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		box-sizing: border-box;
+		padding: 0;
+		gap: 10px;
+	}
+
+	
+
+
+
+
+
+
+
+
+
+@media (max-width: 990px){
+
+	.directory_filter_area{
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: column;
+	}
+
+	.courseDateRange select{
+		width: 6.5625rem; /*105px*/
+	}
+
+}
+
+
+
+
+
+
+@media (max-width: 550px){
+
+	.courseDateRange .start, 
+	.courseDateRange .finish {
+		letter-spacing: -2px;
+	}
+		.courseDateRange select {
+			width: 60px;
+			font-size: 12px;
+			padding: 9px 0px 10px 2px;
+		}
+		.courseDateRange input[type="text"]{
+			width: 90px;
+			font-size: 12px;
+			padding: 9px 0px 10px 2px;
+		}
+}
+
+
+
+
+/*================================*/
+/* 實際上課日_新增------------------------------------ */
+/*================================*/
+.form_list.actual_date{
+}
+	.form_list.actual_date .fL_info{
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		/* margin: -5px 0; */
+	}
+		.form_list.actual_date input[type="text"]{
+			max-width: calc(100% - 95px);
+			box-sizing: border-box;
+			/* margin: 5px 0; */
+		}
+		/* 實際上課日_新增按鈕 */
+		.form_list.actual_date input[type="button"].newBtn{
+			width: 85px;
+			box-sizing: border-box;
+			background: #66cccc;
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*//////////////////////////////////////////////////////*/
+/*------- 芳名錄_table --------*/
+/*//////////////////////////////////////////////////////*/
+
+
+.no_bg thead th {
+    background-color: var(--primary_color);
+}
+
+.form_list.actual_date input[type="button"].newBtn {
+    background-color: var(--second_color);
+}
+
+.numberPage_middleList.active a {
+    background-color: var(--second_color);
+}
+
+
+        
+        
+        
+        
+        
+        
+        
+

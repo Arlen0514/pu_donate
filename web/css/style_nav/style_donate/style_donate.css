@@ -1,0 +1,602 @@
+
+
+/*/////////////////////////////////////////////////////////*/
+/*-------線上捐款--------*/
+/*/////////////////////////////////////////////////////////*/
+
+
+
+
+.valuationArea {
+    border-bottom: 1px #d6d6d6 dashed;
+    padding: 40px 0 40px;
+}
+.valuationBg .valuationArea:first-of-type{
+	padding-top: 0;
+}
+.valuationBg .valuationArea:last-of-type {
+    border-bottom: 0px #d6d6d6 dashed;
+	padding-bottom: 0;
+}
+
+	.valuationBg .form_area{
+		row-gap: clamp(1.25rem, 1.3021vw, 1.5625rem); /* 最小值 20px、大小約 1.3021vw、最大值 25.00px */
+	}
+		.valuationBg  .form_list{
+			font-size:clamp(1rem, 0.9375vw, 1.125rem); /* 字體 最小值 16.00px、大小約 0.9375vw、最大值 18.00px */
+		}
+			.valuationBg  .form_list .fL_tit{
+				font-size: inherit;
+			}
+			.valuationBg  .fL_info {
+				font-size: inherit;
+				line-height: 1.5;
+				padding-bottom: 0;
+			}
+			.valuationBg  .form_outcome .no_input {
+				line-height:inherit;
+			}
+
+
+
+
+
+@media (max-width: 800px){	
+
+	.valuationBg .fL_info {
+		padding-bottom: 0;
+	}
+
+	
+	.valuationBg  .item_RadioCheckArea .item_Radio_list {
+		/* align-items:last baseline; */
+	}
+
+}
+
+
+
+
+
+
+
+
+/* ================================== */
+/* 通訊地址 */
+/* ================================== */
+
+.correspondenceAddress{
+	margin: 0;
+}
+
+	
+/* ================================== */
+/* 電話 */
+/* ================================== */
+
+.telephone{
+
+}
+.telephone .notice_hidden{
+	visibility: hidden;
+}
+
+
+
+@media (max-width: 800px){	
+
+	.telephone .notice_hidden{
+		display: none;
+	}
+
+}
+
+
+
+
+
+
+		
+/* ================================== */
+/* 行動電話 */
+/* ================================== */
+
+.cellphone{
+
+}
+.cellphone .notice_hidden{
+	/* visibility: hidden; */
+}
+
+
+
+@media (max-width: 800px){	
+
+	.cellphone .notice_hidden{
+		/* display: none; */
+	}
+
+}
+
+
+
+
+
+		
+/* ================================== */
+/* 身分 */
+/* ================================== */
+
+.form_list_identity{
+
+}
+
+
+@media (max-width: 800px){	
+
+	.valuationBg .form_list_identity .item_RadioCheckArea .item_Radio_list{
+		line-height: 22px;
+		align-items: first baseline;
+	}
+}
+
+
+
+
+
+
+
+/* ================================== */
+/* 捐贈類別 */
+/* ================================== */
+.donateCategory_info {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.9375rem;
+}
+	.donateCategoryItem{
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		/* flex-grow: 1; */
+		width: calc((100% / 7) - 0.9375rem);
+	}
+		.donateCategoryItem input[type="radio"]{
+		}
+		.donateCategoryItem label{
+			/* display: flex; */
+			text-align: center;
+			padding: 0.625rem; /*10px*/
+			box-shadow: 1px 1px 15px #00000038;
+			border-radius: 0.3125rem; /*5px*/
+			background-color: #fff;
+			transition: 0.3s ease all;
+			/* width: 100px; */
+			flex-grow: 1;
+			justify-content: center;
+			display: inline-flex;
+			flex-direction: column;
+			gap: 0.3125rem; /*5px*/
+		}
+		.donateCategoryItem.active label ,
+		.donateCategoryItem:hover label{
+			box-shadow: 1px 1px 15px #fff0;
+			background-color: #6cc;	
+			transition: 0.3s ease all;	
+		}
+
+			.donateCategoryItem .item_radio{
+				position: absolute;
+				opacity: 0;
+				/* display: none;  */
+			}
+		
+			.donateCategoryItem label > img{
+				max-width: clamp(2.5000rem, 2.6042vw, 3.1250rem); /* 最小值 40.00px、大小約 2.6042vw、最大值 50.00px */
+                width: 100%;
+				height: auto;
+				margin: 0 auto;
+				display: inline-block;
+			}
+			 .donateCategoryItem label > h3{
+				padding: 0;
+				margin: 0;
+				display: block;
+				font-size: clamp(0.8125rem, 0.7292vw, 0.8750rem); /* 字體 最小值 13.00px、大小約 0.7292vw、最大值 14.00px */
+				font-size: clamp(0.8750rem, 0.8333vw, 1.0000rem); /* 字體 最小值 14.00px、大小約 0.8333vw、最大值 16.00px */
+				line-height: 1.5;
+				margin-top: 1px;
+				font-weight: normal;
+			}
+			 .donateCategoryItem label > span.en{	
+                margin: 0;
+			}
+
+			.right_title4 span {
+				font-weight: bold;
+				color: var(--primary_color);
+				font-size: clamp(1.0000rem, 0.9375vw, 1.1250rem);
+				line-height: 1.6;
+				margin-right: .625rem;
+				display: inline-block;
+				font-family: var(--foreign_foreign);
+			}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 990px){	
+
+
+	/* 捐贈類別 */
+	.donateCategory_info {
+		display: grid;
+		grid-template-columns: repeat(4 , 1fr);
+	}
+	.donateCategoryItem{
+		width: auto;
+	}
+
+
+}
+
+@media (max-width: 640px){	
+
+	/* 捐贈類別 */
+	.donateCategory_info {
+		grid-template-columns: repeat(2 , 1fr);
+	}
+		.donateCategoryItem{
+			width: auto;
+			/* width: calc((100% / 2) - 0.9375rem); */
+		}
+
+}
+
+
+@media (max-width: 510px){	
+
+	.donateCategory_info {
+		/* margin-right: -10px; */
+	}
+		.donateCategoryItem {
+			/* padding-right: 10px;
+			display: block;
+			margin-bottom: 15px;  */
+		}
+			.donateCategoryItem label{	
+				/* padding: 5px;
+				width: auto;	 */
+			}
+				.donateCategoryItem label > img {
+					/* width: 40px; */
+				}
+				.donateCategoryItem label > h3 {
+					/* font-size: 13px;
+					line-height: 1.2; */
+				}
+			
+}
+
+
+
+
+
+
+
+
+
+
+/* ================================== */
+/* 指定捐贈用途 */
+/* ================================== */
+.donationPurpose_info {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	/* flex-wrap: wrap; */
+	padding-left: 0;
+	padding-right: 0;
+	display: grid;
+	gap: .9375rem; /*15px*/
+	grid-template-columns: repeat(auto-fit, minmax(0px, 1fr));
+}
+	.donationPurpose_info select{
+		box-sizing: border-box;
+		font-size: inherit;
+	}
+	/* 請自行輸入指定用途 */
+	.donationPurpose_info input.info_other[type="text"] {
+		display: none;
+		/* width: 155px;
+		margin-left: 10px; */
+		height: auto;
+		line-height: 38px;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ================================== */
+/* 捐贈金額 */
+/* ================================== */
+.donateAmount_info {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: clamp(0.4839rem, 0.7813vw, 0.9375rem); /*  最小值 7.74px、大小約 0.7813vw、最大值 15.00px */
+	/* margin-bottom: -15px; */
+	/* justify-content: space-between; */
+}
+	.donateAmountItem{
+		position: relative;
+		/* padding: 0px 0 10px; */
+		/* padding-right: 15px; */
+		color: var(--primary_color);
+		font-size:clamp(1rem, 0.9375vw, 1.125rem); /* 字體 最小值 16.00px、大小約 0.9375vw、最大值 18.00px */
+		font-weight: bold;
+		display: flex;
+		align-items: center;
+		gap: clamp(0.3226rem, 0.5208vw, 0.6250rem); /* 最小值 5.16px、大小約 0.5208vw、最大值 10.00px */
+	}
+		.donateAmount_info input[type="radio"]{
+			box-sizing: border-box;
+		}
+		.donateAmount_info .item_radio{
+			position: absolute;
+			opacity: 0;
+			/* display: none;  */
+		}
+		.donateAmount_info label{
+			box-sizing: border-box;
+			text-align: center;
+			padding: 0.625rem; /*10px*/
+			box-shadow: 1px 1px 15px #00000038;
+			border-radius: 5px;
+			background-color: #fff;
+			transition: 0.3s ease all;
+			font-family: 'Varela Round', sans-serif;
+		}
+		.donateAmountItem.active label ,
+		.donateAmountItem:hover label{
+			box-shadow: 1px 1px 15px #fff0;
+			background-color: #6cc;	
+			transition: 0.3s ease all;	
+			color: #fff;
+		}
+		/* 請自行輸入指定用途 */
+		.donateAmount_info input.otherAmount[type="text"] {
+			display: none;
+			width: 9.6875rem; /*155*/
+			/* margin-left: 10px; */
+			height: 2.75rem; /*44*/
+			line-height: 2.75rem; /*44*/
+		}
+		.donateAmountItem.active > input.otherAmount[type="text"] {
+			display: block;
+		}
+
+
+
+@media (max-width: 800px){	
+
+	/* 請自行輸入指定用途 */
+	.donateAmount_info input.otherAmount[type="text"] {
+		width: 135px;
+		/* margin-left: 10px;
+		height: 44px;
+		line-height: 44px; */
+	}
+
+}
+
+
+/* ================================== */
+/* 付款方式 */
+/* ================================== */
+.donatePay_info {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 15px;
+	/* margin-right: -15px; */
+	display: grid;
+	grid-template-columns: repeat(4 , 1fr);
+}
+	.donatePayItem{
+		box-sizing: border-box;
+		/* display: flex; */
+		/* padding-right: 15px; */
+		/* border: 1px #6cc solid;
+		margin-right: 15px; */
+		/* modify by david 20220825 start */
+		/* width: 33.3%; */
+		/* width: 25%; */
+		/* modify by david 20220825 end */
+		display: flex;
+		/* flex-direction: column; */
+		flex-grow: 1;
+		justify-content: center;
+	}
+		.donatePayItem input[type="radio"]{
+		}
+		.donatePayItem label{
+			/* display: flex; */
+			text-align: center;
+			padding: 10px;
+			box-shadow: 1px 1px 15px #00000038;
+			border-radius: 5px;
+			background-color: #fff;
+			transition: 0.3s ease all;
+			width: calc(100% - 10px * 2);
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+
+		.donate_projectArea span.en{
+			font-size:clamp(1rem, 0.9375vw, 1.125rem); /* 字體 最小值 16.00px、大小約 0.9375vw、最大值 18.00px */
+			line-height: 1.5;
+		}
+		.valuationBg span.en{
+			/* font-size: 12px; */
+			/*font-size: clamp(0.7500rem, 0.7292vw, 0.8750rem); *//* 字體 最小值 12.00px、大小約 0.7292vw、最大值 14.00px */
+			/*font-size: clamp(0.8750rem, 0.8333vw, 1.0000rem);*/ /* 字體 最小值 14.00px、大小約 0.8333vw、最大值 16.00px */
+			font-size: clamp(0.625rem, 0.625vw, 0.75rem); /* 字體 最小值 10.00px、大小約 0.6250vw、最大值 12.00px */
+			line-height: 1.2;
+			margin-bottom: 2px;
+			margin: 0;
+			font-family: var(--foreign_foreign);
+		}
+		.valuationBg span.block{
+			display: block;
+		}
+
+		.donatePayItem.active label{
+			box-shadow: 1px 1px 15px #fff0;
+			background-color: #6cc;	
+			transition: 0.3s ease all;	
+		}
+
+			.donatePayItem .item_radio{
+				position: absolute;
+				opacity: 0;
+				/* display: none;  */
+			}
+		
+			.donatePayItem label > img{
+				width: 30px;
+				height: auto;
+				margin: 0 auto;
+				display: inline-block;
+			}
+			 .donatePayItem label > h3{
+				padding: 0;
+				margin: 0;
+				display: block;
+				font-size: clamp(0.8750rem, 0.8333vw, 1.0000rem); /* 字體 最小值 14.00px、大小約 0.8333vw、最大值 16.00px */
+				line-height: 1.5;
+				margin-top: 10px;
+				font-weight: normal;
+			}
+
+
+			/* 付款方式說明文字區 */
+			ul.donatePay_text{
+				padding: 0;
+				margin: 0;
+				display: block;
+				list-style-type: none;	
+				
+			}
+				ul.donatePay_text > li ,
+				ul.donatePay_text .donatePay_text_item{
+					padding: 0;
+					margin: 0;
+					display: block;
+					list-style-type: none;
+					/*padding-bottom: clamp(0.8065rem, 1.3021vw, 1.5625rem); *//* 最小值 12.90px、大小約 1.3021vw、最大值 25.00px */			
+					gap: 0.625rem; /*10px*/
+					flex-direction: column;
+
+					margin-top: 0.9375rem; /*15*/		
+					display: none;/*預設關閉*/
+				}
+				/* ul.donatePay_text > li.active ,
+				ul.donatePay_text .donatePay_text_item.active{
+					display: block;
+				} */
+
+
+
+
+
+					ul.donatePay_text > li .right_title3 ,
+					ul.donatePay_text .donatePay_text_item  .right_title3{
+						border: none;
+						color: #333;
+						margin-bottom: 0;
+						padding: 0;
+						font-weight: 500;
+						font-size:clamp(1rem, 0.9375vw, 1.125rem); /* 字體 最小值 16.00px、大小約 0.9375vw、最大值 18.00px */
+					}
+					ul.donatePay_text > li .remark ,
+					ul.donatePay_text .donatePay_text_item .remark{
+						color: #727272;
+						background-color: #f5f5f5;
+						padding: clamp(0.6250rem, 0.7813vw, 0.9375rem); /* 最小值 10.00px、大小約 0.7813vw、最大值 15.00px */
+						border-radius: 10px;
+						font-size: clamp(0.8750rem, 0.8333vw, 1.0000rem); /* 字體 最小值 14.00px、大小約 0.8333vw、最大值 16.00px */
+						line-height: 1.2;
+					}
+					
+
+                    ul.donatePay_text  .right_title3:after{
+                        display: none;
+                    }
+
+
+					/* 信用卡定期定額扣款_內容 */
+					.donatePay_text_item.credit_card{
+					}
+						.donatePay_text_item.credit_card .form_list{
+							margin-top: 0.3125rem; /*5px*/
+						}
+							.donatePay_text_item.credit_card .fL_info.birthday{
+								padding-bottom: 0;
+							}
+
+
+
+@media (max-width: 800px){	
+
+/* 付款方式 */
+.donatePay_info {
+	margin: 0 0 0px;
+	grid-template-columns: repeat(2, 1fr);
+}
+	.donatePayItem{
+		box-sizing: border-box;
+		padding: 0 0 0px;
+		width: 100%;
+	}
+	.donatePayItem:last-of-type{
+		padding-bottom: 0;
+	}
+
+}
+
+
+
+
+@media(max-width:510px){
+	.valuationBg span.en {
+		line-height: 1.5;
+		margin-bottom: 0px;
+	}	
+}
+
+
+
+
+
+
+

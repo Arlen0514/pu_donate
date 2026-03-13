@@ -1,0 +1,37 @@
+<%@page pageEncoding="UTF-8"%>
+   	<script type='text/javascript'>
+		$(document).ready(function() {
+			$("#page_select").change(function() {
+				goselectedpage($("#page_select").val());
+			});	
+		});
+	</script>
+
+   	<%if (app_dp.getTotalPages() > 1) { %>
+	<div class="page_left_arrow">
+           <% if (app_dp.isPreviousPage()) { %>
+           <a href="javascript:goselectedpage(<%=pageno - 1 %>);">
+           	&lt;
+           </a>
+       	<%} %>					
+       </div>
+
+	<div class="page_select">
+           <select id="page_select" onchange="page_select()">
+           	<%for(int i = 0; i < app_dp.getTotalPages(); i++) { %>
+               <option <%=(i + 1 == pageno) ? "selected" : "" %>>
+               	<%=i + 1 %>
+               </option>
+			<%} %>
+		</select>
+       </div>
+              
+       <div class="page_right_arrow">
+           <%if (app_dp.isNextPage()) { %>
+           <a href="javascript:goselectedpage(<%=pageno + 1 %>);" >
+           	&gt;
+           </a>
+       	<%} %>
+	</div>
+	<div class="clearfloat"></div>
+	<%} %>

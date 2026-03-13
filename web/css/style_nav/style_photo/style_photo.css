@@ -1,0 +1,258 @@
+/* =============================================== */
+/* 相簿模組列表 */
+/* =============================================== */
+
+
+.photo_area {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	/* justify-content: space-between; */
+	align-items: center;
+	margin: 0 auto;
+	/* gap: 20px; */
+	row-gap: 1.25rem; /*20px*/
+	column-gap: 1.0417vw;
+}
+
+.photo_list {
+	/* width: 33.3%; */
+	/* width: calc(33.3% - (6 * 0.625rem)); */
+
+	width: calc((100% / 3) - (2 * 1.0417vw / 3)); /* 3欄平均寬度，扣除間距 */
+
+	transform: translateY(0);
+	transition: all .2s ease-in;
+	/*padding: 0 0.625rem;*/  /*10px*/
+}
+
+.photo_list:hover {
+	transform: translateY(-20px);
+	
+}
+
+a.photo_list_in {
+	/* min-height: 400px; */
+	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+	overflow: hidden;
+	background: #fff;
+	display: block;
+	color: #000;
+	text-decoration: none;
+	transition: all .2s ease-in;
+	border-radius: 10px;
+}
+
+.photo_info {
+	/* padding: 20px 20px 30px; */
+	padding: clamp(0.6452rem, 1.0417vw, 1.2500rem); /* 最小值 10.32px、大小約 1.0417vw、最大值 20.00px */
+	/* padding-bottom:clamp(0.9678rem, 1.5625vw, 1.8750rem); */ /* 最小值 15.48px、大小約 1.5625vw、最大值 30.00px */
+	/* height: 40%; */
+	/* background-color: none; */
+	transition: all .2s ease-in;
+}
+
+.photo_list:hover .photo_info {
+	/* background-color: var(--primary_color); */
+	transition: all .1s ease-in;
+	
+}
+
+.photo_list:hover .photo_list_in {
+	color: #fff;
+	transition: all .1s ease-in;
+	box-shadow: 0px 15px 20px -10px rgba(35, 31, 32, 0.25), 0px 22px 25px -10px rgba(35, 31, 32, 0.2);
+}
+
+.photo_top{
+	display: flex;
+	/* justify-content: space-between; */
+	align-items: center;
+	gap: 15px;
+	/* margin-bottom: 10px; */
+}
+.photo_title {
+	font-size: 17px;
+	font-weight: 600;
+	margin-bottom: 0;
+	Text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	line-height: 1.5;
+	font-size: clamp(1rem, 0.9rem + 0.5vw, 1.5rem);
+   
+    font-weight: 700;
+    color: #231F20;
+    margin-bottom: 0;
+    position: relative;
+}
+
+.photo_number {
+	content: "01";
+    /* position: absolute;
+    top: 50%; */
+    /* transform: translate(-31px, -50%); */
+    font-size: calc(16 / 16* 1rem);
+    line-height: 1.5;
+    font-weight: 700;
+    color:var(--primary_color);
+    font-family: var(--foreign_font);
+    /*font-display: swap;*/
+}
+
+.photo_img {
+	/* height: 60%; */
+	position: relative;
+	padding-top: 60%;
+	overflow: hidden;
+}
+
+.photo_img img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100% !important;
+	height: 100% !important;
+	object-fit: cover;
+	transform: scale(1);
+	transition: all .2s ease-in;
+}
+
+.photo_list:hover .photo_img img {
+	transform: scale(1.2);
+}
+
+
+
+.photo_img::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 0%;
+    background-color: rgba(6 14 49 / 60%);
+    top: 0;
+    left: 0;
+    z-index: 0;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.photo_list:hover .photo_img::after {
+    height: 100%;
+}
+
+
+.photo_description {
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	/* font-size: 14px; */
+	line-height: 1.5;
+	font-size: .875rem; /*14px*/
+    
+    color: #474843;
+    margin-bottom: 0;
+	min-height: 1.3125rem;
+	/* padding-left: clamp(1.2258rem, 1.9792vw, 2.3750rem); */
+	 /* 最小值 19.61px、大小約 1.9792vw、最大值 38.00px */
+}
+.photo_list:first-of-type .photo_description {
+	/* padding-left: clamp(1.0646rem, 1.7188vw, 2.0625rem); */
+	 /* 最小值 17.03px、大小約 1.7188vw、最大值 33.00px */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width:1440px) {
+
+	.photo_info {
+		padding: clamp(0.4839rem, 0.7813vw, 0.9375rem); /* 最小值 7.74px、大小約 0.7813vw、最大值 15px */
+
+	}
+}
+
+/* @media(max-width:1200px) {
+
+	.index_serviceBg {
+		position: unset;
+		transform: translate(0, 0);
+	}
+
+	.index_serviceBg .wrap {
+		width: 90%;
+	}
+
+	.index_serviceBg .index_title2 {
+		display: block;
+	}
+
+} */
+
+@media(max-width:990px) {
+
+	.photo_list {
+		width: calc((100% / 2) - (1 * 1.0417vw / 2)); /* 2欄平均寬度，扣除間距 */
+	}
+
+}
+
+
+
+
+
+@media(max-width:640px) {
+
+	/* .index_serviceBg {
+	}
+
+		.index_serviceBg .wrap {
+			width: 90%;
+		} */
+
+			.photo_area {
+				/* display: block; */
+				margin: 0;
+				padding: 0;
+				gap: 1.5625rem; /*25px*/
+			}
+
+				.photo_list {
+					border-radius: 10px;
+					padding: 0;
+					width: 100%;
+					height: auto;
+					/* margin: 25px 0; */
+					box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+				}
+
+				.photo_img {
+					/* height: 50%; */
+					/* padding-top: 50%; */
+				}
+
+
+}
+
+
+@media(max-width:540px){
+
+	.index_serviceBg {
+		/*margin-top:clamp(2.5807rem, 4.1667vw, 5.0000rem);*/ /* 最小值 41.29px、大小約 4.1667vw、最大值 80px */
+	}
+
+}

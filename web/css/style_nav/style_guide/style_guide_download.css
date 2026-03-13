@@ -1,0 +1,32 @@
+/* 引入 guide.css 更改左側選單顏色 */
+/* @import url('../style_guide/style_guide.css');  */
+
+
+/* 引入下載模組---------------------------- */
+@import url("../style_guide/style_download.css");
+
+
+
+
+
+/* ====================================================== */
+/* 法令規章 */
+/* ====================================================== */
+
+
+
+
+
+/*下載按鈕第一層顏色更換*/
+/* .download_btn a {
+    background-color: var(--primary_color);
+} */
+/*下載按鈕第二層顏色更換*/
+/* .download_btn:hover a {
+    background-color: var(--second_color);
+} */
+
+/*頁數顏色更換*/
+/* .numberPage_middleList.active a {
+    background-color: var(--second_color);
+} */

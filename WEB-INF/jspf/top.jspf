@@ -1,0 +1,56 @@
+<%@ page contentType="text/html" %>
+<%@ page pageEncoding="UTF-8" %>
+<%@ page import="com.genesis.util.*" %>
+<%@ page import="com.genesis.config.*" %>
+<%@ page import="com.genesis.sql.*" %>
+<%@ page import="java.util.*" %>
+<%
+	request.setCharacterEncoding("UTF-8");
+
+	if(request.getParameter("node")!=null)
+    	session.setAttribute("node",request.getParameter("node"));
+
+	String user = "";
+	if(session.getAttribute("adminLogin") != null) {
+    	String strsql = "Select * From admin_user where au_id = '"+(String)session.getAttribute("adminLogin")+"'";
+    	Vector aus = new SqlExecutor("admin_user").getRecords(strsql);
+    	if(aus.size() > 0) {
+        	TableRecord au = (TableRecord)aus.get(0);
+        	user = (String)au.getFieldValue("au_name");
+    	}
+	}
+
+	String npage = request.getParameter("npage");
+	int pageno = 1;
+	if (npage != null) {
+	    pageno = Integer.parseInt(npage);
+	}
+%>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title><%=app_mistitle%></title>
+	<script language="JavaScript" type="text/JavaScript">
+		/*-- --*/
+	</script>
+	<link href="../css/adm_css.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div align="center">
+  	<table width="770" border="0" cellpadding="0" cellspacing="0">
+    	<tr>
+      		<td colspan="2"><table width="770" border="0" cellspacing="0" cellpadding="0">
+        		<tr>
+          			<td width="490"><img src="../images/logo_1<%=lang%>.gif" width="490" height="80"></td>
+          			<td width="280" class="bk-1">&nbsp;</td>
+        		</tr>
+				<%@include file="/WEB-INF/jspf/mis/top.jspf"%>
+        	</table></td>
+    	</tr>
+
+    	<tr>
+      		<td width="3" align="center" valign="top"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+        		<tr>
+          			<td><IFRAME HEIGHT=650 width=155 MARGINWIDTH=0 MARGINHEIGHT=0 HSPACE=0 VSPACE=0 FRAMEBORDER=0 SCROLLING=no name="show" SRC="../leftmenu.jsp"></IFRAME></td>
+        		</tr>
+      		</table></td>

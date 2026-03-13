@@ -1,0 +1,245 @@
+
+
+
+
+/* 在螢幕寬度大於991時，套用這裡的特定樣式 */ 
+@media screen and (min-width: 991px) {
+
+    .right_contentBg{
+        /* padding-top: 0; */
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* =============================================== */
+/* 相簿模組_內頁列表 */
+/* =============================================== */
+
+
+ul.album_area{	
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+	display: flex;
+	flex-wrap: wrap;
+	/* margin: 0 -15px -30px; */
+    row-gap: clamp(0.9678rem, 1.5625vw, 1.8750rem); /* 最小值 15.48px、大小約 1.5625vw、最大值 30.00px */
+    margin: 0 clamp(-0.4839rem, -0.7813vw, -0.9375rem); /* 最小值 7.74px、大小約 0.7813vw、最大值 15.00px */
+}
+
+	/* 案例展示_列表 */
+	ul.album_area li{
+		padding: 0;
+		margin: 0;
+		list-style-type: none;
+		box-sizing: border-box;	
+		display: block;
+		width: 25%;	
+		padding: 0 clamp(0.4839rem, 0.7813vw, 0.9375rem); /* 最小值 7.74px、大小約 0.7813vw、最大值 15.00px */
+	}
+		.album_list{
+			font-size: 1rem;
+			line-height: 1.5;
+			box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+			/* overflow: hidden; */
+			background: #fff;
+			display: block;
+			color: #000;
+			text-decoration: none;
+			transition: all .2s ease-in;
+			border-radius: 10px;
+		}
+			.album_list a{
+				display: block;
+				text-decoration: none;
+				color: var(--primary_color);
+				word-wrap: break-word;
+				word-break: break-all;
+				/* padding-bottom: clamp(0.9678rem, 1.5625vw, 1.8750rem); */
+				border-radius: inherit;
+			}
+				/* 案例展示_列表_圖 */
+				.album_img{
+					box-sizing: border-box;
+					position: relative;
+					padding-top: 60%;
+					overflow: hidden;
+					display: block;
+					border-radius: 10px;
+				}                                            
+					.album_img img{
+						position: absolute;
+						top: 0;
+						left: 0;
+						bottom: 0;
+						right: 0;
+						float: none;
+						/* border-radius: 50%; */
+						width: 100% !important;
+						height: 100% !important;
+						object-fit: cover;
+						transition: all 0.3s ease-out;
+					}
+				
+					.album_img::after {
+						content: "";
+						position: absolute;
+						width: 100%;
+						height: 0%;
+						background-color: rgba(6 14 49 / 60%);
+						top: 0;
+						left: 0;
+						z-index: 0;
+						-webkit-transition: all 0.3s ease;
+						-moz-transition: all 0.3s ease;
+						-ms-transition: all 0.3s ease;
+						-o-transition: all 0.3s ease;
+						transition: all 0.3s ease;
+					}
+					
+					.album_list a:hover .album_img::after {
+						height: 100%;
+					}
+					
+					
+				/* 案例展示_列表_標題 */
+				ul.album_area h3.title ,
+				ul.album_area .title{
+					padding: 0;
+					margin: 0;
+					font-size: inherit;
+					line-height: inherit;
+					font-weight: bold;
+					color: inherit;
+					margin: 10px 0;
+				}
+				/* 案例展示_列表_簡述 */
+				ul.album_area h4.album_brief ,
+				ul.album_area .album_brief{
+					padding: 0;
+					margin: 0;
+					font-size: 15px;
+					line-height: inherit;
+					font-weight: inherit;
+					color: #777;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					display: -webkit-box;
+					-webkit-line-clamp: 2;
+					-webkit-box-orient: vertical;
+				}
+
+
+
+@media (max-width: 640px){
+
+	ul.album_area{
+		/* margin: 0 -5px -20px; */
+	}	
+		/* 案例展示_列表 */
+		ul.album_area li{
+			width: 50%;
+			/* padding: 0 5px 20px; */
+		}
+			ul.album_area h3.title ,
+			ul.album_area .title {
+				margin: 5px 0;
+			}
+
+}
+
+
+@media (max-width: 365px){
+		
+	/* 案例展示_列表 */
+	ul.album_area li{
+		width: 100%;
+	}
+
+}
+
+
+
+
+/*-------案例展示區內頁--------*/
+ul.album_area.album_area2{	
+}
+	ul.album_area.album_area2 h4.album_brief ,
+	ul.album_area.album_area2 .album_brief{
+		padding: clamp(0.6452rem, 1.0417vw, 1.2500rem); /*  最小值 10.32px、大小約 1.0417vw、最大值 20.00px */
+		padding-bottom: 0;
+		/* margin-bottom: clamp(0.9678rem, 1.5625vw, 1.8750rem); */ /* 最小值 15.48px、大小約 1.5625vw、最大值 30.00px */
+		/*height: 40%;*/
+		/* background-color: none; */
+		transition: all .2s ease-in;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+		line-height: 1.5;
+		font-size: 0.875rem; /*14px*/
+		color: #474843;
+	}	
+
+	ul.album_area.album_area2 .album_img{
+		position: relative;
+	}
+	/* hover */
+	ul.album_area.album_area2 .album_img:before{	
+		position: absolute;
+		/* content: "點擊放大"; */
+		top: 50%;
+		left: 50%;
+		transform: translate(-50% , 0%) scale(0);
+		color: #fff;
+		text-shadow: rgb(0 0 0) 0px 0px 10px;
+		font-size: clamp(1.9355rem, 3.1250vw, 3.7500rem); /* 字體 最小值 30.97px、大小約 3.1250vw、最大值 60.00px */
+		line-height: 1;
+		z-index: 1;
+		/* transition: 0.9s ease all; */
+		opacity: 0;
+
+
+		font-family: 'Bootstrap-Icons';
+		content: "\F4FA";
+		display: inline-block;
+		/* margin-right: 5px; */
+		font-style: normal;
+		font-weight: normal;
+		/* font-size: 1rem; */
+	}
+	ul.album_area.album_area2 .album_img:hover:before{	
+		transform: translate(-50% , -50%) scale(1);
+		opacity:1;
+		transition: 0.9s ease all;
+	}
+	ul.album_area.album_area2 .album_list:hover img{
+		/* opacity: 0.5; */
+		filter: grayscale(0.7) ;  /*灰階*/
+		transition: 0.3s ease all;
+	}
+
+
+@media (max-width: 990px){
+
+	/* hover */
+	ul.album_area.album_area2 .album_img:before{	
+		/*font-size: .75rem;*/ /*12px*/
+	}
+
+}
+	
+
+
+

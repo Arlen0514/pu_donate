@@ -1,0 +1,19 @@
+<%@page pageEncoding="UTF-8"%>
+<%@page import="com.genesis.chinese.*"%>
+<%@page import="com.genesis.config.*"%>
+<%@page import="com.genesis.io.*"%>
+<%@page import="com.genesis.sql.*"%>
+<%@page import="com.genesis.util.*"%>
+<%@page import="com.genesis.eshop.*"%>
+<%@page import="com.genesis.html.*"%>
+<%@page import="java.io.*"%>
+<%@page import="java.text.*"%>
+<%@page import="java.util.*"%>
+<%@page import="java.awt.*"%>
+<%//page import="com.jspsmart.upload.*"%>
+<%@page import="javazoom.upload.*" %>
+<%@page import="org.apache.commons.fileupload.*"%>
+<%
+   // Set request character encoding.
+   request.setCharacterEncoding("UTF-8");
+%>

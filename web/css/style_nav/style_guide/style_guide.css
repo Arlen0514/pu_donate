@@ -1,0 +1,191 @@
+
+/* 引入下載模組---------------------------- */
+@import url("../style_guide/style_download.css");
+
+
+
+
+
+
+
+
+
+.right_title3 {
+    border-bottom: 1px solid var(--primary_color);
+}
+
+.right_title3:after {
+    background: var(--primary_color);
+}
+
+.left_title {
+    background-color: var(--primary_color);
+}
+
+
+.right_title3 h2 {
+    color: var(--primary_color);
+}
+
+.leftList.active > a {
+    background-color: rgb(205 230 255);
+}
+
+
+
+
+
+
+.right_contentBg{
+    display: flex;
+    flex-direction: column;
+    row-gap: clamp(1.6130rem, 2.6042vw, 3.1250rem); /* 最小值 25.81px、大小約 2.6042vw、最大值 50.00px */
+}
+
+
+
+
+/*/////////////////////////////////////////////////////////*/
+/*-------捐款方式說明--------*/
+/*/////////////////////////////////////////////////////////*/
+
+
+
+
+
+
+
+
+
+/* 捐款方式ICON------------------------ */
+ul.cashFlowWay_icon{
+	padding: 0;
+	margin: 0;
+	display: block;
+	list-style-type: none;
+	display: flex;
+	justify-content: center;
+	width: 50rem; /*800px*/
+	flex-wrap: wrap;
+	margin: 0 auto;
+	gap: clamp(0.9678rem, 1.5625vw, 1.8750rem) 0; /* 最小值 15.48px、大小約 1.5625vw、最大值 30.00px */
+}
+	ul.cashFlowWay_icon li{
+		padding: 0;
+		margin: 0;
+		display: block;
+		list-style-type: none;
+		box-sizing: border-box;
+		width: calc(100% / 4);
+		padding: 0 0.8125rem; /*0 13*/
+		box-sizing: border-box;
+	}
+		ul.cashFlowWay_icon a{
+			display: block;
+			text-align: center;
+			text-decoration: none;
+			color: #777;
+			/* font-size: clamp( 0.625rem, 1.8667vw, 1.125rem ); */
+			font-size: clamp(0.9375rem, 0.9375vw, 1.1250rem); /* 字體 最小值 15.00px、大小約 0.9375vw、最大值 18.00px */
+			line-height: 1.2;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			/*gap: clamp(0.4839rem, 0.7813vw, 0.9375rem);*/ /* 最小值 7.74px、大小約 0.7813vw、最大值 15.00px */
+			gap: clamp(0.156rem, -0.01rem + 0.27vw, 0.313rem);
+		}
+			ul.cashFlowWay_icon img{
+				width: 100%;
+				height: auto;
+				max-width: clamp(3.8711rem, 6.25vw, 7.5rem); /* 最小值 61.94px、大小約 6.2500vw、最大值 120.00px */
+				transition: 0.3s ease all;
+			}
+			ul.cashFlowWay_icon .cashFlowWay_icon_tit{
+				color: var(--black_color);
+				padding: 0;
+				margin: 0;
+				display: block;
+				font-size: inherit;
+				line-height: inherit;
+				font-weight: normal;
+				/* margin-top: 18px; */
+
+				min-height: 2.625rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			ul.cashFlowWay_icon .cashFlowWay_icon_tit_en{
+				font-size: clamp(0.875rem, 0.742rem + 0.22vw, 1rem);
+				min-height: 3.375rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			ul.cashFlowWay_icon a:hover {
+				color: #6cc;
+				transition: 0.3s ease all;
+			}
+			ul.cashFlowWay_icon a:hover img{
+				transform: scale(0.7) rotate(45deg);
+				transition: 0.3s ease all;
+			}
+			
+
+
+/* 捐款方式說明文字區------------------------ */
+ul.cashFlowWay_guide{
+	padding: 0;
+	margin: 0;
+	display: block;
+	list-style-type: none;
+	/*padding-top:  clamp(1.6130rem, 2.6042vw, 3.1250rem);*/ /* 最小值 25.81px、大小約 2.6042vw、最大值 50.00px */
+	display: flex;
+	flex-direction: column;
+	row-gap: clamp(0.9678rem, 1.5625vw, 1.8750rem); /* 最小值 15.48px、大小約 1.5625vw、最大值 30.00px */
+}
+	ul.cashFlowWay_guide > li.cashFlowWay{
+		padding: 0;
+		margin: 0;
+		display: block;
+		list-style-type: none;
+	}
+	ul.cashFlowWay_guide > li.cashFlowWay:last-of-type{
+		margin-bottom: 0px;
+	}
+	ul.cashFlowWay_guide > li .text_area {
+		color: #424242;
+		background-color: #f5f5f5;
+		padding: 0.9375rem;
+		border-radius: 10px;
+		/* color: #818181; */
+	}
+
+
+@media (max-width: 768px){
+
+	ul.cashFlowWay_icon li{
+		padding: 0 0.3125rem; /*0 5px*/
+	}
+
+}
+
+
+
+
+@media (max-width: 350px){
+
+/* 捐款方式ICON------------------------ */
+ul.cashFlowWay_icon{
+	justify-content: unset;
+}
+	ul.cashFlowWay_icon li{
+		width: calc(100% / 3);
+	}
+		ul.cashFlowWay_icon a {
+			/* font-size: 12px; */
+		}
+
+}

@@ -1,0 +1,150 @@
+<!-- TinyMCE -->
+<!-- 用專案的名稱配絕對路徑去抓取-->
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.genesis.util.*"%>
+<%
+	// Set request character encoding.
+	request.setCharacterEncoding("UTF-8");
+	//Language選項
+	//String lan = StringTool.validString((String)session.getAttribute("language"));
+	String lan = "tw";      // 強迫網編使用繁體中文訊息
+	
+	//決定mceEditor的語系 deFault 中文
+	if(lan.equals("tw")) {
+		lan = "zh_TW"; 
+		//lan = "tw";
+	} else if(lan.equals("en")) {
+		lan = "en";
+	} else if(lan.equals("") || lan == null) {
+		lan="zh_TW";
+	}
+	
+	String contextPath = request.getContextPath();
+	// 依使用者帳號做為預設目錄 , 即在預設目錄 root 下再增加一層目錄
+	String _id = (String)session.getAttribute("path_id")!= null?(String)session.getAttribute("path_id"):"";
+	
+	response.setHeader("Cache-Control", "private, no-cache ,no-store"); // for HTTP 1.1
+%>
+<script type="text/javascript" src="<%=request.getContextPath()%>/htmleditor/tinymce/tinymce.js" referrerpolicy="origin"></script>
+<script type="text/javascript">
+function convertWord(type, content) {
+	switch (type) {
+		case "before":
+			break;
+		case "after":
+			break;
+	}
+	return content;
+}
+
+	//標準文字編輯器的一些基本參數值
+	tinymce.init({
+	    language: '<%=lan %>',
+	    selector: "textarea.mceEditor",
+	    // width: 960,
+	    //hight: 500,
+	    license_key: 'gpl',
+	    plugins: "advlist autolink link lists charmap  preview  image code fullscreen autoresize searchreplace table wordcount media anchor hr emoticons",
+	    toolbar: [
+	        "undo redo | cut copy paste pastetext | removeformat | searchreplace | formatselect fontfamily fontsizeinput   ", 
+	        "bold italic underline strikethrough forecolor backcolor | alignleft aligncenter alignright alignjustify | outdent indent | blockquote numlist bullist | subscript superscript hr charmap emoticons",
+	        "newdocument  | link unlink anchor | media image | print preview code fullscreen"
+	    ],
+	    
+	    font_family_formats: "Arial=arial,helvetica,sans-serif;Courier New=courier new,courier,monospace;AkrutiKndPadmini=Akpdmi-n;\u65b0\u7d30\u660e\u9ad4=\u65b0\u7d30\u660e\u9ad4;\u6a19\u6977\u9ad4=\u6a19\u6977\u9ad4;\u5fae\u8edf\u6b63\u9ed1\u9ad4=\u5fae\u8edf\u6b63\u9ed1\u9ad4",
+	    
+	    resize: 'both',
+	    automatic_uploads: true,
+	    font_size_input_default_unit: "px",
+	    content_css: "css/content.css",
+	    image_title: true,
+	    images_reuse_filename: true,
+	    file_picker_types: 'file image media',
+	    
+	    setup: function (editor) {
+	        editor.on('change', function () {
+	            tinymce.triggerSave();
+	        });
+	    },
+	    
+	    file_picker_callback: function (callback, value, meta) {
+	        let fileManagerUrl = "<%=request.getContextPath()%>/htmleditor/lister.jsp?type=" + meta.filetype + "&id=<%=_id %>";
+	        let win = window.open(fileManagerUrl, 'filemanager', 'width=1024,height=540,resizable=yes,toolbar=no,menubar=no,location=no,status=no');
+	
+	        window.addEventListener('message', function (event) {
+	            if (event.origin !== window.location.origin) return;
+	            let fileUrl = event.data;
+	            callback(fileUrl, { title: 'img/file' });
+	        }, { once: true });
+	    },
+    
+	    relative_urls: false,
+	    remove_script_host: false,
+	    force_br_newlines: true,
+	    convert_newlines_to_brs: true,
+	    fullscreen_new_window: false,
+	    paste_auto_cleanup_on_paste: false,
+	    paste_convert_middot_lists: true,
+	    paste_unindented_list_class: "unindentedList",
+	    paste_convert_headers_to_strong: true,
+	    paste_insert_word_content_callback: "convertWord",
+	    paste_data_images: false,
+	    paste_as_text: true,
+	    // paste_retain_style_properties: "all",
+	    // paste_word_valid_elements: '*[*]',
+	    
+	    image_advtab: true,
+	    branding: true, 						// 版權顯示
+	    promotion: false						// upgrade 顯示
+	});
+
+	
+	//第二個文字編輯器的一些基本參數值
+	tinymce.init({
+	    // 語言
+	    language: '<%=lan %>',
+	    selector: "textarea.ezEditor", 
+	    license_key: 'gpl',
+	    plugins: "advlist autolink link lists charmap preview code fullscreen " +
+	             "autoresize searchreplace table wordcount paste hr emoticons",
+	    toolbar: "bold italic underline strikethrough forecolor backcolor | " +
+	             "alignleft aligncenter alignright alignjustify | " +
+	             "outdent indent | blockquote numlist bullist | hr charmap emoticons | " +
+	             "link unlink ",
+	    font_formats: "Arial=arial,helvetica,sans-serif; " +
+	                  "Courier New=courier new,courier,monospace; " +
+	                  "AkrutiKndPadmini=Akpdmi-n; " +
+	                  "新細明體=新細明體; 標楷體=標楷體; 微軟正黑體=微軟正黑體;",
+	    resize: 'both',
+	    automatic_uploads: true,
+	    content_css: "css/content.css",
+	    image_title: true,
+	    images_reuse_filename: true,
+	
+	    setup: function (editor) {
+	        editor.on('change', function () {
+	            tinymce.triggerSave();
+	        });
+	    },
+	
+	    relative_urls: false,
+	    remove_script_host: false,
+	    force_br_newlines: true,
+	    convert_newlines_to_brs: true,
+	    fullscreen_new_window: false,
+	    paste_auto_cleanup_on_paste: false,
+	    paste_convert_middot_lists: true,
+	    paste_unindented_list_class: "unindentedList",
+	    paste_convert_headers_to_strong: true,
+	    paste_insert_word_content_callback: "convertWord",
+	    paste_data_images: false, 							// 禁止貼上圖片（避免 base64 圖片存入 DB）
+	    paste_as_text: true, 								// 預設貼上純文字
+	    image_advtab: true,
+	    branding: true, 									// 顯示 TinyMCE 版權
+	    promotion: false, 									// 顯示升級提示
+	    menubar: false,
+	    statusbar: true
+	});
+	
+</script>
+<!-- /TinyMCE -->

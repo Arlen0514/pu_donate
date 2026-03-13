@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /index.jsp
+Sitemap: /sitemap.xml
