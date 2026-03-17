@@ -1,6 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jspf/config.jspf"%>
+<%@ include file="/WEB-INF/jspf/csrf_token.jspf"%>
+<%
+	// CSRF 驗證（分頁表單以 POST 提交）
+	if ("POST".equalsIgnoreCase(request.getMethod())) {
+		String _submittedCsrf = request.getParameter("csrfToken");
+		if (!validateCSRFToken(session, _submittedCsrf, "normalform")) {
+			response.sendError(403, "CSRF token validation failed");
+			return;
+		}
+	}
+	String _csrfToken = generateCSRFToken(session, "normalform");
+%>
 <%
 	// 參數設定
 	String page_code 	= "photo_in", 				  			// 頁面識別碼
@@ -156,6 +168,7 @@
 							<form name="pageform" id="pageform" method="post" action="<%=request.getRequestURI()%>">
 								<input type="hidden" name="npage" id="npage" value="<%=pageno %>" />
 								<input type="hidden" name="ap_category" id="ap_category" value="<%=ap_category %>" />
+								<input type="hidden" name="csrfToken" value="<%=_csrfToken%>" />
 							</form>
 							</div>         
                         </div>

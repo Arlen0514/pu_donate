@@ -1,0 +1,46 @@
+<%@page pageEncoding="UTF-8"%>
+<%@page import="java.security.SecureRandom"%>
+<%@page import="java.math.BigInteger"%>
+<%!
+    /**
+     * CSRF Token 工具
+     * session key 規則: csrfToken_n (normalform)
+     */
+    private static final SecureRandom SECURE_RANDOM = new SecureRandom();
+
+    private String sessionKey(String type) {
+        if ("normalform".equals(type)) return "csrfToken_n";
+        return "csrfToken_" + type;
+    }
+
+    /**
+     * 產生 CSRF Token 並存入 session，回傳 token 字串。
+     * 若 session 已有合法 token 則直接回傳（避免同頁多次 include 重複產生）。
+     */
+    public String generateCSRFToken(javax.servlet.http.HttpSession sess, String type) {
+        String key = sessionKey(type);
+        String existing = (String) sess.getAttribute(key);
+        if (existing != null && !existing.isEmpty()) {
+            return existing;
+        }
+        String token = new BigInteger(128, SECURE_RANDOM).toString(16);
+        sess.setAttribute(key, token);
+        return token;
+    }
+
+    /**
+     * 驗證 CSRF Token。
+     * 驗證成功後移除 session 內的 token，防止重放攻擊。
+     * @return true  表示驗證成功
+     *         false 表示驗證失敗（token 不符或為 null）
+     */
+    public boolean validateCSRFToken(javax.servlet.http.HttpSession sess, String submitted, String type) {
+        if (submitted == null || submitted.isEmpty()) return false;
+        String key = sessionKey(type);
+        String stored = (String) sess.getAttribute(key);
+        if (stored == null || stored.isEmpty()) return false;
+        if (!stored.equals(submitted)) return false;
+        sess.removeAttribute(key);
+        return true;
+    }
+%>
