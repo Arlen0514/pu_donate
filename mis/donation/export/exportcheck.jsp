@@ -25,6 +25,18 @@
 	if("accumulate_export".equals(reportType)){ sessionKey = "accumulate_file";  }
 	if("clear_accumulate_export".equals(reportType)){ session.setAttribute("accumulate_file","");  }
 	
+	// B套捐款CSV匯出 #1
+	if("donate_b_export_1".equals(reportType)){ sessionKey = "donate_b_export_1_file";  }
+	if("clear_donate_b_export_1".equals(reportType)){ session.setAttribute("donate_b_export_1_file","");  }
+	
+	// B套捐款CSV匯出 #2
+	if("donate_b_export_2".equals(reportType)){ sessionKey = "donate_b_export_2_file";  }
+	if("clear_donate_b_export_2".equals(reportType)){ session.setAttribute("donate_b_export_2_file","");  }
+	
+	// B套捐款CSV匯出 #3
+	if("donate_b_export_3".equals(reportType)){ sessionKey = "donate_b_export_3_file";  }
+	if("clear_donate_b_export_3".equals(reportType)){ session.setAttribute("donate_b_export_3_file","");  }
+	
 	// 回傳前端 Ajax Session 的狀態值
 	Object res = session.getAttribute(sessionKey);
 	out.print(res);
