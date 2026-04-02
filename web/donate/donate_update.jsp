@@ -505,8 +505,8 @@
 			if("pay.pu".equals(dh.getString("dh_paymethod"))){
 				
 				
-				/*捐管通知信*/
-				String servername = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+			/*捐管通知信*/
+			String servername = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
 		  	if((request.getServerPort()== 80) || (request.getServerPort()== 443)) {
 		  		servername = request.getScheme()+"://"+request.getServerName();
 		  	} 
@@ -516,7 +516,7 @@
 				String email    = dh.getString("dh_email");				// 收件人
 				String subject  = "捐款通知信";									// 信件主旨
 				String data_id  = dh.getString("dh_id");					// 信件資料ID
-				String language = "tw";					   						// 使用語系
+				String language = "tw";					   					// 使用語系
 				String emailbcc = "";										// 副本收件人
 				String template = "";										// 信件樣板
 				String content  = "";										// 信件內容

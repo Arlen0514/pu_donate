@@ -92,14 +92,14 @@
 			if(!$.isNumeric(F.dh_total.value.trim())){
 				alert('請輸入正確的捐款金額(臺幣)!!');
 				F.dh_total.focus();
-			} else if(parseInt(F.dh_total.value.trim())<100){
-				alert('捐款金額(臺幣)不可小於100元!!');
+			} else if(parseInt(F.dh_total.value.trim()==0){
+				alert('捐款金額(臺幣)不可等於0元!!');
 				F.dh_total.focus();
 			} else if(!$.isNumeric(F.dh_foreign_total.value.trim())){
 				alert('請輸入正確的捐款金額(外幣)!!');
 				F.dh_foreign_total.focus();
-			} else if(isForeign && parseInt(F.dh_foreign_total.value.trim())<100){
-				alert('捐款金額(外幣)不可小於100元!!');
+			} else if(isForeign && parseInt(F.dh_foreign_total.value.trim())==0){
+				alert('捐款金額(外幣)不可等於0元!!');
 				F.dh_total.focus();
 			} else if(F.dh_donate_project_category.value.trim() == ''){
 				alert('請選擇捐贈類別!!');
