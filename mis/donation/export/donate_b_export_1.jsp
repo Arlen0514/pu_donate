@@ -38,7 +38,7 @@ keys.add("%"+qposition+"%");
 keys.add("%"+qname+"%");
 sb.append(" and dh_cellphone like ?");
 keys.add("%"+qphone+"%");
-sb.append("and dh_paymethod like ?");
+sb.append(" and dh_paymethod like ?");
 keys.add("%"+qpayment+"%");
 sb.append(" and !(dh_createdate>? || dh_createdate<?)");
 keys.add(qrestdate+" 24:00:00");
@@ -92,8 +92,7 @@ headerSb.append("\"").append(titles[t].replace("\"", "\"\"")).append("\"");
 ow.write(headerSb.toString());
 ow.write("\r\n");
 
-// 輔助：CSV 欄位跳脫
-// 寫資料
+// 寫資料（欄位值使用雙引號包覆，內含雙引號以 "" 跳脫）
 for (TableRecord dh : dhs) {
 String dh_pid_plain = "";
 try {

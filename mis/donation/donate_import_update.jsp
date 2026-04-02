@@ -247,6 +247,10 @@ function checkform(F) { return true; }
                                     dh.setValue("dh_lang", lang);
                                     dh.setValue("dh_code", code);
                                     dh.setValue("dh_no", IDTool.getUID(code, "M" + DateTimeTool.dateString(""), 4));
+                                    // 收據 email 預設同聯絡 email（與原始匯入邏輯一致）
+                                    if ("".equals(dh.getString("dh_receipt_email"))) {
+                                        dh.setValue("dh_receipt_email", dh.getString("dh_email"));
+                                    }
 
                                     try {
                                         String donatedate = dh.getString("dh_donatedate");
@@ -330,7 +334,7 @@ function checkform(F) { return true; }
                                 TableRecord mr = new TableRecord(tblmr);
                                 String subject = SiteSetup.getText("cp.company." + lang) + " 電子收據通知信";
                                 mr.setValue("data_id", dh.getString("rs_id"));
-                                mr.setValue("mr_recipient", dh.getString("dh_email"));
+                                mr.setValue("mr_recipient", dh.getString("dh_receipt_email"));
                                 mr.setValue("mr_subject", subject);
                                 mr.setValue("mr_status", "N");
                                 mr.setValue("mr_mail", "R");
