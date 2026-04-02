@@ -11,23 +11,10 @@
 	boolean list_switch = true;		// 是否開啟列表功能
 	boolean sort_switch = true;		// 是否開啟排序功能
 	int add_num = -1;				// 設定可新增的資料筆數 , -1 為無限筆
-	int category_num = 1;		    // 設定類別層數 2層以上使用選擇器 一層使用下拉選單即可
 /*------------------------------------------------------------------------------------*/
-	Vector fds = app_sm.selectAll(tblfd, "fd_code=? and fd_lang=?", new Object[] { code, lang }, "fd_showseq ASC , " + "fd_createdate DESC");
+	Vector fds = app_sm.selectAll(tblfd, "fd_code=? and " + "fd_lang=?", new Object[] { code, lang }, "fd_showseq ASC , " + "fd_createdate DESC");
 	// 當資料筆數小於設定可新增的筆數時 , 顯示新增按鍵
 	boolean add_switch = num_check(add_num,fds);
-	
-	// 搜尋欄位
-	String qcategory = StringTool.validString(request.getParameter("_qcategory"));
-	String qupcategory = StringTool.validString(request.getParameter("_qupcategory"));
-	fds = app_sm.selectAll(tblfd, "fd_code=? and fd_lang=? and fd_category=?", new Object[] { code,lang,qcategory }, "fd_showseq ASC , fd_createdate DESC");
-		
-	//所屬類別系列標題
-	String title1=app_sm.select(tbldm,qupcategory).getString("dm_title");
-	String title2=app_sm.select(tbldm,qcategory).getString("dm_title");
-	
-	//所屬類別
-	Vector<TableRecord> dms = app_sm.selectAll(tbldm, "dm_lang=? and dm_code=? and dm_category=?", new Object[]{ lang, code+"_category", "" } , "dm_showseq ASC , dm_createdate DESC");
 	
 %>
 <!DOCTYPE html>
@@ -61,7 +48,7 @@ $(document).ready(function() {
 	    if($op.length){
 	    	$('#left_select option:selected').appendTo('#left_select')
 	    }
-	});		
+	});	
 });
 function checkformsequ(F) {
 	var varStr = "";
@@ -139,49 +126,13 @@ function checkformsequ(F) {
 							<tr align="center" class="web_bk-2">
 								<td colspan="4" align="center">標題順序調整</td>
 							</tr>
-							<form name="form0" id="form0" method="post" action="<%=code%>_sort.jsp">
 							<tr class="web_table-2-1">
-								<td width="85%" align="center">		
-											請選擇欲排序的類別&nbsp; : &nbsp;
-										<% if(category_num<=1){ %>
-										<select name="_qcategory" id="_qcategory" style="min-width: 100px;" onchange="form0.submit();">
-											<%if("".equals(qcategory)) {%>
-						    		        <option value="%">請選擇...</option>
-						    		        <%} %>
-				                  			<% 
-				                  			for(int i=0; i<dms.size(); i++){
-					                  			TableRecord dm = (TableRecord) dms.get(i);
-					                  		%>
-					                  		<option value="<%=dm.getString("dm_id") %>" <%=dm.getString("dm_id").equals(qcategory)?"selected":"" %>><%=dm.getString("dm_title") %></option>
-				                	        <% } %>
-				                	    </select>
-					                	<% }else{  //2層以上 類別選擇器 %>
-											<span id="dm_title" style="color:#FA0300;"><%=!"".equals(qcategory)?title1+"--"+title2:""%></span>&nbsp;&nbsp;
-				                  			<input type="hidden" name="_qupcategory" id="_qupcategory" value="<%=qupcategory%>" />
-											<input type="hidden" name="_qcategory" id="_qcategory" value="<%=qcategory %>" />
-				                  			<input type="button" value="選擇類別" onclick="window.open('../mis_tools/category_selector.jsp?Back_id=_qcategory&Back_category=_qupcategory&max_layer=<%=category_num %>&dm_code=<%=code%>_category','_blank','height=260,width=400,top=50,left=300,toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no');" />
-											<input type="submit" value="查詢">
-										<% } %>
-										<%--2層 optgroup
-										 所屬類別：<select name="_qcategory" id="_qcategory" onchange="form0.submit();">
-										<option value="">請選擇類別</option>
-										<%for(TableRecord dm : dms){ %>
-										<optgroup label="<%=dm.getString("dm_title")%>">
-											<%
-												Vector<TableRecord> sub_dms = app_sm.selectAll(tbldm,"dm_code=? and dm_lang=? and dm_category=?",new Object[]{code,lang,dm.getString("dm_id")});
-												for(TableRecord sub_dm : sub_dms){ 
-											%>
-											<option value="<%=sub_dm.getString("dm_id")%>" <%=sub_dm.getString("dm_id").equals(qcategory)?"selected":"" %>><%=sub_dm.getString("dm_title")%></option>
-											<%} %>
-										</optgroup>
-										<%} %>
-									</select>
-									--%>
+								<td width="85%" align="center">
+									標題列表									
 								</td>
 								<td width="15%" align="center" colspan="3">功能</td>
 							</tr>
-							</form>
-							<form name="frm" id="frm" method="post" enctype="multipart/form-data" action="<%=code%>_update.jsp?action=S&_qcategory=<%=qcategory %>&_qupcategory=<%=qupcategory %>" onsubmit="javascript:return checkformsequ(this);">
+							<form name="frm" id="frm" method="post" enctype="multipart/form-data" action="<%=code%>_update.jsp?action=S" onsubmit="javascript:return checkformsequ(this);">
 							<tr class="web_table-2-1">
 								<td class="web_table-2-1" align="left"><select
 									name="left_select" id="left_select" multiple="multiple"

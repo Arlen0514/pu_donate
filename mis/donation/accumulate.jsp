@@ -55,6 +55,7 @@
 	sb2.append("and dh_collect=? and dh_status=? ");
 	keys2.add("Y");
 	keys2.add("Y");
+	sb2.append("and dh_donate_project_category !='' ");
 	sb2.append("and !(dh_createdate>? || dh_createdate<?)");
 	keys2.add(qrestdate+" 24:00:00");
 	keys2.add(qemitdate);

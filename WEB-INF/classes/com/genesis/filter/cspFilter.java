@@ -17,10 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class cspFilter implements Filter {
-	// FilterConfig¥i¥Î©ó³X°ÝFilterªº°t¸m¸ê°T
+	// FilterConfigï¿½iï¿½Î©ï¿½Xï¿½ï¿½Filterï¿½ï¿½ï¿½tï¿½mï¿½ï¿½T
 	private FilterConfig config;
 	private String cspString;
-	// ¹ê°µªì©l¤Æ
+	// ï¿½ê°µï¿½ï¿½lï¿½ï¿½
 	public void init(FilterConfig config) {
 		this.config = config;
 		this.cspString = AppConfig.getProperty("csp.string.default") + AppConfig.getProperty("csp.string.script")
@@ -40,15 +40,16 @@ public class cspFilter implements Filter {
 		}
 	}
 
-	// ¹ê°µ¾P·´
+	// ï¿½ê°µï¿½Pï¿½ï¿½
 	public void destroy() {
 		this.config = null;
 	}
 
-	// °õ¦æ¹LÂoªº®Ö¤ß¤èªk
+	// ï¿½ï¿½ï¿½ï¿½Lï¿½oï¿½ï¿½ï¿½Ö¤ß¤ï¿½k
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		httpResponse.setHeader("Content-Security-Policy", cspString);
 		httpResponse.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
@@ -62,7 +63,7 @@ public class cspFilter implements Filter {
         httpResponse.setHeader("Pragma", "no-cache"); 
         httpResponse.setHeader("Expires", "0");  
 		/*	
-		// ©Ò¦³ cookie ³]©w 20240125 May
+		// ï¿½Ò¦ï¿½ cookie ï¿½]ï¿½w 20240125 May
 		*/
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 
@@ -78,7 +79,7 @@ public class cspFilter implements Filter {
                 }
             }
 		}else {
-	        // ¦pªG¨S¦³¥ô¦ó Cookie¡A³B²zÀ³¥Îµ{¦¡ªº®Ú¥Ø¿ý³X°Ý
+	        // ï¿½pï¿½Gï¿½Sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Cookieï¿½Aï¿½Bï¿½zï¿½ï¿½ï¿½Îµ{ï¿½ï¿½ï¿½ï¿½ï¿½Ú¥Ø¿ï¿½ï¿½Xï¿½ï¿½
 	        String JSESSIONID =  httpRequest.getSession().getId();
 	        httpResponse.setHeader("Set-Cookie", "JSESSIONID="+JSESSIONID+"; Path=/; SameSite=Lax; Secure; HttpOnly");
 	    }

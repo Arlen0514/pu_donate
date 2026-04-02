@@ -292,7 +292,7 @@
         <!--table header區塊-->
         <div class="donation_form_header">
             <strong>
-                國立臺灣<img class="logo" style="width: 65px;" src="<%=url %>/images/logo.webp" alt="" />大學捐款單
+                <img class="logo" style="width: 65px;" src="<%=url %>/images/logo_receipt.webp" alt="" />捐款單
             </strong>
             <div class="donation_code">捐款單號：<%=dh_no %></div>
             <div class="date">填表日期：<%=sdf_f.format(donate_date.getTime()) %></div>
@@ -467,10 +467,10 @@
                     <td colspan="2">
                         <div class="receipt_info receipt_info1">
                             <div class="list list1">
-                                <span><%="N".equals(dh.getString("dh_receipt_status"))?"⬛":"⬜" %></span>不寄收據/感謝函。
+                                <span><%="N".equals(dh.getString("dh_receipt_status"))?"⬛":"⬜" %></span>不寄收據。
                             </div>
                             <div class="list list2">
-                                <span><%="Y".equals(dh.getString("dh_receipt_status"))?"⬛":"⬜" %></span>寄收據/感謝函
+                                <span><%="Y".equals(dh.getString("dh_receipt_status"))?"⬛":"⬜" %></span>寄收據
                             </div>
                             <div class="list list3">
                                 <div class="title">

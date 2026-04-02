@@ -3,7 +3,7 @@
 <%@ include file="/WEB-INF/jspf/config.jspf" %>
 <% 
 	// 語系變數為 lang
-	String page_code = "donate";				// 功能識別碼 , 於資料庫做資料識別及模組程式檔名用
+	String page_code = "donate_mail_content";				// 功能識別碼 , 於資料庫做資料識別及模組程式檔名用
 	lang = StringTool.validString(request.getParameter("lang"));
 	
 	String dh_id	 = StringTool.validString(request.getParameter("dh_id"));
@@ -17,6 +17,14 @@
 	} 
 	String localname = request.getScheme()+"://"+request.getLocalName()+":"+request.getLocalPort();
 	String url = servername + request.getContextPath() + "/web/mail";
+	
+	TableRecord mail_content = app_sm.select(tblcp, "cp_code = ?", new Object[]{page_code});
+	
+	TableRecord payment_info = app_sm.select(tblcp, "cp_category = ? and cp_code = ? and cp_lang = ? ", new Object[]{
+    		dh.getString("dh_paymethod"), "guide", lang});
+	
+	
+	
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -46,24 +54,86 @@
 	              	</tr>
 	              	
 		                <td align="left" valign="top" colspan="2">
-		                	敬愛的捐款人：您好！<br/>
-		                	&emsp;&emsp;誠摯感謝您對本校的慷慨捐助與支持。您的善心不僅展現了對教育的高度關懷，更是對本校校務推動的莫大鼓舞。您的捐款將會依指定用途妥善運用，再次感謝您與我們一同為靜宜大學的永續發展播下希望的種子。之後我們將寄送收據及專函申謝，敬祈續予指導與支持。謹此
-							<br/><br/>
-							敬祝<br/>
-							闔家安康 萬事如意！<br/><br/>
-							天主教靜宜大學校友中心 敬上
+		                	<%=mail_content.getString("cp_content") %>
+		                	
 		                	<%if("pay.newebpay.vatm".equals(dh.getString("dh_paymethod"))){ %>
 		                	<br/><br/>
 		                	虛擬帳號，銀行代號(<%=ph.getString("ph_bank_no") %>):<%=ph.getString("ph_account") %>
 		                	<%} %>
+		                	
+		                	
+		                	<br/>
+		                	<%=payment_info.getString("cp_desc") %>
+		                	
 		                	<%-- <br/>
 		                	捐款人:<%=dh.getString("dh_name") %>
 		                	<br/> --%>
+		                	
+<%-- 		                	<%if("pay.pu".equals(dh.getString("dh_paymethod"))){ %> --%>
+<%-- 		                	<a href="<%=servername + request.getContextPath()%>/web/payment/pupay/get_url.jsp?dh_id=<%=dh_id%>" target="_blank">前往繳款</a> --%>
+<%--                             <%} %> --%>
 		                </td>
 	              	</tr>
 	              	
+	              	
             	</table>
             	<br />
+            	<br />
+				<table width="571px" border="0" cellpadding="8" cellspacing="0" style="font-size:12px; line-height:20px; margin-top:10px; margin-bottom:10px;">	
+	              	  <tr style="background:#F2EFE9;">
+		                <td width="22%" align="right" valign="top">捐款單編號：</td>
+		                <td width="78%" align="left" valign="top"><%=dh.getString("dh_no") %></td>
+		              </tr>
+		              <tr>
+		                <td width="22%" align="right" valign="top">捐款日期：</td>
+		                <td width="78%" align="left" valign="top"><%=dh.getString("dh_donatedate") %></td>
+		              </tr>
+		              <tr style="background:#F2EFE9;">
+		                <td align="right" valign="top">捐款貴賓：</td>
+		                <td align="left" valign="top"><%=dh.getString("dh_name") %></td>
+		              </tr>
+		              
+		              <tr >
+		                <td align="right" valign="top">捐款金額：</td>
+		                <td align="left" valign="top"><%=dh.getInt("dh_total") %></td>
+		              </tr>
+		              
+		              <tr style="background:#F2EFE9;">
+		                <td align="right" valign="top">捐款指定用途：</td>
+		                <td align="left" valign="top"><%=dh.getString("dh_donate_project_title") %></td>
+		              </tr>
+		              <tr >
+		                <td align="right" valign="top">付款方式：</td>
+		                <td align="left" valign="top">
+		                <%=app_sm.select(tblcp, "cp_category = ? and cp_code = ? and cp_lang = ? ", new Object[]{
+		                		dh.getString("dh_paymethod"), "guide", lang}).getString("cp_title")%>
+		                <br/>
+		                <%if(!dh.getString("dh_paymethod").contains("pu")){ %>
+		                <%=app_sm.select(tblcp, "cp_category = ? and cp_code = ? and cp_lang = ? ", new Object[]{
+		                		dh.getString("dh_paymethod"), "guide", lang}).getString("cp_desc")%>		
+		                <%}else{ %>		
+		                <a href="<%=servername + request.getContextPath()%>/web/payment/pupay/get_url.jsp?dh_id=<%=dh_id%>" target="_blank">前往繳款</a>
+		               	 <%} %>	
+		               	</td>
+		              </tr>
+		              <tr style="background:#F2EFE9;">
+		                <td align="right" valign="top">是否開立收據：</td>
+		                <td align="left" valign="top"><%="Y".equals(dh.getString("dh_receipt_status"))?"寄送收據":"不寄送收據" %></td>
+		              </tr>
+		              <%if("Y".equals(dh.getString("dh_receipt_status"))){%>
+		              
+		              <tr style="background:#F2EFE9;">
+		                <td align="right" valign="top">收據抬頭：</td>
+		                <td align="left" valign="top"><%=dh.getString("dh_receipt_title") %></td>
+		              </tr>
+		              <tr>
+		                <td align="right" valign="top">收據地址：</td>
+		                <td align="left" valign="top"><%=dh.getString("dh_receipt_zipcode")+dh.getString("dh_receipt_county")+dh.getString("dh_receipt_city")+dh.getString("dh_receipt_address") %></td>
+		              </tr>
+		              
+		              <%} %>
+	              	
+            	</table>
             	<table width="571" border="0" cellspacing="0" cellpadding="0" style="font-size:11px; color:#666;">
               	<tr>
                 	<td align="center" style="border-top: dashed 1px #999; line-height:30px;">- 此封信為系統自動寄發，請勿直接回信!! -</td>

@@ -443,9 +443,10 @@
 		                  		<td width="20%" align="right">捐款金額 ：  </td>
 		                  		<td width="30%" align="left" >
 		                  			<%if(is_foreign){ %>
-		                  			<%=dh.getString("dh_currency") %>&nbsp;<%=app_df.format(dh.getInt("dh_foreign_total"))%>&nbsp;元，
+		                  			<%=dh.getString("dh_currency_other") %>&nbsp;<%=app_df.format(dh.getInt("dh_total"))%>&nbsp;元
+		                  			<%}else{ %>
+		                  			TWD&nbsp;<%=app_df.format(dh.getInt("dh_total"))%>&nbsp;元
 		                  			<%} %>
-		                  			<%=is_foreign?"TWD":dh.getString("dh_currency") %>&nbsp;<%=app_df.format(dh.getInt("dh_total"))%>&nbsp;元
 		                  		</td>		                 		
 						  	</tr>
 							<tr>
@@ -646,7 +647,7 @@
 							<tr class="information_table-2-1">				  
 		                  		<td align="right">收據 ： </td>
 		                 		<td align="left" colspan="3">
-		                 			<%=dh.getString("dh_receipt_status").replace("Y", "寄收據/感謝函").replace("N", "不寄收據/感謝函") %>
+		                 			<%=dh.getString("dh_receipt_status").replace("Y", "寄收據").replace("N", "不寄收據") %>
 								</td>			                 		
 						  	</tr>
 						  	
@@ -661,13 +662,23 @@
 		                  	
 						  	<tr class="information_table-2-1">				  
 		                  		<td width="20%" align="right">公開 ： </td>
-		                 		<td width="30%" align="left">
+		                 		<td width="30%" align="left" colspan="3">
 		                 			<%=dh.getString("dh_public").replace("Y", "公開").replace("N", "不公開") %>
 		                 		</td>
-		                  		<td width="20%" align="right">上傳稅務機關 ： </td>
-		                 		<td width="30%" align="left">
-		                 			<%=dh.getString("dh_tax").replace("Y", "上傳").replace("N", "不上傳") %>
-		                 		</td>			                 			
+<!-- 		                  		<td width="20%" align="right">上傳稅務機關 ： </td> -->
+<!-- 		                 		<td width="30%" align="left"> -->
+<%-- 		                 			<%=dh.getString("dh_tax").replace("Y", "上傳").replace("N", "不上傳") %> --%>
+<!-- 		                 		</td>			                 			 -->
+						  	</tr>	
+						  	<tr class="information_table-2-1">				  
+		                  		<td width="20%" align="right">備註說明 ： </td>
+		                 		<td width="30%" align="left" colspan="3">
+		                 			<%=dh.getString("dh_memo")%>
+		                 		</td>
+<!-- 		                  		<td width="20%" align="right">上傳稅務機關 ： </td> -->
+<!-- 		                 		<td width="30%" align="left"> -->
+<%-- 		                 			<%=dh.getString("dh_tax").replace("Y", "上傳").replace("N", "不上傳") %> --%>
+<!-- 		                 		</td>			                 			 -->
 						  	</tr>		  	
 						  	
 						</table>

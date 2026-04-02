@@ -3,4 +3,11 @@
    // Return back the connection.
    // Usually is a part of config.jspf
    app_sm.close();
+if (app_sm != null) {
+    try {
+    	app_sm.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
 %>

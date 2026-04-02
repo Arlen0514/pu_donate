@@ -1,8 +1,9 @@
 package com.genesis.filter;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Enumeration;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -15,79 +16,100 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 整合版安全過濾器
+ * 1. SQL Injection
+ * 2. XSS
+ * 3. Path Traversal
+ * 4. Spring4Shell 參數名稱攻擊檢查
+ */
 public class SqlInjectionFilter implements Filter {
 
     private Pattern sqlPattern;
     private Pattern xssPattern;
-    private Pattern ognlPattern;
     private int maxLength;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
+        // 常見 SQL Injection 型態
         String sqlRegex =
                 "(?i).*(" +
-                "\\bunion\\b\\s+\\bselect\\b" +
-                "|\\bor\\b\\s+['\"0-9a-zA-Z_]+\\s*=\\s*['\"0-9a-zA-Z_]+" +
-                "|\\band\\b\\s+['\"0-9a-zA-Z_]+\\s*=\\s*['\"0-9a-zA-Z_]+" +
-                "|sleep\\s*\\(" +
-                "|benchmark\\s*\\(" +
-                "|waitfor\\s+delay" +
-                "|;\\s*drop\\b" +
-                "|;\\s*delete\\b" +
-                "|;\\s*update\\b" +
-                "|;\\s*insert\\b" +
+                    "\\bunion\\b\\s+\\bselect\\b" +
+                    "|" +
+                    "\\bselect\\b\\s+.*\\bfrom\\b" +
+                    "|" +
+                    "\\binsert\\b\\s+\\binto\\b" +
+                    "|" +
+                    "\\bupdate\\b\\s+.+\\bset\\b" +
+                    "|" +
+                    "\\bdelete\\b\\s+\\bfrom\\b" +
+                    "|" +
+                    "\\bdrop\\b\\s+\\btable\\b" +
+                    "|" +
+                    "\\btruncate\\b" +
+                    "|" +
+                    "\\bexec\\b" +
+                    "|" +
+                    "\\bexecute\\b" +
+                    "|" +
+                    "\\bor\\b\\s+['\"0-9a-zA-Z_]+\\s*=\\s*['\"0-9a-zA-Z_]+" +
+                    "|" +
+                    "\\band\\b\\s+['\"0-9a-zA-Z_]+\\s*=\\s*['\"0-9a-zA-Z_]+" +
+                    "|" +
+                    "'\\s*or\\s*'1'='1" +
+                    "|" +
+                    "\"\\s*or\\s*\"1\"=\"1" +
                 ").*";
 
+        // 常見 XSS 型態
         String xssRegex =
                 "(?i).*(" +
-                "<script" +
-                "|</script" +
-                "|javascript:" +
-                "|vbscript:" +
-                "|onerror\\s*=" +
-                "|onload\\s*=" +
-                "|onmouseover\\s*=" +
-                "|onclick\\s*=" +
-                "|<iframe" +
-                "|<img" +
-                "|<svg" +
-                "|<object" +
-                "|<embed" +
-                ").*";
-
-        String ognlRegex =
-                "(?i).*(" +
-                "\\$\\{" +
-                "|%\\{" +
-                "|#context" +
-                "|#attr" +
-                "|#application" +
-                "|getWriter\\s*\\(" +
-                "|getClass\\s*\\(" +
-                "|classLoader" +
-                "|newInstance\\s*\\(" +
-                "|Runtime\\.getRuntime" +
+                    "<\\s*script" +
+                    "|" +
+                    "javascript\\s*:" +
+                    "|" +
+                    "onerror\\s*=" +
+                    "|" +
+                    "onload\\s*=" +
+                    "|" +
+                    "onmouseover\\s*=" +
+                    "|" +
+                    "alert\\s*\\(" +
+                    "|" +
+                    "document\\.cookie" +
+                    "|" +
+                    "<\\s*iframe" +
                 ").*";
 
         this.sqlPattern = Pattern.compile(sqlRegex);
         this.xssPattern = Pattern.compile(xssRegex);
-        this.ognlPattern = Pattern.compile(ognlRegex);
-        this.maxLength = 500;
+        this.maxLength = 4096;
     }
 
-    private String decodeSafely(String input) {
-        if (input == null) return null;
+    /**
+     * Decode 最多 2 次，避免雙重編碼攻擊
+     * %252e%252e%252f -> %2e%2e%2f -> ../
+     */
+    private static String multiDecode(String s) {
+        if (s == null) return null;
 
-        try {
-            return URLDecoder.decode(input, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            return input;
-        } catch (IllegalArgumentException e) {
-            return input;
+        String v = s;
+        for (int i = 0; i < 2; i++) {
+            try {
+                String dec = URLDecoder.decode(v, StandardCharsets.UTF_8.name());
+                if (dec.equals(v)) break;
+                v = dec;
+            } catch (Exception e) {
+                break;
+            }
         }
+        return v;
     }
 
+    /**
+     * 額外補強一些簡單 XSS 判斷
+     */
     private boolean containsEncodedXSS(String input) {
         if (input == null) return false;
 
@@ -95,57 +117,114 @@ public class SqlInjectionFilter implements Filter {
 
         return lower.contains("&lt;script")
                 || lower.contains("&gt;")
-                || lower.contains("&lt;iframe")
-                || lower.contains("&lt;img")
+                || lower.contains("<script")
+                || lower.contains("</script>")
                 || lower.contains("javascript:")
-                || lower.contains("vbscript:")
                 || lower.contains("onerror=")
-                || lower.contains("onload=")
-                || lower.contains("onmouseover=")
-                || lower.contains("onclick=");
+                || lower.contains("onload=");
     }
 
-    private boolean isIllegalLength(String input) {
-        return input != null && input.length() > maxLength;
-    }
+    /**
+     * Path Traversal / Unix File Parameter Manipulation
+     */
+    private static boolean isPathTraversalLike(String input) {
+        if (input == null) return false;
 
-    private boolean isMalicious(String input) {
-        if (input == null || input.trim().isEmpty()) {
-            return false;
-        }
+        String v = multiDecode(input);
+        if (v == null) return false;
 
-        return sqlPattern.matcher(input).matches()
-                || xssPattern.matcher(input).matches()
-                || ognlPattern.matcher(input).matches()
-                || containsEncodedXSS(input);
-    }
+        String lower = v.toLowerCase();
 
-    private boolean shouldSkipParam(String paramName) {
-        if (paramName == null) return false;
-
-        return "lang".equalsIgnoreCase(paramName);
-    }
-
-    private boolean validateInput(String input, HttpServletResponse response, String label) throws IOException {
-        if (input == null) {
-            return false;
-        }
-
-        if (isIllegalLength(input)) {
-            System.out.println("參數過長，被阻擋：" + label + " = " + input);
-            response.sendError(400, "偵測到異常請求參數");
+        if (lower.contains("../")
+                || lower.contains("..\\")
+                || lower.contains("/..")
+                || lower.contains("\\..")) {
             return true;
         }
 
-        String decoded = decodeSafely(input);
+        if (lower.matches(".*[a-z]:\\\\.*")) {
+            return true;
+        }
 
-        if (isMalicious(input) || isMalicious(decoded)) {
-            System.out.println("可疑請求，被阻擋：" + label + " = " + input);
-            response.sendError(400, "偵測到異常請求參數");
+        if (lower.startsWith("\\\\")) {
+            return true;
+        }
+
+        if (lower.contains("/etc/passwd")
+                || lower.contains("web-inf")
+                || lower.contains("meta-inf")) {
             return true;
         }
 
         return false;
+    }
+
+    /**
+     * Spring4Shell / 危險參數名稱
+     */
+    private boolean isDangerousParamName(String name) {
+        if (name == null) return false;
+
+        String lower = multiDecode(name);
+        if (lower == null) return false;
+
+        lower = lower.toLowerCase();
+
+        return lower.startsWith("class.")
+                || lower.contains("classloader")
+                || lower.contains("module.classloader");
+    }
+
+    private boolean isSqlInjection(String input) {
+        if (input == null) return false;
+
+        String value = multiDecode(input);
+        if (value == null) return false;
+
+        value = value.trim();
+        if ("".equals(value)) return false;
+
+        return this.sqlPattern.matcher(value).matches();
+    }
+
+    private boolean isXss(String input) {
+        if (input == null) return false;
+
+        String value = multiDecode(input);
+        if (value == null) return false;
+
+        value = value.trim();
+        if ("".equals(value)) return false;
+
+        return this.xssPattern.matcher(value).matches() || containsEncodedXSS(value);
+    }
+
+    /**
+     * 統一擋下時的 log
+     */
+    private void block(HttpServletRequest request,
+                       HttpServletResponse response,
+                       String reason,
+                       String paramName,
+                       String paramValue) throws IOException {
+
+        String uri = request.getRequestURI();
+        String method = request.getMethod();
+        String queryString = request.getQueryString();
+        String ip = request.getRemoteAddr();
+
+        System.out.println("==================================================");
+        System.out.println("[SqlInjectionFilter] 已攔截可疑請求");
+        System.out.println("原因        : " + reason);
+        System.out.println("Method      : " + method);
+        System.out.println("URI         : " + uri);
+        System.out.println("IP          : " + ip);
+        System.out.println("QueryString : " + (queryString == null ? "" : multiDecode(queryString)));
+        System.out.println("Param Name  : " + (paramName == null ? "" : paramName));
+        System.out.println("Param Value : " + (paramValue == null ? "" : paramValue));
+        System.out.println("==================================================");
+
+        response.sendError(400, "Bad Request");
     }
 
     @Override
@@ -158,32 +237,116 @@ public class SqlInjectionFilter implements Filter {
         httpRequest.setCharacterEncoding("UTF-8");
         httpResponse.setCharacterEncoding("UTF-8");
 
+        // 0. 先檢查 queryString 長度
         String queryString = httpRequest.getQueryString();
-        if (queryString != null) {
-            if (validateInput(queryString, httpResponse, "queryString")) {
+        String decodedQuery = multiDecode(queryString);
+
+        if (decodedQuery != null && decodedQuery.length() > this.maxLength) {
+            block(httpRequest, httpResponse, "queryString 過長", "queryString", decodedQuery);
+            return;
+        }
+
+        // 1. 先檢查 queryString 是否有 Path Traversal
+        if (isPathTraversalLike(decodedQuery)) {
+            block(httpRequest, httpResponse, "queryString 含路徑穿越字樣", "queryString", decodedQuery);
+            return;
+        }
+
+        // 2. 檢查 queryString 是否有 SQLi / XSS
+        if (decodedQuery != null) {
+            if (isSqlInjection(decodedQuery)) {
+                block(httpRequest, httpResponse, "queryString 疑似 SQL Injection", "queryString", decodedQuery);
+                return;
+            }
+
+            if (isXss(decodedQuery)) {
+                block(httpRequest, httpResponse, "queryString 疑似 XSS", "queryString", decodedQuery);
                 return;
             }
         }
 
-        Map<String, String[]> paramMap = httpRequest.getParameterMap();
-        for (Map.Entry<String, String[]> entry : paramMap.entrySet()) {
-            String paramName = entry.getKey();
+        // 3. 檢查 parameter name / value
+        Map<String, String[]> params = httpRequest.getParameterMap();
+        if (params != null) {
+            for (Map.Entry<String, String[]> entry : params.entrySet()) {
 
-            if (shouldSkipParam(paramName)) {
-                continue;
-            }
+                String paramKey = entry.getKey();
+                String decodedKey = multiDecode(paramKey);
 
-            if (validateInput(paramName, httpResponse, "paramName")) {
-                return;
-            }
+                // 3-1. 檢查參數名稱長度
+                if (decodedKey != null && decodedKey.length() > this.maxLength) {
+                    block(httpRequest, httpResponse, "參數名稱過長", decodedKey, null);
+                    return;
+                }
 
-            String[] values = entry.getValue();
-            if (values != null) {
+                // 3-2. Spring4Shell / classLoader 類型攻擊
+                if (isDangerousParamName(decodedKey)) {
+                    block(httpRequest, httpResponse, "危險參數名稱(Spring4Shell特徵)", decodedKey, null);
+                    return;
+                }
+
+                // 3-3. 參數名稱本身有 Path Traversal
+                if (isPathTraversalLike(decodedKey)) {
+                    block(httpRequest, httpResponse, "參數名稱含路徑穿越字樣", decodedKey, null);
+                    return;
+                }
+
+                // 3-4. 參數名稱本身有 SQLi / XSS
+                if (isSqlInjection(decodedKey)) {
+                    block(httpRequest, httpResponse, "參數名稱疑似 SQL Injection", decodedKey, null);
+                    return;
+                }
+
+                if (isXss(decodedKey)) {
+                    block(httpRequest, httpResponse, "參數名稱疑似 XSS", decodedKey, null);
+                    return;
+                }
+
+                String[] values = entry.getValue();
+                if (values == null) continue;
+
                 for (String value : values) {
-                    if (validateInput(value, httpResponse, paramName)) {
+                    if (value == null) continue;
+
+                    String decodedValue = multiDecode(value);
+
+                    // debug 用，可視需求保留或拿掉
+//                    System.out.println("[SqlInjectionFilter] param key = " + decodedKey + ", value = [" + decodedValue + "]");
+
+                    // 3-5. 值長度過長
+                    if (decodedValue != null && decodedValue.length() > this.maxLength) {
+                        block(httpRequest, httpResponse, "參數值過長", decodedKey, decodedValue);
+                        return;
+                    }
+
+                    // 3-6. 值有 Path Traversal
+                    if (isPathTraversalLike(decodedValue)) {
+                        block(httpRequest, httpResponse, "參數值含路徑穿越字樣", decodedKey, decodedValue);
+                        return;
+                    }
+
+                    // 3-7. 值有 SQLi
+                    if (isSqlInjection(decodedValue)) {
+                        block(httpRequest, httpResponse, "參數值疑似 SQL Injection", decodedKey, decodedValue);
+                        return;
+                    }
+
+                    // 3-8. 值有 XSS
+                    if (isXss(decodedValue)) {
+                        block(httpRequest, httpResponse, "參數值疑似 XSS", decodedKey, decodedValue);
                         return;
                     }
                 }
+            }
+        }
+
+        // 4. 額外檢查 request.getParameterNames()，補強 Spring4Shell
+        Enumeration<String> paramNames = request.getParameterNames();
+        while (paramNames.hasMoreElements()) {
+            String name = paramNames.nextElement();
+            if (isDangerousParamName(name)) {
+                block(httpRequest, httpResponse, "危險參數名稱(Spring4Shell特徵)", name, null);
+                return;
             }
         }
 
@@ -192,5 +355,6 @@ public class SqlInjectionFilter implements Filter {
 
     @Override
     public void destroy() {
+        // no-op
     }
 }

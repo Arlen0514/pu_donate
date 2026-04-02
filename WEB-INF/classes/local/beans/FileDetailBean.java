@@ -1,7 +1,7 @@
 /**
  * FileDetailBean.java
  * Created by com.genesis.util.BeanCreator
- *         on 2024/08/29 18:00:13
+ *         on 2026/04/02 14:24:19
  * @author Kevin Koo
  */
 package local.beans;
@@ -33,6 +33,8 @@ public final class FileDetailBean implements java.io.Serializable {
     private String fd_url        = "";
     private String fd_target     = "";
     private String fd_display    = "";
+    private String fd_emitdate   = "";
+    private String fd_restdate   = "";
     private String fd_lang       = "";
     private String fd_code       = "";
     private int    fd_showseq    = 0;
@@ -101,6 +103,14 @@ public final class FileDetailBean implements java.io.Serializable {
         this.fd_display = fd_display;
     }
 
+    public void setFd_emitdate(String fd_emitdate) {
+        this.fd_emitdate = fd_emitdate;
+    }
+
+    public void setFd_restdate(String fd_restdate) {
+        this.fd_restdate = fd_restdate;
+    }
+
     public void setFd_lang(String fd_lang) {
         this.fd_lang = fd_lang;
     }
@@ -152,6 +162,8 @@ public final class FileDetailBean implements java.io.Serializable {
         vc.add(fd_url);
         vc.add(fd_target);
         vc.add(fd_display);
+        vc.add(fd_emitdate);
+        vc.add(fd_restdate);
         vc.add(fd_lang);
         vc.add(fd_code);
         vc.add(new Integer(fd_showseq));
@@ -220,6 +232,14 @@ public final class FileDetailBean implements java.io.Serializable {
         return fd_display;
     }
 
+    public String getFd_emitdate() {
+        return fd_emitdate;
+    }
+
+    public String getFd_restdate() {
+        return fd_restdate;
+    }
+
     public String getFd_lang() {
         return fd_lang;
     }
@@ -258,13 +278,14 @@ public final class FileDetailBean implements java.io.Serializable {
         "fd_id", "fk_id", "fd_upcategory", "fd_category", 
         "fd_title", "fd_file", "fd_file_type", "fd_image", 
         "fd_video", "fd_chinavideo", "fd_content", "fd_url", 
-        "fd_target", "fd_display", "fd_lang", "fd_code", 
-        "fd_showseq", "fd_createdate", "fd_createuser", "fd_modifydate", 
-        "fd_modifyuser" };
+        "fd_target", "fd_display", "fd_emitdate", "fd_restdate", 
+        "fd_lang", "fd_code", "fd_showseq", "fd_createdate", 
+        "fd_createuser", "fd_modifydate", "fd_modifyuser" };
 
     // The field java types.
     private String[] _ftypes = new String[] {
         "String", "String", "String", "String", "String", "String", "String", 
         "String", "String", "String", "String", "String", "String", "String", 
-        "String", "String", "int", "String", "String", "String", "String" };
+        "String", "String", "String", "String", "int", "String", "String", 
+        "String", "String" };
 }

@@ -344,7 +344,17 @@ ul.headerRight_topArea{
 			background-color: #fff;
 			transition: 0.3s ease all;
 		}
-	
+
+		ul.headerRight_topArea .topArea_btn a{
+			color: #3188c7;
+    		background-color: #fff;
+		}
+
+		ul.headerRight_topArea .topArea_btn a:hover{
+			color: #fff;
+    		background-color: #3188c7;
+		}
+
 
 
 
@@ -678,6 +688,12 @@ ul.headerRight_topArea{
 
 			/* font-family: 'Noto Serif TC', serif; */
 		}
+
+		/* 只在手機版出現主按鍵 */
+		.nav_mobile{
+			display: none;
+		}
+
 				/* .nav  > a  */
 				.nav a {
 					text-align: center;
@@ -1224,7 +1240,11 @@ ul.headerRight_topArea{
 		-webkit-transform: translateX(0%) translateY(55%);
 		transform: translateX(0%) translateY(55%);
 	}
-		
+	
+	
+	.nav_mobile{
+		display: block;
+	}
 	
 
 	
@@ -1278,6 +1298,7 @@ ul.headerRight_topArea{
 					padding: 0px;
 					border-bottom: solid 1px #767676;
 				}
+
 				.nav.sstc {
 					position: relative;
 				}

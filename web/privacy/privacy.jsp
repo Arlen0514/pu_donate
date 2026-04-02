@@ -86,7 +86,7 @@
 						
 						<!-- InstanceBeginEditable name="crumb" -->
                         
-                        <span>隱私權政策</span>   
+                        <span>個資聲明</span>   
                         
                         <i class="material-icons">navigate_next</i>
                         

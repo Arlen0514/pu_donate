@@ -115,7 +115,7 @@
 				"捐款日期", "捐款是否付款", "捐款單編號", "銷帳編號", "姓名", "捐款金額", "身份證字號/統編/居留證號", 
 				"電子信箱", "電話", "聯絡電話", "聯絡地址(郵遞區號)", "聯絡地址",  "捐款計畫",
 				"計畫代碼", "受贈單位", "捐款屬性", 
-				"收據抬頭", "付款方式", "捐款收據", "收據地址(郵遞區號)", "收據地址"
+				"收據抬頭", "付款方式", "捐款收據", "收據地址(郵遞區號)", "收據地址","備註說明"
 			};
 			
 			
@@ -145,9 +145,10 @@
 						dh.getString("dh_donate_attribute_title"),
 						dh.getString("dh_receipt_title"),
 						dh_paymethod,
-						"Y".equals(dh.getString("dh_receipt_status"))?"寄收據/感謝函":"不寄收據/感謝函",
+						"Y".equals(dh.getString("dh_receipt_status"))?"寄收據":"不寄收據",
 						dh.getString("dh_receipt_zipcode"),
-						dh.getString("dh_receipt_county")+dh.getString("dh_receipt_city")+dh.getString("dh_receipt_address").replace(",", "")
+						dh.getString("dh_receipt_county")+dh.getString("dh_receipt_city")+dh.getString("dh_receipt_address").replace(",", ""),
+						dh.getString("dh_memo")
 				};	
 				
 				if(i==0){

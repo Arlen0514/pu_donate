@@ -10,6 +10,11 @@ String copr_company = SiteSetup.getSetup("cp.company" + "." + lang).getString("s
 		campus_url = SiteSetup.getSetup("campus_url" + "." + lang).getString("ss_text"),
 		library_url = SiteSetup.getSetup("library_url" + "." + lang).getString("ss_text"),
 		sport_url = SiteSetup.getSetup("sport_url" + "." + lang).getString("ss_text"),
+		web_alumni_center_title = SiteSetup.getSetup("web_alumni_center_title" + "." + lang).getString("ss_text"),
+		campus_title = SiteSetup.getSetup("campus_title" + "." + lang).getString("ss_text"),
+		library_title = SiteSetup.getSetup("library_title" + "." + lang).getString("ss_text"),
+		sport_title = SiteSetup.getSetup("sport_title" + "." + lang).getString("ss_text"),
+		privacy_url = SiteSetup.getSetup("cp.privacy_link" + "." + lang).getString("ss_text"),
 		fb_url = SiteSetup.getSetup("cp.fb" + "." + lang).getString("ss_text"),
 		yt_url = SiteSetup.getSetup("cp.yt" + "." + lang).getString("ss_text"),
 		ig_url = SiteSetup.getSetup("cp.ig" + "." + lang).getString("ss_text"),
@@ -58,7 +63,7 @@ String copr_company = SiteSetup.getSetup("cp.company" + "." + lang).getString("s
                     <div class="fR_nav fR_nav2">                    
                         <span>
                             <a href="<%=web_alumni_center_url %>" target="_blank">
-                            	校友服務與社會連結中心
+                            	<%=web_alumni_center_title %>
                             </a>
                         </span>
                     </div>
@@ -67,7 +72,7 @@ String copr_company = SiteSetup.getSetup("cp.company" + "." + lang).getString("s
                     <div class="fR_nav fR_nav2">                    
                         <span>
                             <a href="<%=campus_url %>" target="_blank">
-                            	宗教輔導室
+                            	<%=campus_title %>
                             </a>
                         </span>
                     </div>
@@ -76,7 +81,7 @@ String copr_company = SiteSetup.getSetup("cp.company" + "." + lang).getString("s
                     <div class="fR_nav fR_nav2">                    
                         <span>
                             <a href="<%=library_url %>" target="_blank">
-                            	蓋夏圖書館
+                            	<%=library_title %>
                             </a>
                         </span>
                     </div>
@@ -85,7 +90,7 @@ String copr_company = SiteSetup.getSetup("cp.company" + "." + lang).getString("s
                     <div class="fR_nav fR_nav2">                    
                         <span>
                             <a href="<%=sport_url %>" target="_blank">
-                            	體育室
+                            	<%=sport_title %>
                             </a>
                         </span>
                     </div>    
@@ -100,11 +105,6 @@ String copr_company = SiteSetup.getSetup("cp.company" + "." + lang).getString("s
 
                 <div class="footer_bottom">
                     <div class="footer_contentIn"> 
-
-                        
-
-
-                        
                         <div class="footer_contentItem">        
                             <%if (!"".equals(copr_company)) { %>
 		                    <h3><%=copr_company %>
@@ -152,30 +152,41 @@ String copr_company = SiteSetup.getSetup("cp.company" + "." + lang).getString("s
                     <!--版權宣告-->
                     <div class="copyright">
                         <!-- <div class="wrap"> -->
-                            © 2025 <a href="https://www.geneinfo.com.tw" target="_blank">Greatest Idea Strategy Co.,Ltd</a> All rights reserved.
+                            © <%=DateTimeTool.getYear() + " "%> <a href="https://www.geneinfo.com.tw" target="_blank">Greatest Idea Strategy Co.,Ltd</a> All rights reserved.
+                            <a class="privacy_policy" href="<%=privacy_url %>" target="_blank">隱私權聲明</a>
                     </div>
 
                     <div class="sns_linkBg">
+                            <%if (!"".equals(fb_url)) { %>
                             <div class="list fb_link">
-                                <a href="https://zh-tw.facebook.com/PU.ProvidenceUniversity" target="_blank">
+                                <a href="<%=fb_url %>" target="_blank">
                                     <img src="../images/fb_icon.svg" alt="facebook" title="facebook">
                                 </a>
                             </div>
+                            <%} %>
+                           
+                            <%if (!"".equals(ig_url)) { %>
                             <div class="list yt_link">
-                                <a href="#" target="_blank">
+                                <a href="<%=ig_url %>" target="_blank">
                                     <img src="../images/ig_icon.svg" alt="instagram" title="instagram">
                                 </a>
                             </div>
+                            <%} %>
+                            <%if (!"".equals(td_url)) { %>
                             <div class="list yt_link">
-                                <a href="#" target="_blank">
+                                <a href="<%=td_url %>" target="_blank">
                                     <img src="../images/threads_icon.svg" alt="threads" title="threads">
                                 </a>
                             </div>
+                        	<%} %>
+                        	
+                        	 <%if (!"".equals(yt_url)) { %>
                             <div class="list yt_link">
-                                <a href="https://www.youtube.com/channel/UCwVbcnNxhcduy9hUfFSHCzw" target="_blank">
-                                    <img src="../images/yt_icon.svg" alt="line" title="line">
+                                <a href="<%=yt_url %>" target="_blank">
+                                    <img src="../images/yt_icon.svg" alt="youtube" title="youtube">
                                 </a>
                             </div>
+                            <%} %>
 							
                     </div>
                 </div>

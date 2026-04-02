@@ -16,7 +16,7 @@
 	boolean list_switch = true;				// 是否開啟列表功能
 	boolean sort_switch = true;				// 是否開啟排序功能
 	boolean keyword_switch = false;			// 是否開啟關鍵字設定
-	boolean deadline_switch = false;		// 是否開啟上下架日期
+	boolean deadline_switch = true;		// 是否開啟上下架日期
 	int add_num = -1;						// 設定可新增的資料筆數 , -1 為無限筆
 /*------------------------------------------------------------------------------------*/	
 	Vector fds = app_sm.selectAll(tblfd, "fd_code=? and fd_lang=?", new Object[] { code, lang }, "fd_showseq ASC , fd_createdate DESC");
@@ -25,20 +25,17 @@
 	
 	// 搜尋欄位
 	String qtitle = StringTool.validString(request.getParameter("_qtitle"));
-	String qcategory = StringTool.validString(request.getParameter("_qcategory"));
-	
+
 	// 跳頁參數
-	String[] names = new String[] { "npage", "_qtitle", "_qcategory" };
-	String[] values = new String[] { String.valueOf(pageno), qtitle, qcategory };
-	// 回列表頁
-	out.write(HtmlCoder.getForm("listpage", code + ".jsp", names, values));
-	
-	//所屬類別
-	Vector<TableRecord> dms = app_sm.selectAll(tbldm, "dm_lang=? and dm_code=? and dm_category=?", new Object[]{ lang, code+"_category", "" } , "dm_showseq ASC , dm_createdate DESC");
-	
+	String[] names = new String[] { "npage", "_qtitle" };
+	String[] values = new String[] { String.valueOf(pageno), qtitle };
+
 	// 修改資料id
 	String fd_id = StringTool.validString(request.getParameter("fd_id"));	
 	TableRecord fd = app_sm.select(tblfd, fd_id);
+
+	// 回列表頁
+	out.write(HtmlCoder.getForm("listpage", code + ".jsp", names, values));
 %>
 <!DOCTYPE html>
 <html>
@@ -48,17 +45,22 @@
 <script>
 function checkform(F) {
 	// 驗證副檔名
-	var file_chk = /([^\/]+\.(?:jpg|jpeg|gif|png|webp))/;
+	var file_chk = /([^\/]+\.(?:jpg|jpeg|gif|png))/;
 	// 驗證中文
 	var chnese_chk = /[\u4e00-\u9fa5]/;
 	
-	if(F.fd_category.value == "") {
-        alert("請選擇類別!!");
-        F.fd_category.focus();
-	} else if(F.fd_title.value == "") {
+	if (F.fd_title.value == "") {
         alert("請輸入標題名稱!!");
         F.fd_title.focus();
-  	} else {
+    } else if (F.fd_target.value == "U" && F.fd_url.value == "") {
+		alert("請輸入外部連結!!");
+		F.fd_url.focus();
+	<%if("".equals(fd.getString("fd_file"))) { %>
+    } else if (F.fd_target.value == "F" && F.fd_file.value == "") {
+		alert("請上傳檔案!!");
+		F.fd_file.focus();
+	<%} %>
+    } else {
         return true;
     }
 	return false;
@@ -107,7 +109,7 @@ function checkform(F) {
 			</tr>
 			<tr>
 				<td align="center" colspan="2">
-				<form name="frm" id="frm" method="post" enctype="multipart/form-data" action="<%=code%>_update.jsp?action=M&fd_id=<%=fd_id %>&_qtitle=<%=qtitle %>&npage=<%=pageno %>&_qcategory=<%=qcategory %>" onsubmit="javascript:return checkform(this);">
+				<form name="frm" id="frm" method="post" enctype="multipart/form-data" action="<%=code%>_update.jsp?action=M&fd_id=<%=fd_id %>&_qtitle=<%=qtitle %>&npage=<%=pageno %>" onsubmit="javascript:return checkform(this);">
 				<table width="95%" border="0" cellspacing="1" cellpadding="0">
 					<tr>
 						<td class="system_bk-2bk">
@@ -125,34 +127,19 @@ function checkform(F) {
 									<%} %>
 								</td>
 							</tr>
-
+							
 							<tr align="center" class="web_bk-2">
 								<td colspan="4" align="center">修改資訊</td>
 							</tr>
-
-							<tr class="web_table-2-1">
-								<td width="15%" align="right">所屬類別</td>
-								<td colspan="3" width="85%" align="left">
-									<select name="fd_category" id="fd_category">
-										<option value="">請選擇類別</option>
-			                  		   	<%  
-			                  			for(int i = 0; i < dms.size(); i++) {
-			                  				TableRecord dm = (TableRecord) dms.get(i);
-			                  			%>
-			                  			<option value="<%=dm.getString("dm_id") %>" <%=dm.getString("dm_id").equals(fd.getString("fd_category"))?"selected":"" %>><%=dm.getString("dm_title") %></option>
-										<% } %>
-									</select>
-								</td>
-							</tr>
-
+							
 							<tr class="web_table-2-1">
 								<td width="15%" align="right">標題</td>
 								<td colspan="3" width="85%" align="left">
 									<input type="text" name="fd_title" id="fd_title" size="100" maxlength="120" value="<%=fd.getString("fd_title")%>"/>
 								</td>
 							</tr>
-
-		                    <tr class="web_table-2-1">
+							
+							<tr class="web_table-2-1">
 								<td rowspan="2" align="right" class="web_table-2-1">檔案</td>	
 								<td colspan="3" align="left" class="tablebg">&nbsp;
 						        	<%if(!fd.getString("fd_file").isEmpty()) { %>
@@ -160,16 +147,16 @@ function checkform(F) {
 							    	<%} %>
 								</td>
 		                    </tr>
-
+							
 							<tr class="web_table-2-1">
 								<td colspan="3" align="left" class="tablebg">
 									<input name="imgradio1" type="radio" value="ucpic" checked onclick="frm.fd_file.value='';">使用原檔<br>
 									<input name="imgradio1" type="radio" value="new">上傳新檔
-									<input name="fd_file" id="fd_file" type="file" class="button" <%--accept="image/*"--%> onclick="frm.imgradio1[1].checked=true;">
+									<input name="fd_file" id="fd_file" type="file" class="button" <%--accept="image/*"--%> onclick="frm.imgradio1[1].checked=true;"> 
 								</td>
 		                    </tr>
 
-							<%-- 				
+		                    <%-- 				
 							<tr class="web_table-2-1">
 								<td align="right">內文</td>
 								<td colspan="3" align="left">
@@ -245,21 +232,24 @@ function checkform(F) {
 								</td>
 							</tr>
 							<%} %>
-							<%if(deadline_switch){ %>
+							
+							<%if(deadline_switch) { %>
 							<tr align="center" class="web_bk-2">
 								<td colspan="4" align="center">上下架時間</td>
 							</tr>
+
 							<tr class="web_table-2-1">
 								<td align="right" class="web_table-2-1">上架日期</td>
 								<td align="left" class="tablebg">
-									<input name="fd_emitdate" id="_qemitdate" type="text" value="<%=fd.getString("fd_emitdate") %>" size="15" readonly>
+									<input type="text" name="fd_emitdate" id="_qemitdate" value="<%=fd.getString("fd_emitdate") %>" size="15" readonly />
 								</td>
 								<td align="right" class="tablebg">下架日期</td>
 								<td align="left" class="tablebg">
-									<input name="fd_restdate" id="_qrestdate" type="text" value="<%=fd.getString("fd_restdate") %>" size="15" readonly>
+									<input type="text" name="fd_restdate" id="_qrestdate" value="<%=fd.getString("fd_restdate") %>" size="15" readonly />
 								</td>
 							</tr>
 							<%} %>
+
 							<tr class="web_table-2-1">
 								<td align="right">最後修改人員</td>
 								<td align="left"><%=fd.getString("fd_modifyuser") %></td>
@@ -293,7 +283,10 @@ function checkform(F) {
 
 		</table>
 		</td>
-	</div>
+		</div>
+	</tr>
+</table>
+</div>
 </div>
 </body>
 </html>

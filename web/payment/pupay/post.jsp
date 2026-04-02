@@ -168,7 +168,20 @@ try {
 		if (success == 1) { // 成功流程 
 			
 			System.out.println("成功！開始後續流程..."); 
-			out.println("<script>location='../../donate/donate_sendmail.jsp?dh_id="+dh_id+"';</script>");
+		
+			// 建立沖銷紀錄(一筆訂單只會對應一筆沖銷紀錄)
+			TableRecord wh = new TableRecord(tblwh);
+			wh.setValue("wh_status", "N");				// 未沖銷
+			wh.setValue("wh_total", amount);
+			wh.setValue("data_id", dh.getString("dh_id"));
+			wh.setValue("wh_payment", dh.getString("dh_paymethod"));
+			wh.setValue("wh_code", "pu");
+			wh.setInsert("credit_post");
+			app_sm.insert(wh);
+		
+		
+// 			out.println("<script>location='../../donate/donate_sendmail.jsp?dh_id="+dh_id+"';</script>");
+			out.println("<script>location='get_url.jsp?dh_id="+dh_id+"';</script>");
 		
 		} else if (success == -1) { // 失敗流程 
 				

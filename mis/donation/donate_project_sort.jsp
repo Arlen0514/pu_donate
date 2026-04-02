@@ -20,7 +20,7 @@
 	// 搜尋欄位
 	String qcategory = StringTool.validString(request.getParameter("_qcategory"));
 	String qupcategory = StringTool.validString(request.getParameter("_qupcategory"));
-	cps = app_sm.selectAll(tblcp, "cp_code=? and cp_lang=? and cp_category like ?", new Object[] { code,lang, "%"+qcategory+"%" }, "cp_showseq ASC , cp_createdate DESC");
+	cps = app_sm.selectAll(tblcp, "cp_code=? and cp_lang=? and cp_category = ?", new Object[] { code,lang, qcategory }, "cp_showseq ASC , cp_createdate DESC");
 		
 	//所屬類別系列標題
 	String title1=app_sm.select(tbldm,qupcategory).getString("dm_title");
@@ -141,7 +141,7 @@ function checkformsequ(F) {
 							<tr align="center" class="information_bk-2">
 								<td colspan="4" align="center">標題順序調整</td>
 							</tr>
-							<%-- 
+							<%-- --%>
 							<form name="form0" id="form0" method="post" action="<%=code%>_sort.jsp">
 							<tr class="information_table-2-1">
 								<td width="85%" align="center">	
@@ -165,26 +165,26 @@ function checkformsequ(F) {
 				                  			<input type="button" value="選擇類別" onclick="window.open('../mis_tools/category_selector.jsp?Back_id=_qcategory&Back_category=_qupcategory&max_layer=<%=category_num %>&dm_code=<%=code%>_category&css_type=information','_blank','height=260,width=400,top=50,left=300,toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no');" />
 											<input type="submit" value="查詢">
 										<% } %>
-										2層 optgroup
-										 所屬類別：<select name="_qcategory" id="_qcategory" onchange="form0.submit();">
-										<option value="">請選擇類別</option>
-										<%for(TableRecord dm : dms){ %>
-										<optgroup label="<%=dm.getString("dm_title")%>">
-											<%
-												Vector<TableRecord> sub_dms = app_sm.selectAll(tbldm,"dm_code=? and dm_lang=? and dm_category=?",new Object[]{code,lang,dm.getString("dm_id")});
-												for(TableRecord sub_dm : sub_dms){ 
-											%>
-											<option value="<%=sub_dm.getString("dm_id")%>" <%=sub_dm.getString("dm_id").equals(qcategory)?"selected":"" %>><%=sub_dm.getString("dm_title")%></option>
-											<%} %>
-										</optgroup>
-										<%} %>
+<!-- 										2層 optgroup -->
+<!-- 										 所屬類別：<select name="_qcategory" id="_qcategory" onchange="form0.submit();"> -->
+<!-- 										<option value="">請選擇類別</option> -->
+<%-- 										<%for(TableRecord dm : dms){ %> --%>
+<%-- 										<optgroup label="<%=dm.getString("dm_title")%>"> --%>
+<%-- 											<% --%>
+<!-- // 												Vector<TableRecord> sub_dms = app_sm.selectAll(tbldm,"dm_code=? and dm_lang=? and dm_category=?",new Object[]{code,lang,dm.getString("dm_id")}); -->
+<!-- // 												for(TableRecord sub_dm : sub_dms){  -->
+<%-- 											%> --%>
+<%-- 											<option value="<%=sub_dm.getString("dm_id")%>" <%=sub_dm.getString("dm_id").equals(qcategory)?"selected":"" %>><%=sub_dm.getString("dm_title")%></option> --%>
+<%-- 											<%} %> --%>
+<!-- 										</optgroup> -->
+<%-- 										<%} %> --%>
 									</select>
 									
 								</td>
 								<td width="15%" align="center" colspan="3">功能</td>
 							</tr>
 							</form>
-							--%>
+							
 							<form name="frm" id="frm" method="post" enctype="multipart/form-data" action="<%=code%>_update.jsp?action=S&_qcategory=<%=qcategory %>&_qupcategory=<%=qupcategory %>" onsubmit="javascript:return checkformsequ(this);">
 							<tr class="information_table-2-1">
 								<td class="information_table-2-1" align="left"><select
