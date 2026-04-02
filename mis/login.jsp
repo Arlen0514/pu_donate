@@ -41,6 +41,7 @@
    	// Select data.
    	Vector aus = app_sm.selectAll("admin_user", "au_account=? and au_password=?", new Object[]{ account, sha256(password) });
 
+   	
    	// Admin user.
    	TableRecord au = (aus.size() > 0) ? (TableRecord)aus.get(0) : new TableRecord("admin_user");
 

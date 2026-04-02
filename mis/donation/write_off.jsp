@@ -169,7 +169,8 @@ function checkform(F) {
 	                 	<td align="center" class="tablebg">
 	                 		<select name="_qcode" id="_qcode">
 								<option value="" <%="".equals(qcode)?"selected":"" %>>全部</option>
-								<option value="credit_card" <%="credit_card".equals(qcode)?"selected":"" %>>信用卡</option>
+<%-- 								<option value="credit_card" <%="credit_card".equals(qcode)?"selected":"" %>>信用卡</option> --%>
+								<option value="pu" <%="pu".equals(qcode)?"selected":"" %>>行動支付</option>
 								<option value="virtual_account" <%="virtual_account".equals(qcode)?"selected":"" %>>虛擬帳號</option>
 								<option value="credit_regular" <%="credit_regular".equals(qcode)?"selected":"" %>>信用卡定期定額</option>
 							</select>
@@ -240,7 +241,7 @@ function checkform(F) {
 								String pay_date = wh.getString("wh_pay_date").replace("-","/"); 
 								String dh_status = dh.getString("dh_status").replace("Y","正常").replace("N","作廢");
 						  		String wh_status = wh.getString("wh_status").replace("Y","已沖銷").replace("N","未沖銷");
-						  		String wh_code = wh.getString("wh_code").replace("credit_card","信用卡").replace("virtual_account","虛擬帳號").replace("credit_regular","信用卡定期定額");
+						  		String wh_code = wh.getString("wh_code").replace("credit_card","信用卡").replace("virtual_account","虛擬帳號").replace("credit_regular","信用卡定期定額").replace("pu","行動支付");
 						  %>
 						  <tr class="information_table-2-1">
 							<td align="center"><%=((pageno-1) * page_items)+i+1 %></td>

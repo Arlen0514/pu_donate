@@ -10,7 +10,7 @@
     	<load-on-startup>1</load-on-startup>
   	</servlet>
   	<session-config>
-	    <session-timeout>30</session-timeout>
+	    <session-timeout>15</session-timeout>
 	    <cookie-config>
 			<name>JSESSIONID</name>
 			<secure>true</secure>
@@ -85,28 +85,29 @@
 	
 	<filter-mapping>
 	    <filter-name>ContentSecurityPolicyFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/comm/*</url-pattern>
+		<url-pattern>/htmleditor/*</url-pattern>
+		<url-pattern>/jQuery/*</url-pattern>
+		<url-pattern>/js/*</url-pattern>
+		<url-pattern>/uploads/*</url-pattern>
+		<url-pattern>/web/*</url-pattern>
+		<url-pattern>/404.jsp</url-pattern>
+		<url-pattern>/403.jsp</url-pattern>
+		<url-pattern>/400.jsp</url-pattern>
+		<url-pattern>/500.jsp</url-pattern>
+		<url-pattern>/home.jsp</url-pattern>
+		<url-pattern>/index.jsp</url-pattern>
+		<url-pattern>/robots.txt</url-pattern>
 	</filter-mapping>
 
 	<!-- Spring4Shell (CVE-2022-22965) 防護過濾器 20260317 -->
-	<filter>
-	    <filter-name>Spring4ShellFilter</filter-name>
-	    <filter-class>com.genesis.filter.Spring4ShellFilter</filter-class>
-	</filter>
-
-	<filter-mapping>
-	    <filter-name>Spring4ShellFilter</filter-name>
-	    <url-pattern>/*</url-pattern>
-	</filter-mapping>
- 
-    <!-- 設定 SQL Injection 過濾器 -->
 <!-- 	<filter> -->
-<!-- 		<filter-name>SqlInjectionFilter</filter-name> -->
-<!-- 		<filter-class>com.genesis.filter.SqlInjectionFilter</filter-class> -->
+<!-- 	    <filter-name>Spring4ShellFilter</filter-name> -->
+<!-- 	    <filter-class>com.genesis.filter.Spring4ShellFilter</filter-class> -->
 <!-- 	</filter> -->
-	
-<!--     <filter-mapping> -->
-<!-- 	    <filter-name>SqlInjectionFilter</filter-name> -->
+
+<!-- 	<filter-mapping> -->
+<!-- 	    <filter-name>Spring4ShellFilter</filter-name> -->
 <!-- 	    <url-pattern>/comm/*</url-pattern> -->
 <!-- 		<url-pattern>/htmleditor/*</url-pattern> -->
 <!-- 		<url-pattern>/jQuery/*</url-pattern> -->
@@ -121,6 +122,29 @@
 <!-- 		<url-pattern>/index.jsp</url-pattern> -->
 <!-- 		<url-pattern>/robots.txt</url-pattern> -->
 <!-- 	</filter-mapping> -->
+ 
+    <!-- 設定 SQL Injection 過濾器 -->
+	<filter>
+		<filter-name>SqlInjectionFilter</filter-name>
+		<filter-class>com.genesis.filter.SqlInjectionFilter</filter-class>
+	</filter>
+	
+    <filter-mapping>
+	    <filter-name>SqlInjectionFilter</filter-name>
+	    <url-pattern>/comm/*</url-pattern>
+		<url-pattern>/htmleditor/*</url-pattern>
+		<url-pattern>/jQuery/*</url-pattern>
+		<url-pattern>/js/*</url-pattern>
+		<url-pattern>/uploads/*</url-pattern>
+		<url-pattern>/web/*</url-pattern>
+		<url-pattern>/404.jsp</url-pattern>
+		<url-pattern>/403.jsp</url-pattern>
+		<url-pattern>/400.jsp</url-pattern>
+		<url-pattern>/500.jsp</url-pattern>
+		<url-pattern>/home.jsp</url-pattern>
+		<url-pattern>/index.jsp</url-pattern>
+		<url-pattern>/robots.txt</url-pattern>
+	</filter-mapping>
 
   	<!--
  	過濾器使用 Start

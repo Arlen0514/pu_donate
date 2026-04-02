@@ -594,9 +594,14 @@
 	}	
 }
 
-
-
-
+/* ========================= */
+/* 備註說明 */
+/* ========================= */
+.form_list .fL_info textarea{
+	border: 1px solid #cccccc;
+	border-radius: .625rem;
+	min-height: 9.375rem; /* 150 */
+}
 
 
 

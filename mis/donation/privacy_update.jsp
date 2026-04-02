@@ -6,7 +6,7 @@
 <%	
 	// 基本參數
 	String code = "privacy"; 						// 模組識別碼
-	String show_title = "隱私權政策維護";			// 模組標題
+	String show_title = "個資維護";			// 模組標題
 
 	// 設定圖檔上傳 MB 數
 	Integer fSize = 1;

@@ -9,7 +9,7 @@
 	String show_title = "募款專案維護";			// 模組標題
 
 	// 圖片建議尺寸
-	String image_info = "(建議尺寸1280px * 580px)";
+	String image_info = "(建議尺寸429px * 328px)";
 	// 圖片建議尺寸
 	//String mobile_info = "(建議尺寸830px * 1300px)";
 

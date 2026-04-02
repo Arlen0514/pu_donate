@@ -6,9 +6,10 @@
 	/*-- 針對各語系設定欄位 --*/
 	// Tiltes.
 	String[] titles = new String[] {
-		"靜宜大學連結", "校友中心連結", "宗教輔導室", "蓋夏圖書館", "體育室",
+		"靜宜大學連結", "校友中心連結", "宗教輔導室",  "蓋夏圖書館", "體育室",
+		"校友中心連結名稱",  "宗教輔導室名稱","蓋夏圖書館名稱", "體育室名稱",
 		"Facebook", "Youtube", "Instagram", "Threads",
-		"地址連結",
+		"地址連結", "隱私連結",
 		"網站前台名稱", "公司名稱", "地址", "電話", "傳真", "統編", "信箱",
 		"Open Graph 標題", "Open Graph 簡述", "索引", "來訪週期", "關鍵字",
 		"版權說明", "內容簡介", "head追踪碼", "body追踪碼"
@@ -17,8 +18,9 @@
 	// Keywords.
 	String[] keywords = new String[] {
 		"web_ntou_official_url" , "web_alumni_center_url", "campus_url", "library_url", "sport_url",
+		"web_alumni_center_title", "campus_title", "library_title", "sport_title",
 		"cp.fb", "cp.yt", "cp.ig", "cp.td", 
-		"cp.address_link",
+		"cp.address_link", "cp.privacy_link",
 		"web_title", "cp.company", "cp.address", "cp.phone", "cp.fax", "cp.companyno", "cp.email",
 		"og.title", "og.description", "seo.robots", "seo.revisit_after", "seo.keywords",
 		"seo.copyright", "seo.description", "seo.head_track", "seo.body_track"

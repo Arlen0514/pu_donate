@@ -21,7 +21,7 @@ public  boolean inValidFileExtension(String fileName) {
 %>
 <%
 	// 專案代號
-	String projectName = "donate_ntou";
+	String projectName = "pu_donate";
 	String encoded = "zh_TW";
 
 	// 防止 XSS 		Alan 20201117
@@ -51,7 +51,7 @@ public  boolean inValidFileExtension(String fileName) {
 // 		String 			clientIPAddress = StringTool.validString(request.getRemoteAddr());	// 取得IP
 
 
-		System.out.println("queryString :"+queryString);
+// 		System.out.println("queryString :"+queryString);
 
 		queryString = urlpath + URLDecoder.decode(queryString, "UTF-8"); 					// url解碼
 		queryString = queryString.replace("&_", "").replace("%", "").replace("&", "");

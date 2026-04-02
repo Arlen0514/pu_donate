@@ -25,6 +25,8 @@ public class Spring4ShellFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
+    	request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 

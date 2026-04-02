@@ -5,7 +5,7 @@
 <%
 	// 基本參數
 	String code = "privacy"; 				// 模組識別碼
-	String show_title = "隱私權政策維護";	// 模組標題
+	String show_title = "個資維護";	// 模組標題
 	
 	// 功能參數
 	boolean list_switch = true;			// 是否開啟列表功能

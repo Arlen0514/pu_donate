@@ -162,7 +162,10 @@
 															<%} %>
                                                             </select>
 														</form>                                                            
-<%}else { %>
+<%}else {
+	
+// 	System.out.println((String)session.getAttribute("language_str"));
+	%>
 															<%=(String)session.getAttribute("language_str")%>
 <%} %>                                                                
                                                         </div>       

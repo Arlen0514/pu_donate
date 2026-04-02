@@ -19,7 +19,7 @@
 	String show_title = apCode.getString("ap_title")+"-相片";	// 模組標題	
 
 	// 圖片建議尺寸
-	String image_info = "(建議尺寸800px * 692px)";
+	String image_info = "(建議尺寸354px * 212px)";
 	// 圖片建議尺寸
 	//String mobile_info = "(建議尺寸830px * 1300px)";
 

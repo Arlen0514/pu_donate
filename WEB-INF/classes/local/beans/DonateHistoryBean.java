@@ -1,7 +1,7 @@
 /**
  * DonateHistoryBean.java
  * Created by com.genesis.util.BeanCreator
- *         on 2025/12/31 10:32:19
+ *         on 2026/04/01 15:14:18
  * @author Kevin Koo
  */
 package local.beans;
@@ -72,6 +72,7 @@ public final class DonateHistoryBean implements java.io.Serializable {
     private String dh_zipcode                 = "";
     private String dh_address                 = "";
     private String dh_remark                  = "";
+    private String dh_memo                    = "";
     private String dh_receipt_status          = "";
     private String dh_receipt_title           = "";
     private String dh_receipt_county          = "";
@@ -315,6 +316,10 @@ public final class DonateHistoryBean implements java.io.Serializable {
         this.dh_remark = dh_remark;
     }
 
+    public void setDh_memo(String dh_memo) {
+        this.dh_memo = dh_memo;
+    }
+
     public void setDh_receipt_status(String dh_receipt_status) {
         this.dh_receipt_status = dh_receipt_status;
     }
@@ -481,6 +486,7 @@ public final class DonateHistoryBean implements java.io.Serializable {
         vc.add(dh_zipcode);
         vc.add(dh_address);
         vc.add(dh_remark);
+        vc.add(dh_memo);
         vc.add(dh_receipt_status);
         vc.add(dh_receipt_title);
         vc.add(dh_receipt_county);
@@ -724,6 +730,10 @@ public final class DonateHistoryBean implements java.io.Serializable {
         return dh_remark;
     }
 
+    public String getDh_memo() {
+        return dh_memo;
+    }
+
     public String getDh_receipt_status() {
         return dh_receipt_status;
     }
@@ -848,13 +858,13 @@ public final class DonateHistoryBean implements java.io.Serializable {
         "dh_identity_type", "dh_identity", "dh_identity_thank", "dh_identity_year", 
         "dh_identity_dept", "dh_unit", "dh_job", "dh_foreign", 
         "dh_county", "dh_city", "dh_zipcode", "dh_address", 
-        "dh_remark", "dh_receipt_status", "dh_receipt_title", "dh_receipt_county", 
-        "dh_receipt_city", "dh_receipt_zipcode", "dh_receipt_address", "dh_same_name", 
-        "dh_same_address", "dh_public", "dh_tax", "dh_credit_card_no", 
-        "dh_authorization_code", "dh_expiration_year", "dh_expiration_month", "dh_debit_due_year", 
-        "dh_debit_due_month", "dh_regular_type", "dh_regular_period", "dh_remain_period", 
-        "dh_bank_no", "dh_code", "dh_lang", "dh_createdate", 
-        "dh_createuser", "dh_modifydate", "dh_modifyuser" };
+        "dh_remark", "dh_memo", "dh_receipt_status", "dh_receipt_title", 
+        "dh_receipt_county", "dh_receipt_city", "dh_receipt_zipcode", "dh_receipt_address", 
+        "dh_same_name", "dh_same_address", "dh_public", "dh_tax", 
+        "dh_credit_card_no", "dh_authorization_code", "dh_expiration_year", "dh_expiration_month", 
+        "dh_debit_due_year", "dh_debit_due_month", "dh_regular_type", "dh_regular_period", 
+        "dh_remain_period", "dh_bank_no", "dh_code", "dh_lang", 
+        "dh_createdate", "dh_createuser", "dh_modifydate", "dh_modifyuser" };
 
     // The field java types.
     private String[] _ftypes = new String[] {
@@ -868,6 +878,6 @@ public final class DonateHistoryBean implements java.io.Serializable {
         "String", "String", "String", "String", "String", "String", "String", 
         "String", "String", "String", "String", "String", "String", "String", 
         "String", "String", "String", "String", "String", "String", "String", 
-        "int", "int", "String", "String", "String", "String", "String", 
-        "String", "String" };
+        "String", "int", "int", "String", "String", "String", "String", 
+        "String", "String", "String" };
 }

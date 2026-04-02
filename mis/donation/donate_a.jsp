@@ -566,23 +566,73 @@
 		                  		<td colspan="4" align="center" class="information_title-1">捐款資訊</td>
 		                	</tr>
 		                	
-							<tr class="information_table-2-1">
-		                  		<td width="20%" align="right"><font color='red'>＊</font>捐款金額(臺幣) ：  </td> 
-		                  		<td width="30%" align="left">
-                                    <input type="text" name="dh_total" id="dh_total" value="0" placeholder="TWD" size="10"/>&nbsp;元
-		                  		</td>
-		                  		<td width="20%" align="right">捐款金額(外幣) ：  </td> 
-		                  		<td width="30%" align="left">
-		                  			<select name="dh_currency" id="dh_currency">
-		                  				<option value="">請選擇</option>
-                                   		<%for(TableRecord dm:currency){ %>
-                                   		<option value="<%=dm.getString("dm_subtitle") %>"><%=dm.getString("dm_title") %></option>
-                                   		<%} %>
-                                   	</select>
-                                    &nbsp;&nbsp;
-                                    <input type="text" name="dh_foreign_total" id="dh_foreign_total" value="0" size="10" placeholder="外幣金額，如非外幣請填0"/>&nbsp;元
-		                  		</td>
-		                 	</tr>
+<!-- 							<tr class="information_table-2-1"> -->
+<!-- 		                  		<td width="20%" align="right"><font color='red'>＊</font>捐款金額(臺幣) ：  </td>  -->
+<!-- 		                  		<td width="30%" align="left"> -->
+<!--                                     <input type="text" name="dh_total" id="dh_total" value="0" placeholder="TWD" size="10"/>&nbsp;元 -->
+<!-- 		                  		</td> -->
+<!-- 		                  		<td width="20%" align="right">捐款金額(外幣) ：  </td>  -->
+<!-- 		                  		<td width="30%" align="left"> -->
+<!-- 		                  			<select name="dh_currency" id="dh_currency"> -->
+<!-- 		                  				<option value="">請選擇</option> -->
+<%--                                    		<%for(TableRecord dm:currency){ %> --%>
+<%--                                    		<option value="<%=dm.getString("dm_subtitle") %>"><%=dm.getString("dm_title") %></option> --%>
+<%--                                    		<%} %> --%>
+<!--                                    	</select> -->
+<!--                                     &nbsp;&nbsp; -->
+<!--                                     <input type="text" name="dh_foreign_total" id="dh_foreign_total" value="0" size="10" placeholder="外幣金額，如非外幣請填0"/>&nbsp;元 -->
+<!-- 		                  		</td> -->
+<!-- 		                 	</tr> -->
+<tr class="information_table-2-1">
+    <td width="20%" align="right">
+        <font color='red'>＊</font>捐款幣別：
+    </td>
+    <td width="30%" align="left">
+            <label class="item_Radio_list">
+                <input
+                    type="radio"
+                    class="item_radio"
+                    name="dh_currency"
+                    value="TWD"
+                />
+                <span class="radio-text">台幣</span>
+            </label>
+
+            <label class="item_Radio_list">
+                <input
+                    type="radio"
+                    class="item_radio"
+                    name="dh_currency"
+                    value="other"
+                    id="currency_other_radio"
+                />
+                <span class="radio-text">其他</span>
+            </label>
+
+            <input
+                type="text"
+                class="info_other"
+                id="currency_other_input"
+                name="dh_currency_other"
+                placeholder="請輸入幣別代碼"
+                maxlength="3"
+                style="display:none; width:150px; margin-left:10px;"
+            />
+    </td>
+
+    <td width="20%" align="right">
+        <font color='red'>＊</font>捐款金額：
+    </td>
+    <td width="30%" align="left">
+        <input
+            type="text"
+            name="dh_total"
+            id="dh_total"
+            placeholder="請輸入金額"
+            size="10"
+        />&nbsp;元
+    </td>
+</tr>
 		                 	
 		                 	<tr class="information_table-2-1">
 			                  	<td align="right"><font color='red'>＊</font>捐贈類別： </td>
@@ -705,7 +755,7 @@
 		                 		<td width="30%" align="left" colspan="3">
 	                         	<%for(TableRecord payment : payments){ 
 	                         		// 只顯示線下捐款方式
-	                         		if(payment.getString("cp_category").contains("newebpay")) continue;
+	                         		if(payment.getString("cp_category").contains("newebpay") || payment.getString("cp_category").contains("pu")) continue;
 	                         	%>
 	                         	<label for="<%=payment.getString("cp_category") %>">
 									<input type="radio" name="dh_paymethod" id="<%=payment.getString("cp_category") %>" value="<%=payment.getString("cp_category") %>">&nbsp;<%=payment.getString("cp_title") %> &nbsp; 
@@ -816,10 +866,10 @@
 		                  		<td align="right"><font color='red'>＊</font>收據 ： </td>
 		                 		<td align="left" colspan="3">
 		                 			<label for="no_receipt">
-		                 				<input type="radio" name="dh_receipt_status" id="no_receipt"  value="N"> 不寄收據/感謝函
+		                 				<input type="radio" name="dh_receipt_status" id="no_receipt"  value="N"> 不寄收據
 			                 		</label>
 			                 		<label for="yes_receipt">
-		                 				<input type="radio" name="dh_receipt_status" id="yes_receipt" value="Y"> 寄收據/感謝函
+		                 				<input type="radio" name="dh_receipt_status" id="yes_receipt" value="Y"> 寄收據
 									</label>
 								</td>			                 		
 						  	</tr>
@@ -861,7 +911,7 @@
                                     	<input type="radio" name="dh_public" id="show_name" value="Y"> 公開&nbsp;
 			                 		</label>
 			                 		<label for="hide_name"><!--未登入時顯示-->
-                                    	<input type="radio" name="dh_public" id="hide_name" value="N"> 不公開（註記為熱心人士）&nbsp;
+                                    	<input type="radio" name="dh_public" id="hide_name" value="N"> 不公開（註記為靜宜之友）&nbsp;
                                     </label>
 		                 		</td>
 		                  		<td width="20%" align="right"><font color='red'>＊</font>上傳稅務機關 ： </td>
@@ -929,6 +979,29 @@
 </div>
 </body>
 </html>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const currencyRadios = document.querySelectorAll('input[name="dh_currency"]');
+    const currencyOtherInput = document.getElementById("currency_other_input");
+
+    function toggleCurrencyOther() {
+        const checked = document.querySelector('input[name="dh_currency"]:checked');
+
+        if (checked && checked.value === "other") {
+            currencyOtherInput.style.display = "inline-block";
+        } else {
+            currencyOtherInput.style.display = "none";
+            currencyOtherInput.value = "";
+        }
+    }
+
+    for (let i = 0; i < currencyRadios.length; i++) {
+        currencyRadios[i].addEventListener("change", toggleCurrencyOther);
+    }
+
+    toggleCurrencyOther();
+});
+</script>
 <script> ResetAll(form0.dh_county, form0.dh_city, form0.dh_zipcode, form0.county, form0.city); </script>
 <script> ResetAll(form0.dh_receipt_county, form0.dh_receipt_city, form0.dh_receipt_zipcode, form0.receipt_county, form0.receipt_city); </script>
 <%@include file="/WEB-INF/jspf/connclose.jspf"%>

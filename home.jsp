@@ -45,6 +45,11 @@
             campus_url = SiteSetup.getSetup("campus_url" + "." + lang).getString("ss_text"),
             library_url = SiteSetup.getSetup("library_url" + "." + lang).getString("ss_text"),
             sport_url = SiteSetup.getSetup("sport_url" + "." + lang).getString("ss_text"),
+            web_alumni_center_title = SiteSetup.getSetup("web_alumni_center_title" + "." + lang).getString("ss_text"),
+            campus_title = SiteSetup.getSetup("campus_title" + "." + lang).getString("ss_text"),
+            library_title = SiteSetup.getSetup("library_title" + "." + lang).getString("ss_text"),
+            sport_title = SiteSetup.getSetup("sport_title" + "." + lang).getString("ss_text"),
+            privacy_url = SiteSetup.getSetup("cp.privacy_link" + "." + lang).getString("ss_text"),
             fb_url = SiteSetup.getSetup("cp.fb" + "." + lang).getString("ss_text"),
             yt_url = SiteSetup.getSetup("cp.yt" + "." + lang).getString("ss_text"),
             ig_url = SiteSetup.getSetup("cp.ig" + "." + lang).getString("ss_text"),
@@ -299,6 +304,11 @@
                                             捐款抵稅相關辦法
                                         </a>
                                     </div>
+                                    <div class="navOpenList">
+                                        <a href="web/qa/qa_download.jsp">
+                                            表單下載
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -313,7 +323,12 @@
                                         <a href="web/guide/guide_2.jsp">
                                             捐款抵稅相關辦法
                                         </a>
-                                    </div>  
+                                    </div>
+                                      <div class="navOpenList">
+                                        <a href="web/qa/qa_download.jsp">
+                                            表單下載
+                                        </a>
+                                    </div>
                                         
                                 </div>
                             </div> 
@@ -391,6 +406,7 @@
                                         </a>
                                     </div>
                                     <%} %>
+                                    
                                 </div>
                             </div>
                             
@@ -403,6 +419,7 @@
                                         </a>
                                     </div>
                                     <%} %>
+                                    
                                 </div>
                             </div> 
                             
@@ -522,6 +539,8 @@
                                     <div class="pcBanner" style="background-image:url('<%=app_fetchpath+"/"+"banner"+"/"+lang+"/"+banner.getString("ap_image")%>');">                                    
                                         
 <%-- 										<%if (isLink) {%> --%>
+
+										<%if(!"".equals((banner.getString("ap_desc")+banner.getString("ap_content")).trim())){ %>
 	                                    <div class="indexBannerIn">
 	                                        <!--首頁banner列表標題-->
 	                                        <h2 class="indexBanner_title">
@@ -539,6 +558,7 @@
 	                                        </div>
 	                                        <%} %>
 	                                    </div>
+	                                    <%} %>
 <%-- 	                                    <%}%>                                         --%>
                                     </div>
 
@@ -673,7 +693,7 @@
                 <ul class="index_NAarea" id="index_NAarea">
                     
                     <%for(TableRecord home_new:home_news){
-                    	System.out.println(home_new.getString("np_id"));
+//                     	System.out.println(home_new.getString("np_id"));
                     	String np_emitdate = home_new.getString("np_emitdate");
                     	String news_year = np_emitdate.split("/")[0];
                     	String news_month = np_emitdate.split("/")[1];
@@ -865,7 +885,7 @@
                     <div class="fR_nav fR_nav2">                    
                         <span>
                             <a href="<%=web_alumni_center_url %>" target="_blank">
-                            	校友服務與社會連結中心
+                            	<%=web_alumni_center_title %>
                             </a>
                         </span>
                     </div>
@@ -874,7 +894,7 @@
                     <div class="fR_nav fR_nav2">                    
                         <span>
                             <a href="<%=campus_url %>" target="_blank">
-                            	宗教輔導室
+                            	<%=campus_title %>
                             </a>
                         </span>
                     </div>
@@ -883,7 +903,7 @@
                     <div class="fR_nav fR_nav2">                    
                         <span>
                             <a href="<%=library_url %>" target="_blank">
-                            	蓋夏圖書館
+                            	<%=library_title %>
                             </a>
                         </span>
                     </div>
@@ -892,7 +912,7 @@
                     <div class="fR_nav fR_nav2">                    
                         <span>
                             <a href="<%=sport_url %>" target="_blank">
-                            	體育室
+                            	<%=sport_title %>
                             </a>
                         </span>
                     </div>    
@@ -955,6 +975,7 @@
                     <div class="copyright">
                         <!-- <div class="wrap"> -->
                             © <%=DateTimeTool.getYear() + " "%> <a href="https://www.geneinfo.com.tw" target="_blank">Greatest Idea Strategy Co.,Ltd</a> All rights reserved.
+                            <a class="privacy_policy" href="<%=privacy_url %>" target="_blank">隱私權聲明</a>
                     </div>
 
                     <div class="sns_linkBg">
@@ -1015,3 +1036,4 @@
 
 </body>
 </html>
+<%@include file="/WEB-INF/jspf/connclose.jspf"%>

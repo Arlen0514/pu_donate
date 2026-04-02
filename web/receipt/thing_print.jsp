@@ -245,7 +245,7 @@
         <!--table header區塊-->
         <div class="donation_form_header">
             <strong>
-                國立臺灣<img class="logo" src="<%=url %>/images/logo.webp" alt="">大學受贈財物簽辦單
+                國立臺灣<img class="logo" src="<%=url %>/images/logo_receipt.webp" alt="">大學受贈財物簽辦單
             </strong>
             <div class="couplet">
                 <%=receipt_title %>

@@ -11,9 +11,10 @@
 	/*-- 針對各語系設定欄位 --*/
 	// Tiltes.
 	String[] titles = new String[] {
-		"靜宜大學連結", "校友中心連結", "宗教輔導室", "蓋夏圖書館", "體育室",
+		"靜宜大學連結", "校友中心連結", "宗教輔導室",  "蓋夏圖書館", "體育室",
+		"校友中心連結名稱",  "宗教輔導室名稱","蓋夏圖書館名稱", "體育室名稱",
 		"Facebook", "Youtube", "Instagram", "Threads",
-		"地址連結",
+		"地址連結", "隱私連結",
 		"網站前台名稱", "公司名稱", "地址", "電話", "傳真", "統編", "信箱",
 		"Open Graph 標題", "Open Graph 簡述", "索引", "來訪週期", "關鍵字",
 		"版權說明", "內容簡介", "head追踪碼", "body追踪碼"
@@ -22,8 +23,9 @@
 	// Keywords.
 	String[] keywords = new String[] {
 		"web_ntou_official_url" , "web_alumni_center_url", "campus_url", "library_url", "sport_url",
+		"web_alumni_center_title", "campus_title", "library_title", "sport_title",
 		"cp.fb", "cp.yt", "cp.ig", "cp.td", 
-		"cp.address_link",
+		"cp.address_link", "cp.privacy_link",
 		"web_title", "cp.company", "cp.address", "cp.phone", "cp.fax", "cp.companyno", "cp.email",
 		"og.title", "og.description", "seo.robots", "seo.revisit_after", "seo.keywords",
 		"seo.copyright", "seo.description", "seo.head_track", "seo.body_track"
@@ -163,27 +165,50 @@
 							</tr>
 
 							<tr class="system_table-2-1">
-								<td width="15%" align="right" class="admini_bk-2">校友中心</td>
+								<td width="15%" align="right" class="admini_bk-2">
+								<input name="web_alumni_center_title" type="text" style="width:55%"
+								 value="<%=SiteSetup.getSetup("web_alumni_center_title" + "." + lang).getString("ss_text")%>" />
+								連結
+								</td>
 								<td width="85%" colspan="3" align="left" class="system_table-2-1">
 									<input name="web_alumni_center_url" type="text" size="120" value="<%=SiteSetup.getSetup("web_alumni_center_url" + "." + lang).getString("ss_text")%>" />
 								</td>
 							</tr>
 							<tr class="system_table-2-1">
-								<td width="15%" align="right" class="admini_bk-2">宗教輔導室</td>
+								<td width="15%" align="right" class="admini_bk-2">
+									<input name="campus_title" type="text" style="width:55%"
+									 value="<%=SiteSetup.getSetup("campus_title" + "." + lang).getString("ss_text")%>" />
+									連結
+								</td>
 								<td width="85%" colspan="3" align="left" class="system_table-2-1">
 									<input name="campus_url" type="text" size="120" value="<%=SiteSetup.getSetup("campus_url" + "." + lang).getString("ss_text")%>" />
 								</td>
 							</tr>
 							<tr class="system_table-2-1">
-								<td width="15%" align="right" class="admini_bk-2">蓋夏圖書館</td>
+								<td width="15%" align="right" class="admini_bk-2">
+									<input name="library_title" type="text" style="width:55%"
+									 value="<%=SiteSetup.getSetup("library_title" + "." + lang).getString("ss_text")%>" />
+								連結
+								</td>
 								<td width="85%" colspan="3" align="left" class="system_table-2-1">
-									<input name="library_url" type="text" size="120" value="<%=SiteSetup.getSetup("library_url" + "." + lang).getString("ss_text")%>" />
+									<input name="library_url" type="text"  style="width:55%"
+									value="<%=SiteSetup.getSetup("library_url" + "." + lang).getString("ss_text")%>" />
 								</td>
 							</tr>
 							<tr class="system_table-2-1">
-								<td width="15%" align="right" class="admini_bk-2">體育室</td>
+								<td width="15%" align="right" class="admini_bk-2">
+									<input name="sport_title" type="text" style="width:55%"
+									 value="<%=SiteSetup.getSetup("sport_title" + "." + lang).getString("ss_text")%>" />
+								連結
+								</td>	
 								<td width="85%" colspan="3" align="left" class="system_table-2-1">
 									<input name="sport_url" type="text" size="120" value="<%=SiteSetup.getSetup("sport_url" + "." + lang).getString("ss_text")%>" />
+								</td>
+							</tr>
+							<tr class="system_table-2-1">
+								<td width="15%" align="right" class="admini_bk-2">隱私權連結</td>
+								<td width="85%" colspan="3" align="left" class="system_table-2-1">
+									<input name="cp.privacy_link" type="text" size="120" value="<%=SiteSetup.getSetup("cp.privacy_link" + "." + lang).getString("ss_text")%>" />
 								</td>
 							</tr>
 							<tr class="system_table-2-1">

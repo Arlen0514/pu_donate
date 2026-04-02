@@ -194,6 +194,25 @@ try {
         	ph.setInsert("pu_check");
         	app_sm.insert(ph);
         }
+        
+     // 沖銷記錄更新
+		TableRecord wh = app_sm.select(tblwh, "data_id=? and wh_status=?", new Object[]{dh.getString("dh_id"), "N"});
+		
+		if(!"".equals(wh.getString("wh_id"))) {
+			String wh_pay_date = valid_day;
+			String wh_pay_time = "";
+			
+			wh.setValue("wh_status", "Y");
+			wh.setValue("wh_account", ph.getString("ph_no"));
+			wh.setValue("wh_pay_date", wh_pay_date);
+			wh.setValue("wh_pay_time", wh_pay_time);
+			wh.setUpdate("credit_result");
+			app_sm.update(wh);
+		}
+        
+        
+        
+        
 
     } else if ("交易失敗".equals(statusDesc)) {
 

@@ -179,6 +179,11 @@ Vector<TableRecord> department_category_dms = app_sm.selectAll(tbldm, "dm_code=?
                                             捐款抵稅相關辦法
                                         </a>
                                     </div>
+                                    <div class="navOpenList">
+                                        <a href="../qa/qa_download.jsp">
+                                            表單下載
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -194,6 +199,11 @@ Vector<TableRecord> department_category_dms = app_sm.selectAll(tbldm, "dm_code=?
                                             捐款抵稅相關辦法
                                         </a>
                                     </div>  
+                                    <div class="navOpenList">
+                                        <a href="../qa/qa_download.jsp">
+                                            表單下載
+                                        </a>
+                                    </div>
                                         
                                 </div>
                             </div> 
@@ -286,6 +296,7 @@ Vector<TableRecord> department_category_dms = app_sm.selectAll(tbldm, "dm_code=?
                                         </a>
                                     </div>
                                     <%} %>
+                                    
                                         
                                 </div>
                             </div> 

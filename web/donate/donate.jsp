@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jspf/config.jspf"%>
+<%@ include file="/WEB-INF/jspf/csrf_token.jspf"%>
 <%@ include file="/web/include/words.jsp"%>
 <%@ include file="/web/include/encryption.jsp"%>
 <% 
@@ -91,6 +92,10 @@
 	
 	// 數字格式
 	DecimalFormat df = new DecimalFormat("00");
+	String csrfToken = generateCSRFToken(session, "normalform");
+	
+	//捐款備註說明
+	Vector<TableRecord> donate_memos = app_sm.selectAll(tbldm, "dm_code = ?", new Object[]{"donate_memo"}, "dm_showseq ASC , dm_createdate DESC");
 		  
 %>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-TW">
@@ -139,14 +144,28 @@
 				is_year	= F.dh_regular_type.value.trim() == 'Y';
 			}
 			
+			let selectVal = F.donateRemark.value;
+			let inputVal = F.dh_remark.value.trim();
+
+			if (selectVal === "other") {
+			    if (inputVal === "") {
+			        alert("請輸入其他備註");
+			        F.dh_remark.focus();
+			        return false;
+			    }
+			    F.dh_remark.value = inputVal;
+			} else {
+			    F.dh_remark.value = selectVal;
+			}
+			
 			let is_receipt = F.dh_receipt_status.value.trim() == 'Y';
 			let is_foreign = F.dh_foreign.value.trim() == 'Y';
 			
 			if(!$.isNumeric(F.dh_total.value.trim())){
 				alert('請輸入正確的捐款金額!!');
 				F.dh_total.focus();
-			} else if(parseInt(F.dh_total.value.trim())<100){
-				alert('捐款金額不可小於100元!!');
+			} else if(parseInt(F.dh_total.value.trim())==0){
+				alert('捐款金額不可等於0元!!');
 				F.dh_total.focus();
 			} else if(F.dh_donate_project_category.value.trim() == ''){
 				alert('請選擇捐贈類別!!');
@@ -730,6 +749,7 @@
                         
 						<form name="form0" id="form0" method="post" action="donate_update.jsp?action=add" onsubmit="return checkform(this);">                        
 <!--                         <form name="form0" id="form0" method="post" enctype="multipart/form-data" action="donate_update.jsp?action=add" onsubmit="return checkform(this);">                         -->
+                        <input type="hidden" name="csrfToken" value="<%=csrfToken %>" />
                         <div class="right_contentBg">
             
                             <div class="form_remark">
@@ -750,108 +770,12 @@
                                     <!--內頁標題樣式4-->
                                     <div class="right_title4">
                                         <span>Step 1</span>
-                                        <h2>選擇捐款金額</h2>
+                                        <h2>選擇捐款類別</h2>
                                     </div>
 
                                     <!--表單區-->
                                     <div class="form_area contact_area">
-                                    	<!-- 幣別 -->
-                                            <div class="form_list">
-                                                <div class="fL_tit">
-                                                    幣別
-                                                    <span class="en">Currency</span>
-                                                    <div class="requirde_icon">*</div>
-                                                </div>
-                                                <div class="fL_info item_RadioCheckArea currency_info">
-                                                    <label class="item_Radio_list">
-                                                        <input
-                                                            type="radio"
-                                                            class="item_radio"
-                                                            name="dh_currency"
-                                                            value="TWD"
-                                                            <%="TWD".equals(default_values.get("dh_currency"))?"checked":"" %>
-                                                        />
-                                                        <div class="custom-radio">
-                                                            <div class="inner-circle"></div>
-                                                        </div>
-                                                        <span class="radio-text">台幣</span>
-                                                    </label>
-
-                                                    <label class="item_Radio_list">
-                                                        <input
-                                                            type="radio"
-                                                            class="item_radio"
-                                                            name="dh_currency"
-                                                            value="other"
-                                                            id="currency_other_radio"
-                                                            <%="other".equals(default_values.get("dh_currency"))?"checked":"" %>
-                                                        />
-                                                        <div class="custom-radio">
-                                                            <div class="inner-circle"></div>
-                                                        </div>
-                                                        <span class="radio-text">其他</span>
-                                                    </label>
-
-                                                    <input
-                                                        type="text"
-                                                        class="info_other"
-                                                        id="currency_other_input"
-                                                        name="dh_currency_other"
-                                                        placeholder="請輸入幣別代碼"
-                                                        maxlength="3"
-                                                        style="display: none; width: 150px; margin-left: 10px"
-                                                        value="<%=default_values.get("dh_currency_other") %>"
-                                                    />
-                                                </div>
-                                            </div>
-                                    	<!--捐贈金額-->
-	                                    <div class="form_list">
-	                                        <div class="fL_tit">
-	                                            捐贈金額
-	                                            <span class="en">Donation Amount</span><!-- modify by david 20220913  -->
-	                                            <!--必填icon-->
-	                                            <div class="requirde_icon">
-	                                                *
-	                                            </div> 
-	                                        </div> 
-	                                        <div class="fL_info donateAmount_info">
-												<div class="donateAmountItem <%="1000".equals(default_values.get("dh_total"))?"active":"" %>">
-	                                                <input class="item_radio" type="radio" name="donate_amount" id="d_a4" value="1000" <%="1000".equals(default_values.get("dh_total"))?"checked":"" %>>
-	                                                <label class="" for="d_a4">
-	                                                    1000
-	                                                </label>
-	                                            </div>
-	                                            
-	                                            <div class="donateAmountItem <%="5000".equals(default_values.get("dh_total"))?"active":"" %>">
-	                                                <input class="item_radio" type="radio" name="donate_amount" id="d_a1" value="5000" <%="5000".equals(default_values.get("dh_total"))?"checked":"" %>>
-	                                                <label class="" for="d_a1">
-	                                                    5000
-	                                                </label>
-	                                            </div>
-	                                            
-	                                            <div class="donateAmountItem <%="10000".equals(default_values.get("dh_total"))?"active":"" %>">
-	                                                <input class="item_radio" type="radio" name="donate_amount" id="d_a2" value="10000" <%="10000".equals(default_values.get("dh_total"))?"active":"" %>>
-	                                                <label class="" for="d_a2">
-	                                                    10000
-	                                                </label>
-	                                            </div>
-	                                            
-	                                            <div class="donateAmountItem <%="30000".equals(default_values.get("dh_total"))?"active":"" %>">
-	                                                <input class="item_radio" type="radio" name="donate_amount" id="d_a3" value="30000" <%="30000".equals(default_values.get("dh_total"))?"active":"" %>>
-	                                                <label class="" for="d_a3">
-	                                                    30000
-	                                                </label>
-	                                            </div>
-	                                            
-	                                            <div class="donateAmountItem">
-	                                                <input class="item_radio d_a_other" type="radio" name="donate_amount" id="d_a_other" value="">
-	                                                <label class="" for="d_a_other">
-	                                                    其他金額
-	                                                </label>
-	                                                <input type="text" name="dh_total" id="dh_total" placeholder="請自行輸入金額" value="<%=default_values.get("dh_total") %>" class="otherAmount"/>
-	                                            </div>
-	                                        </div>
-	                                    </div>
+                                    	
                                     
                                         
                                         <!--捐贈類別-->
@@ -1011,12 +935,21 @@
                                         <!--捐款用途備註說明-->
                                         <div class="form_list deptFund" id="deptFundMemo"><!--一列兩個時class內加fLType2-->
                                             <div class="fL_tit">
-                                                捐款用途備註說明 
-                                                <span class="en"> Donation Purpose Remark</span>
+                                                捐贈用途備註
+                                                <span class="en"> Purpose of donation</span>
                                             </div>
                                             
-                                            <div class="fL_info">
-					                          	<input type="text" name="dh_remark" id="dh_remark" value="<%=default_values.get("dh_remark") %>" />
+                                            <div class="fL_info donationPurpose_info">
+                                            	<select id="donateRemark" name="donateRemark">
+                                                        <!--捐贈用途備註 20250610-->
+                                                        <option value="">請選擇</option>
+                                                        <%for(TableRecord donate_memo : donate_memos){  %>
+                                                        <option value="<%=donate_memo.getString("dm_title")%>" <%=default_values.get("dh_remark").equals(donate_memo.getString("dm_title")) ? "selected" :"" %>><%=donate_memo.getString("dm_title")%></option>
+                                                        <%} %>
+                                                        <option value="other">其他</option>
+                                                </select>
+                                            
+					                          	<input  class="info_other" type="text" name="dh_remark" id="dh_remark" value="<%=default_values.get("dh_remark") %>" />
 					                        </div>
                                         </div> 
                                 	</div> 
@@ -1049,7 +982,7 @@
                                             <div class="fL_info donatePay_info">
                                             	<%for(TableRecord payment : payments){
                                             		
-                                            		System.out.println("---"+payment.getString("cp_category"));
+//                                             		System.out.println("---"+payment.getString("cp_category"));
                                             		%>
 												 <div class="donatePayItem <%=payment.getString("cp_category").equals(default_values.get("dh_paymethod"))?"active":"" %>">
                                                     <input class="item_radio" type="radio" name="dh_paymethod" id="<%=payment.getString("cp_category") %>" value="<%=payment.getString("cp_category") %>" <%=payment.getString("cp_category").equals(default_values.get("dh_paymethod"))?"checked":"" %>>
@@ -1158,6 +1091,104 @@
                                                 <%}%>
                                             </ul>
                                         </div> 
+                                        
+                                        <!-- 幣別 -->
+                                            <div class="form_list">
+                                                <div class="fL_tit">
+                                                    幣別
+                                                    <span class="en">Currency</span>
+                                                    <div class="requirde_icon">*</div>
+                                                </div>
+                                                <div class="fL_info item_RadioCheckArea currency_info">
+                                                    <label class="item_Radio_list">
+                                                        <input
+                                                            type="radio"
+                                                            class="item_radio"
+                                                            name="dh_currency"
+                                                            value="TWD"
+                                                            <%="TWD".equals(default_values.get("dh_currency"))?"checked":"" %>
+                                                        />
+                                                        <div class="custom-radio">
+                                                            <div class="inner-circle"></div>
+                                                        </div>
+                                                        <span class="radio-text">台幣</span>
+                                                    </label>
+
+                                                    <label class="item_Radio_list">
+                                                        <input
+                                                            type="radio"
+                                                            class="item_radio"
+                                                            name="dh_currency"
+                                                            value="other"
+                                                            id="currency_other_radio"
+                                                            <%="other".equals(default_values.get("dh_currency"))?"checked":"" %>
+                                                        />
+                                                        <div class="custom-radio">
+                                                            <div class="inner-circle"></div>
+                                                        </div>
+                                                        <span class="radio-text">其他</span>
+                                                    </label>
+
+                                                    <input
+                                                        type="text"
+                                                        class="info_other"
+                                                        id="currency_other_input"
+                                                        name="dh_currency_other"
+                                                        placeholder="請輸入幣別代碼"
+                                                        maxlength="3"
+                                                        style="display: none; width: 150px; margin-left: 10px"
+                                                        value="<%=default_values.get("dh_currency_other") %>"
+                                                    />
+                                                </div>
+                                            </div>
+                                    	<!--捐贈金額-->
+	                                    <div class="form_list">
+	                                        <div class="fL_tit">
+	                                            捐贈金額
+	                                            <span class="en">Donation Amount</span><!-- modify by david 20220913  -->
+	                                            <!--必填icon-->
+	                                            <div class="requirde_icon">
+	                                                *
+	                                            </div> 
+	                                        </div> 
+	                                        <div class="fL_info donateAmount_info">
+												<div class="donateAmountItem <%="1000".equals(default_values.get("dh_total"))?"active":"" %>">
+	                                                <input class="item_radio" type="radio" name="donate_amount" id="d_a4" value="1000" <%="1000".equals(default_values.get("dh_total"))?"checked":"" %>>
+	                                                <label class="" for="d_a4">
+	                                                    1000
+	                                                </label>
+	                                            </div>
+	                                            
+	                                            <div class="donateAmountItem <%="5000".equals(default_values.get("dh_total"))?"active":"" %>">
+	                                                <input class="item_radio" type="radio" name="donate_amount" id="d_a1" value="5000" <%="5000".equals(default_values.get("dh_total"))?"checked":"" %>>
+	                                                <label class="" for="d_a1">
+	                                                    5000
+	                                                </label>
+	                                            </div>
+	                                            
+	                                            <div class="donateAmountItem <%="10000".equals(default_values.get("dh_total"))?"active":"" %>">
+	                                                <input class="item_radio" type="radio" name="donate_amount" id="d_a2" value="10000" <%="10000".equals(default_values.get("dh_total"))?"active":"" %>>
+	                                                <label class="" for="d_a2">
+	                                                    10000
+	                                                </label>
+	                                            </div>
+	                                            
+	                                            <div class="donateAmountItem <%="30000".equals(default_values.get("dh_total"))?"active":"" %>">
+	                                                <input class="item_radio" type="radio" name="donate_amount" id="d_a3" value="30000" <%="30000".equals(default_values.get("dh_total"))?"active":"" %>>
+	                                                <label class="" for="d_a3">
+	                                                    30000
+	                                                </label>
+	                                            </div>
+	                                            
+	                                            <div class="donateAmountItem">
+	                                                <input class="item_radio d_a_other" type="radio" name="donate_amount" id="d_a_other" value="">
+	                                                <label class="" for="d_a_other">
+	                                                    其他金額
+	                                                </label>
+	                                                <input type="text" name="dh_total" id="dh_total" placeholder="請自行輸入金額" value="<%=default_values.get("dh_total") %>" class="otherAmount"/>
+	                                            </div>
+	                                        </div>
+	                                    </div>
                                         
                                         <!-- 身份別  -->
                                             <div class="form_list">
@@ -1419,7 +1450,7 @@
                                                     <div class="custom-radio">
                                                         <div class="inner-circle"></div>
                                                     </div>
-                                                    <span class="radio-text">不寄收據/感謝函</span>
+                                                    <span class="radio-text">不寄收據</span>
                                                 </label>
 
                                                 <label class="item_Radio_list">
@@ -1428,7 +1459,7 @@
                                                         <div class="inner-circle"></div>
                                                     </div>
                                                     <span class="radio-text">
-                                                        寄收據/感謝函
+                                                        寄收據
                                                     </span>
                                                 </label>
 
@@ -1518,6 +1549,22 @@
                                                 </label>
                                             </div>
                                         </div> 
+                                        
+                                         <!--備註說明-->
+                                            <div class="form_list deptFund"	>
+                                                <!--一列兩個時class內加fLType2-->
+                                                <div class="fL_tit">
+                                                    備註說明
+                                                    <span class="en">Donation Purpose Remark</span>
+                                                    <!--必填icon-->
+                                                    <!-- <div class="requirde_icon">
+                                                        *
+                                                    </div>  -->
+                                                </div>
+                                                <div class="fL_info">
+                                                    <textarea name="dh_memo" id="dh_memo"></textarea>
+                                                </div>
+                                            </div>
 <!--   										<div class="form_list" id="tax_upload">一列兩個時class內加fLType2 -->
 <!--                                             <div class="fL_tit"> -->
 <!--                                                 上傳稅務機關 -->
@@ -1658,6 +1705,90 @@
                                 $(this).val(filtered.toUpperCase());
                             }
                         });
+                    });
+                </script>
+                
+                 <!--捐贈用途備註.js  20250610-->
+                <script type="text/javascript">
+                    $(function () {
+                        $(".donationPurpose_info select#donateRemark").change(function () {
+                            //當checkbox框有變動(change/勾選或取消勾選)時
+
+                            if (this.value === "other") {
+                                $("#donateRemark").siblings(".info_other").show(0); //打開
+                            } else {
+                                $("#donateRemark").siblings(".info_other").hide(0); //關閉
+                            }
+                        });
+                    });
+                </script>
+                <!-- 幣別.js -->
+                <script type="text/javascript">
+                    $(function () {
+                        // 1. 控制輸入框顯示/隱藏
+                        $('input[name="dh_currency"]').change(function () {
+                            var inputField = $("#currency_other_input");
+
+                            if ($(this).val() === "other") {
+                                inputField.show(); // 顯示輸入框
+                                inputField.focus(); // 自動聚焦
+                            } else {
+                                inputField.hide(); // 隱藏輸入框
+                                inputField.val(""); // 清空內容
+                            }
+                        });
+
+                        // 2. 限制只能輸入英文 (自動轉大寫，過濾非英文字元)
+                        $("#currency_other_input").on("input", function () {
+                            var val = $(this).val();
+                            // 使用正規表達式將非英文字母替換為空字串
+                            var filtered = val.replace(/[^a-zA-Z]/g, "");
+
+                            // 如果有變更 (例如轉大寫或刪除非英文)，則更新欄位值
+                            if (val !== filtered.toUpperCase()) {
+                                $(this).val(filtered.toUpperCase());
+                            }
+                        });
+                    });
+                </script>
+                <!-- 20260330新增 當點選現金or支票時，下方幣別的其他選項才會顯示 start  -->
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const payRadios = document.querySelectorAll('input[name="dh_paymethod"]');
+                        const otherRadio = document.getElementById("currency_other_radio");
+                        const otherInput = document.getElementById("currency_other_input");
+
+                        function toggleCurrencyOther(selectedValue) {
+                            if (selectedValue === "pay.cash" || selectedValue === "pay.cheque") {
+                                // 顯示「其他」選項
+                                otherRadio.parentElement.style.display = "inline-flex";
+                            } else {
+                                // 隱藏並清空
+                                otherRadio.parentElement.style.display = "none";
+                                otherRadio.checked = false;
+                                otherInput.style.display = "none";
+                                otherInput.value = "";
+                            }
+                        }
+
+                        // 監聽付款方式變更
+                        payRadios.forEach(radio => {
+                            radio.addEventListener("change", function () {
+                                toggleCurrencyOther(this.value);
+                            });
+                        });
+
+                        // 控制「其他 input」顯示
+                        otherRadio.addEventListener("change", function () {
+                            if (this.checked) {
+                                otherInput.style.display = "inline-block";
+                            } else {
+                                otherInput.style.display = "none";
+                            }
+                        });
+
+                        // 預設隱藏（頁面載入時）
+                        otherRadio.parentElement.style.display = "none";
                     });
                 </script>
                         </div>

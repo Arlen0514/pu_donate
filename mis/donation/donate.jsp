@@ -268,7 +268,8 @@ function clearProgress2() {
 			    		  <span><%=show_title %></span>&nbsp;&nbsp;
 			    		  <span><input type="button" value="新增捐款單" onclick="javascript:location.href='<%=code %>_a.jsp'" /></span>&nbsp;
 						  <span><input type="button" value="捐款單列表" onclick="javascript:location.href='<%=code %>.jsp'" /></span>&nbsp;
-						  <span><input type="button" value="設定收件者" onclick="javascript:location.href='<%=code %>_pop.jsp'" /></span>		    		  
+						  <span><input type="button" value="設定收件者" onclick="javascript:location.href='<%=code %>_pop.jsp'" /></span>	
+						  <span><input type="button" value="批次匯入" onclick="javascript:location.href='<%=code %>_import.jsp'" /></span>&nbsp;	    		  
 					    </td>
 				      </tr>         
 			          <tr class="information_bk-2">
@@ -390,7 +391,7 @@ function clearProgress2() {
 						    <td align="center"><%=dh.getString("dh_donatedate") %></td>				    
 						    <td align="center"><%="N".equals(dh.getString("dh_status"))?"作廢":"正常" %></td>
 				    		<td align="center">
-				    			<%if(dh.getString("dh_paymethod").contains("newebpay")){ %>
+				    			<%if(dh.getString("dh_paymethod").contains("newebpay") || dh.getString("dh_paymethod").contains("pu")){ %>
 				    			<input type="checkbox" value="Y" name="dh_collect" <%="Y".equals(dh.getString("dh_collect"))?"checked":"" %> disabled="disabled"/>
 				    			<%}else{ %>
 				    			<input type="checkbox" value="Y" name="dh_collect" <%="Y".equals(dh.getString("dh_collect"))?"checked":"" %> onclick="goaction(this.form, '<%=code %>_update.jsp?action=COLLECT');"/>

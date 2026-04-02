@@ -4,14 +4,14 @@
 <%@include file="include/function.jsp"%>
 <%
 	//基本參數
-	String code = "download"; 				// 模組識別碼
-	String show_title = "表單下載維護";			// 模組標題
+	String code = "download"; 					// 模組識別碼
+	String show_title = "表單下載維護";				// 模組標題
 	
 	// 功能參數
 	boolean list_switch = true;		// 是否開啟列表功能
 	boolean sort_switch = true;		// 是否開啟排序功能
 	boolean modify_switch = true;	// 是否開啟修改功能
-	boolean search_switch = true;	// 是否開啟搜尋功能
+	boolean search_switch = false;	// 是否開啟搜尋功能
 	int page_items = 15; 			// 列表分頁筆數設定
 	int add_num = -1;				// 設定可新增的資料筆數 , -1 為無限筆
 	int del_num = -1;				// 設定少於幾筆不可刪除 , -1 為無限制
@@ -23,24 +23,19 @@
 	boolean delete_switch = num_check(del_num,fds);	
 	
 	// 搜尋欄位
-	String qtitle = StringTool.validString(request.getParameter("_qtitle"),"");
-	String qcategory = StringTool.validString(request.getParameter("_qcategory"),"");
-	
+	String qtitle = StringTool.validString(request.getParameter("_qtitle"));
+
 	// 跳頁參數
-	String[] names = new String[] { "npage", "_qtitle", "_qcategory" };
-	String[] values = new String[] { String.valueOf(pageno), qtitle, qcategory };
-	
-	//所屬類別
-	Vector<TableRecord> dms = app_sm.selectAll(tbldm, "dm_lang=? and dm_code=? and dm_category=?", new Object[]{ lang, code+"_category", "" } , "dm_showseq ASC , dm_createdate DESC");
-	
+	String[] names = new String[] { "npage", "_qtitle" };
+	String[] values = new String[] { String.valueOf(pageno), qtitle };
+
 	
 	if (search_switch) {
 		StringBuffer sb = new StringBuffer();
 		Vector keys = new Vector();
-		sb.append("fd_lang=? and fd_code=? and fd_category like ? and fd_title like ?");
+		sb.append("fd_lang=? and fd_code=? and fd_title like ?");
 		keys.add(lang);
 		keys.add(code);
-		keys.add("%" + qcategory + "%");	
 		keys.add("%" + qtitle + "%");			
 		fds = app_sm.selectAll(tblfd, sb.toString(), keys.toArray(), "fd_showseq ASC , fd_createdate DESC");
 	}
@@ -68,7 +63,6 @@ function checkform(F) {
 }
 function clearData(){
 	$("#_qtitle").val("");
-	$("#_qcategory").val("");
 	//$("#_qemitdate").val("<%=DateTimeTool.getYear() - 1 + DateTimeTool.dateString().substring(4)%>");
 	//$("#_qrestdate").val("<%=DateTimeTool.getYear() + 1 + DateTimeTool.dateString().substring(4)%>");
 }
@@ -121,7 +115,7 @@ function clearData(){
 					<table width="100%" border="0" align="center" cellpadding="3"
 						cellspacing="1">
 						<tr>
-							<td align="center" colspan="3" class="web_title-1"><%=show_title%>&nbsp;&nbsp;
+							<td align="center" colspan="2" class="web_title-1"><%=show_title%>&nbsp;&nbsp;
 								<%if (add_switch) { %>
 								<input type="button" value="新增資料" onclick="javascript:location.href='<%=code%>_a.jsp'" />&nbsp;
 								<%} %>
@@ -135,29 +129,16 @@ function clearData(){
 						</tr>
 
 						<tr align="center" class="web_bk-2">
-							<td colspan="3" align="center">條件值搜尋</td>
+							<td colspan="2" align="center">條件值搜尋</td>
 						</tr>
 						<tr class="web_table-2-1">
-							<td width="25%" align="center">所屬類別</td>
-							<td width="55%" align="center">標題名稱</td>							
+							<td width="80%" align="center">標題名稱</td>							
 							<td width="20%" align="center">功能</td>
 						</tr>
 						
 						<form name="list_sea" id="list_sea" method="post" action="<%=code %>.jsp" onsubmit="return checkform(this);">
 						<tr class="web_table-2-1">
-							<td align="center">
-							
-								<select name="_qcategory" id="_qcategory">
-									<option value="">全部</option>
-	                  			<%  
-	                  				for(int i=0; i<dms.size(); i++){
-	                  					TableRecord dm = (TableRecord) dms.get(i);
-	                  			%>
-	                  			<option value="<%=dm.getString("dm_id") %>" <%=dm.getString("dm_id").equals(qcategory)?"selected":"" %>><%=dm.getString("dm_title") %></option>
-								<% } %>
-								</select>
-							</td>
-							<td align="center"><input name="_qtitle" id="_qtitle" type="text" value="<%=qtitle %>" size="50" /></td>							
+							<td align="center"><input name="_qtitle" id="_qtitle" type="text" value="<%=qtitle %>" size="123" /></td>							
 		                    <td align="center">
 		                        <input name="query" type="submit" value="查詢">&nbsp;
 		            			<input type="button" value="清除" onclick="clearData();" />
@@ -179,7 +160,7 @@ function clearData(){
 						cellspacing="1">
 						<%if(!search_switch){ %>
 						<tr>
-							<td align="center" colspan="4" class="web_title-1"><%=show_title%>&nbsp;&nbsp;
+							<td align="center" colspan="3" class="web_title-1"><%=show_title%>&nbsp;&nbsp;
 								<%if (add_switch) { %>
 								<input type="button" value="新增資料" onclick="javascript:location.href='<%=code%>_a.jsp'" />&nbsp;
 								<%} %>
@@ -193,16 +174,15 @@ function clearData(){
 						</tr>
 						<%}else{ %>
 						<tr>
-							<td align="center" colspan="4" class="web_title-1"><%=show_title%>查詢列表&nbsp;&nbsp;
+							<td align="center" colspan="3" class="web_title-1"><%=show_title%>查詢列表&nbsp;&nbsp;
 						</tr>
 						<%} %>
 						<tr align="center" class="web_bk-2">
-							<td colspan="4" align="center">標題列表</td>
+							<td colspan="3" align="center">標題列表</td>
 						</tr>
 						<tr class="web_table-2-1">
 							<td width="5%" align="center">項目</td>
-							<td width="20%" align="center">所屬類別</td>
-							<td width="55%" align="center">標題名稱</td>
+							<td width="75%" align="center">標題名稱</td>						
 							<td width="20%" align="center">功能</td>
 						</tr>
 						<%
@@ -212,7 +192,6 @@ function clearData(){
 						<form name="list<%=i + 1%>" id="list<%=i + 1%>" method="post">
 						<tr class="web_table-2-1">
 							<td align="center"><%=((pageno - 1) * page_items) + i + 1%></td>
-							<td align="center"><%=app_sm.select(tbldm,fd.getString("fd_category")).getString("dm_title") %></td>
 							<td align="center"><%=fd.getString("fd_title") %></td>							
 							<td align="center">
 								<%=HtmlCoder.hiddenInputs(names, values)%>
@@ -228,7 +207,7 @@ function clearData(){
 						</form>
 						<%} %>
 
-						<td class="web_bk-2" colspan="4" align="center" height="26px">
+						<td class="web_bk-2" colspan="3" align="center" height="26px">
 							<%@include file="/WEB-INF/jspf/mis/pager.jspf"%>
 						</td>
 

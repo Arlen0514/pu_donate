@@ -8,7 +8,7 @@
 	String show_title = "活動紀實維護";	// 模組標題
 
 	// 圖片建議尺寸
-	String image_info = "(建議尺寸260px * 225px)";
+	String image_info = "(建議尺寸494px * 296px)";
 	// 圖片建議尺寸
 	//String mobile_info = "(建議尺寸830px * 1300px)";
 

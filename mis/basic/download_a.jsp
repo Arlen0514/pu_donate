@@ -3,7 +3,7 @@
 <%@include file="/WEB-INF/jspf/mis/check.jspf"%>
 <%@include file="include/function.jsp"%>
 <%
-	//基本參數
+	// 基本參數
 	String code = "download"; 				// 模組識別碼
 	String show_title = "表單下載維護";		// 模組標題
 
@@ -16,15 +16,12 @@
 	boolean list_switch = true;				// 是否開啟列表功能
 	boolean sort_switch = true;				// 是否開啟排序功能
 	boolean keyword_switch = false;			// 是否開啟關鍵字設定
-	boolean deadline_switch = false;		// 是否開啟上下架日期	
+	boolean deadline_switch = true;		// 是否開啟上下架日期
 	int add_num = -1;						// 設定可新增的資料筆數 , -1 為無限筆
 /*----------------------------------------------------------------------------------------------*/
-	Vector datas = app_sm.selectAll(tblfd, "fd_code=? and fd_lang=?", new Object[] { code, lang }, "fd_showseq ASC , fd_createdate DESC");
+	Vector fds = app_sm.selectAll(tblfd, "fd_code=? and fd_lang=?", new Object[] { code, lang }, "fd_showseq ASC , fd_createdate DESC");
 	// 當資料筆數小於設定可新增的筆數時 , 顯示新增按鍵
-	boolean add_switch = num_check(add_num,datas);
-	
-	//所屬類別
-	Vector<TableRecord> dms = app_sm.selectAll(tbldm, "dm_lang=? and dm_code=? and dm_category=?", new Object[]{ lang, code+"_category", "" } , "dm_showseq ASC , dm_createdate DESC");
+	boolean add_switch = num_check(add_num,fds);
 %>
 <!DOCTYPE html>
 <html>
@@ -32,19 +29,19 @@
 <%@include file="include/head.jsp"%>
 <%@include file="/WEB-INF/jspf/mis/htmleditor.jspf"%>
 <script>
-function checkform(F) {
+function checkform(F) {	
 	// 驗證副檔名
-	var file_chk = /([^\/]+\.(?:jpg|jpeg|gif|png|webp))/;
+	var file_chk = /([^\/]+\.(?:jpg|jpeg|gif|png))/;
 	// 驗證中文
 	var chnese_chk = /[\u4e00-\u9fa5]/;
-	
-	if(F.fd_category.value == "") {
-        alert("請選擇類別!!");
-        F.fd_category.focus();
-    } else if (F.fd_title.value == "") {
+
+	if (F.fd_title.value == "") {
         alert("請輸入標題名稱!!");
         F.fd_title.focus();
-    } else if (F.fd_file.value == "") {
+    } else if (F.fd_target.value == "U" && F.fd_url.value == "") {
+		alert("請輸入外部連結!!");
+		F.fd_url.focus();
+    } else if (F.fd_target.value == "F" && F.fd_file.value == "") {
 		alert("請上傳檔案!!");
 		F.fd_file.focus();
     } else {
@@ -120,31 +117,17 @@ function checkform(F) {
 							</tr>
 
 							<tr class="web_table-2-1">
-								<td width="15%" align="right">所屬類別</td>
-								<td colspan="3" width="85%" align="left">
-							   		<select name="fd_category" id="fd_category">
-							   			<option value="">請選擇類別</option>
-	                  					<%  
-	                  					for(int i = 0; i < dms.size(); i++) {
-	                  						TableRecord dm = (TableRecord) dms.get(i);
-	                  					%>
-	                  					<option value="<%=dm.getString("dm_id") %>"><%=dm.getString("dm_title") %></option>
-										<%} %>
-									</select>
-								</td>
-							</tr>
-
-							<tr class="web_table-2-1">
 								<td width="15%" align="right">標題</td>
 								<td colspan="3" width="85%" align="left">
 									<input type="text" name="fd_title" id="fd_title" size="100" maxlength="120" />
 								</td>
 							</tr>
 
+
 							<tr class="web_table-2-1">
 								<td align="right" class="web_table-2-1">檔案</td>
 								<td colspan="3" align="left" class="tablebg">
-									<input name="fd_file" id="fd_file" type="file" class="button" >
+									<input name="fd_file" id="fd_file" type="file" class="button" />
 								</td>
 							</tr>
 
@@ -157,7 +140,7 @@ function checkform(F) {
 							</tr>
 							--%>
 
-							<%if(keyword_switch){ %>
+							<%if(keyword_switch) { %>
 							<tr align="center" class="web_table-2-1">
 								<td colspan="4" align="center">關鍵字設定</td>
 							</tr>
@@ -224,21 +207,23 @@ function checkform(F) {
 								</td>
 							</tr>
 							<%} %>
-							<%if(deadline_switch){ %>
+							
+							<%if(deadline_switch) { %>
 							<tr align="center" class="web_bk-2">
 								<td colspan="4" align="center">上下架時間</td>
 							</tr>
 							<tr class="web_table-2-1">
 								<td align="right" class="web_table-2-1">上架日期</td>
 								<td align="left" class="tablebg">
-									<input name="fd_emitdate" id="_qemitdate" type="text" value="<%=DateTimeTool.dateString()%>" size="15" readonly>
+									<input type="text" name="fd_emitdate" id="_qemitdate" value="<%=DateTimeTool.dateString()%>" size="15" readonly />
 								</td>
 								<td align="right" class="tablebg">下架日期</td>
 								<td align="left" class="tablebg">
-									<input name="fd_restdate" id="_qrestdate" type="text" value="2099/12/31" size="15" readonly>
+									<input type="text" name="fd_restdate" id="_qrestdate" value="2099/12/31" size="15" readonly />
 								</td>
 							</tr>
 							<%} %>
+							
 							<tr class="web_table-2-1">
 								<td align="right">資料建立人員</td>
 								<td align="left"><%=app_account%></td>
@@ -274,6 +259,7 @@ function checkform(F) {
 		</div>
 	</tr>
 </table>
+</div>
 </div>
 </body>
 </html>

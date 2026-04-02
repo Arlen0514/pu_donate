@@ -42,9 +42,9 @@
 	}
 	
 	// 預設選項
-	String[] titles =   new String[] {"行動支付","銀行臨櫃", "郵政劃撥", "現金", "支票"};
+	String[] titles =   new String[] {"行動支付","銀行臨櫃", "郵政劃撥", "現金", "支票", "虛擬帳號"};
 	String[] categorys = new String[] {
-			"pay.pu", "pay.bank", "pay.postal", "pay.cash", "pay.cheque"
+			"pay.pu", "pay.bank", "pay.postal", "pay.cash", "pay.cheque", "pay.pu.vatm"
 	};
 	
 	for(int i = 0; i < titles.length; i++) {

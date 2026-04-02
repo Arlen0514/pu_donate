@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/jspf/config.jspf" %>
+<%@ include file="/WEB-INF/jspf/csrf_token.jspf" %>
 <%
 
 String page_code = "news";
@@ -11,6 +12,7 @@ int page_items=10;
 app_dp = new DataPager(nps,page_items);    							//設定資料分頁每頁筆數
 nps = app_dp.getPageContent(pageno);
 
+String csrfToken = generateCSRFToken(session, "normalform");
 
 %>
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/in.dwt" codeOutsideHTMLIsLocked="false" -->
@@ -144,6 +146,7 @@ nps = app_dp.getPageContent(pageno);
 							<%@include file="/WEB-INF/jspf/web/rwd_pager2.jspf"%>
 							<form name="pageform" id="pageform" method="post" action="<%=request.getRequestURI()%>">
 								<input type="hidden" name="npage" id="npage" value="<%=pageno %>" />
+								<input type="hidden" name="csrfToken" value="<%=csrfToken %>" />
 							</form>
 							</div>                     
 							</div>

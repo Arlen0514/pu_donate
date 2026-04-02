@@ -6,7 +6,7 @@
 <%
 	//基本參數
 	String code = "privacy"; 					// 模組識別碼
-	String show_title = "隱私權政策維護";		// 模組標題
+	String show_title = "個資維護";		// 模組標題
 
 	// 圖片建議尺寸
 	//String image_info = "(建議尺寸1280px * 580px)";

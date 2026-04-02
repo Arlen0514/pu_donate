@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/jspf/config.jspf" %>
+<%@ include file="/WEB-INF/jspf/csrf_token.jspf" %>
 <%@ include file="/web/include/encryption.jsp"%>
 <%
 
@@ -10,7 +11,7 @@ String code = "activity_donate";
 String dm_id = StringTool.validString(request.getParameter("dm_id"),"");
 String cp_id = StringTool.validString(request.getParameter("cp_id"),"");
 
-
+System.out.println("cp_id :"+cp_id);
 TableRecord cp = app_sm.select(tblcp, cp_id);
 
 
@@ -55,18 +56,18 @@ TableRecord download_file = app_sm.select(tblcp, "cp_code = ? AND cp_lang = ?", 
 			new Object[]{"guide", lang, "Y"}, "cp_showseq ASC, cp_createdate DESC");
 	
 	// 預設專案類型
-	String donate_id = StringTool.validString(request.getParameter("donate_id"));
+// 	String donate_id = cp_id;
 	
-	if(donate_id.startsWith("DM")){				// 募款專案
-		default_values.put("dh_donate_project_category", donate_id);
-	} else if(donate_id.startsWith("CP")){		// 院系捐款
-		TableRecord project_cp = app_sm.select(tblcp, donate_id);
+// 	if(donate_id.startsWith("DM")){				// 募款專案
+// 		default_values.put("dh_donate_project_category", donate_id);
+// 	} else if(donate_id.startsWith("CP")){		// 院系捐款
+// 		TableRecord project_cp = app_sm.select(tblcp, donate_id);
 	
-		default_values.put("dh_donate_project_category", department_index.getString("dm_id"));
-		default_values.put("dh_donate_college", project_cp.getString("cp_upcategory"));
-		default_values.put("dh_donate_department", project_cp.getString("cp_category"));
-		default_values.put("dh_donate_project", donate_id);
-	}
+// 		default_values.put("dh_donate_project_category", department_index.getString("dm_id"));
+// 		default_values.put("dh_donate_college", project_cp.getString("cp_upcategory"));
+// 		default_values.put("dh_donate_department", project_cp.getString("cp_category"));
+// 		default_values.put("dh_donate_project", donate_id);
+// 	}
 	
 	// 系所類別(第一層)
     Vector<TableRecord> dept_dms = app_sm.selectAll(tbldm, "dm_code=? and dm_lang=? and dm_category=? ", 
@@ -107,6 +108,8 @@ TableRecord download_file = app_sm.select(tblcp, "cp_code = ? AND cp_lang = ?", 
 	
 	// 數字格式
 	DecimalFormat df = new DecimalFormat("00");
+	
+	String csrfToken = generateCSRFToken(session, "normalform");
 
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -156,8 +159,8 @@ TableRecord download_file = app_sm.select(tblcp, "cp_code = ? AND cp_lang = ?", 
 			if(!$.isNumeric(F.dh_total.value.trim())){
 				alert('請輸入正確的捐款金額!!');
 				F.dh_total.focus();
-			} else if(parseInt(F.dh_total.value.trim())<100){
-				alert('捐款金額不可小於100元!!');
+			} else if(parseInt(F.dh_total.value.trim())==0){
+				alert('捐款金額不可等於0元!!');
 				F.dh_total.focus();
 // 			} else if(F.dh_donate_project_category.value.trim() == ''){
 // 				alert('請選擇捐贈類別!!');
@@ -312,33 +315,33 @@ TableRecord download_file = app_sm.select(tblcp, "cp_code = ? AND cp_lang = ?", 
         	<%}%>
         	
         	// 捐款類別
-        	if($('[name=dh_donate_project_category]:checked').length>0) {
-        		let item_category = $('[name=dh_donate_project_category]:checked').val().trim();
-            	let item_id = $('[name=dh_donate_project_category]:checked').attr('id');
+//         	if($('[name=dh_donate_project_category]:checked').length>0) {
+//         		let item_category = $('[name=dh_donate_project_category]:checked').val().trim();
+//             	let item_id = $('[name=dh_donate_project_category]:checked').attr('id');
             	
-            	switch(item_id){
-	                case 'dc0':									// 其他
-	                	$('#deptFund').hide();
-	                	$('#donate_project_area').show();
-	                	$(".donationPurpose_info .info_other").show(); 	// 關閉
-	                	break;
-	                case 'dc4':									// 院系募款
-	                	$('#deptFund').show();
-	                	$('#donate_project_area').hide();
-	                	if($('#donate_project_dept').val() == 'other') {
-	                		$("#donate_project_dept_other").css({
-	                            "grid-column": "1 / 4",
-	                            "display": "grid",
-	                        });
-	                	}
-	                	break;
-	                default:
-	                	$('#deptFund').hide();
-	            		$('#donate_project_area').show();
-	                	$(".donationPurpose_info .info_other").hide(); 	// 關閉
-						break;		                	
-	            }
-        	}
+//             	switch(item_id){
+// 	                case 'dc0':									// 其他
+// 	                	$('#deptFund').hide();
+// 	                	$('#donate_project_area').show();
+// 	                	$(".donationPurpose_info .info_other").show(); 	// 關閉
+// 	                	break;
+// 	                case 'dc4':									// 院系募款
+// 	                	$('#deptFund').show();
+// 	                	$('#donate_project_area').hide();
+// 	                	if($('#donate_project_dept').val() == 'other') {
+// 	                		$("#donate_project_dept_other").css({
+// 	                            "grid-column": "1 / 4",
+// 	                            "display": "grid",
+// 	                        });
+// 	                	}
+// 	                	break;
+// 	                default:
+// 	                	$('#deptFund').hide();
+// 	            		$('#donate_project_area').show();
+// 	                	$(".donationPurpose_info .info_other").hide(); 	// 關閉
+// 						break;		                	
+// 	            }
+//         	}
         	
         	// 付款方式
         	if($('[name=dh_paymethod]:checked').length>0) {
@@ -362,74 +365,74 @@ TableRecord download_file = app_sm.select(tblcp, "cp_code = ? AND cp_lang = ?", 
 		}
 		
 		<%-- 變更捐款項目 --%>
-		function change_donate(item_category, item_id){
+// 		function change_donate(item_category, item_id){
 			
-            switch(item_id){
-                case 'dc0':									// 其他
-                	$('#deptFund').hide();
-                	$('#donate_project_area').show();
-                	$(".donationPurpose_info .info_other").show(); 	// 關閉
-                	search_donate_project('project', item_category);
-                	break;
-                case 'dc4':									// 院系募款
-                	$('#deptFund').show();
-                	$('#donate_project_area').hide();
-                	$('#dh_donate_college').val('').change();
-                	change_dept('college');
-                	break;
-                default:
-                	$('#deptFund').hide();
-            		$('#donate_project_area').show();
-                	$(".donationPurpose_info .info_other").hide(); 	// 關閉
-                	search_donate_project('project', item_category);
-					break;		                	
-            }
-		}
+//             switch(item_id){
+//                 case 'dc0':									// 其他
+//                 	$('#deptFund').hide();
+//                 	$('#donate_project_area').show();
+//                 	$(".donationPurpose_info .info_other").show(); 	// 關閉
+//                 	search_donate_project('project', item_category);
+//                 	break;
+//                 case 'dc4':									// 院系募款
+//                 	$('#deptFund').show();
+//                 	$('#donate_project_area').hide();
+//                 	$('#dh_donate_college').val('').change();
+//                 	change_dept('college');
+//                 	break;
+//                 default:
+//                 	$('#deptFund').hide();
+//             		$('#donate_project_area').show();
+//                 	$(".donationPurpose_info .info_other").hide(); 	// 關閉
+//                 	search_donate_project('project', item_category);
+// 					break;		                	
+//             }
+// 		}
 		
 		<%-- 變更院系系所 --%>
-		function change_dept(dept_type){
-			let value = $('#dh_donate_'+dept_type).val();
+// 		function change_dept(dept_type){
+// 			let value = $('#dh_donate_'+dept_type).val();
 			
-			if(dept_type == 'department'){
-				search_donate_project('department', value);
-			} else {
-				let url = '../ajax/search_donate_dept.jsp';
-				let data = {
-						async: false,
-						college: value
-				};
+// 			if(dept_type == 'department'){
+// 				search_donate_project('department', value);
+// 			} else {
+// 				let url = '../ajax/search_donate_dept.jsp';
+// 				let data = {
+// 						async: false,
+// 						college: value
+// 				};
 				
-				$.post(url, data, function(res){
-					let jsonObj = JSON.parse(res);
+// 				$.post(url, data, function(res){
+// 					let jsonObj = JSON.parse(res);
 					
-					if(jsonObj.status){
-						$('#dh_donate_department').html(jsonObj.options);
-						search_donate_project('department', value);
-					}
-				});
-			}
-		}
+// 					if(jsonObj.status){
+// 						$('#dh_donate_department').html(jsonObj.options);
+// 						search_donate_project('department', value);
+// 					}
+// 				});
+// 			}
+// 		}
 		
 		<%-- 取得捐款計畫 --%>
-		function search_donate_project(category_type, category_id) {
-			let url = '../ajax/search_donate_project.jsp';
-			let data = {
-					async: false,
-					type: category_type,
-					category: category_id
-			};
+// 		function search_donate_project(category_type, category_id) {
+// 			let url = '../ajax/search_donate_project.jsp';
+// 			let data = {
+// 					async: false,
+// 					type: category_type,
+// 					category: category_id
+// 			};
 			
-			$.post(url, data, function(res){
-				let jsonObj = JSON.parse(res);
+// 			$.post(url, data, function(res){
+// 				let jsonObj = JSON.parse(res);
 				
-				if(jsonObj.status){
-					if(category_type == 'project')
-						$('#dh_donate_project').html(jsonObj.options);
-					else if(category_type == 'department')
-						$('#donate_project_dept').html(jsonObj.options);
-				}
-			});
-		}
+// 				if(jsonObj.status){
+// 					if(category_type == 'project')
+// 						$('#dh_donate_project').html(jsonObj.options);
+// 					else if(category_type == 'department')
+// 						$('#donate_project_dept').html(jsonObj.options);
+// 				}
+// 			});
+// 		}
 		
 		<%-- 變更地址類型 --%>
 		function change_address_type(){
@@ -541,32 +544,32 @@ TableRecord download_file = app_sm.select(tblcp, "cp_code = ? AND cp_lang = ?", 
 	        });
 			
 			<%-- 變更捐款類別 --%>
-			$(".donateCategoryItem input.item_radio:radio").change(function () { 
-	            if (this.checked) {
-	            	let dh_donate_project_category = $(this).val().trim();
-	            	let item_id = $(this).attr('id');
+// 			$(".donateCategoryItem input.item_radio:radio").change(function () { 
+// 	            if (this.checked) {
+// 	            	let dh_donate_project_category = $(this).val().trim();
+// 	            	let item_id = $(this).attr('id');
 	            	
-// 	            	console.log('dh_donate_project_category', dh_donate_project_category);
+// // 	            	console.log('dh_donate_project_category', dh_donate_project_category);
 	            	
-	                $(".donateCategoryItem input.item_radio:radio").not(this).parent().siblings().removeClass("active");
-	                $(".donateCategoryItem input.item_radio:radio").not(this).parent().siblings().children().attr("checked", false);
-	                $(this).parent().toggleClass("active");
-	                $(this).attr("checked", true);
+// 	                $(".donateCategoryItem input.item_radio:radio").not(this).parent().siblings().removeClass("active");
+// 	                $(".donateCategoryItem input.item_radio:radio").not(this).parent().siblings().children().attr("checked", false);
+// 	                $(this).parent().toggleClass("active");
+// 	                $(this).attr("checked", true);
 	                
-	                change_donate(dh_donate_project_category, item_id);
-	            } else {
-	                $(this).parent().removeClass("active");
-	                $(this).attr("checked", false);
-	            }
-	        });
+// 	                change_donate(dh_donate_project_category, item_id);
+// 	            } else {
+// 	                $(this).parent().removeClass("active");
+// 	                $(this).attr("checked", false);
+// 	            }
+// 	        });
 			
 			<%-- 變更指定捐贈 --%>
-			$('#dh_donate_project').on('change', function(){
-				if($(this).val() == 'other')
-					$('#dh_donate_project_title').show();
-				else
-					$('#dh_donate_project_title').hide();
-			});
+// 			$('#dh_donate_project').on('change', function(){
+// 				if($(this).val() == 'other')
+// 					$('#dh_donate_project_title').show();
+// 				else
+// 					$('#dh_donate_project_title').hide();
+// 			});
 			
 			<%--
 			$(".donationPurpose_info select").change(function () {
@@ -580,28 +583,28 @@ TableRecord download_file = app_sm.select(tblcp, "cp_code = ? AND cp_lang = ?", 
             --%>
 			
 			<%-- 變更院系募款 --%>
-			$('#donate_project_dept').on('change', function(){
-				if($(this).val() == 'other') {
-					$("#donate_project_dept_other").css({
-                        "grid-column": "1 / 4",
-                        "display": "grid",
-                    });
-// 					$('#donate_project_dept_other').show();
-				} else {
-					$('#donate_project_dept_other').hide();
-				}
+// 			$('#donate_project_dept').on('change', function(){
+// 				if($(this).val() == 'other') {
+// 					$("#donate_project_dept_other").css({
+//                         "grid-column": "1 / 4",
+//                         "display": "grid",
+//                     });
+// // 					$('#donate_project_dept_other').show();
+// 				} else {
+// 					$('#donate_project_dept_other').hide();
+// 				}
 					
-			});
+// 			});
 			
 			<%-- 變更院系系所(第一層) --%>
-			$('#dh_donate_college').on('change', function(){
-				change_dept('college');
-			});
+// 			$('#dh_donate_college').on('change', function(){
+// 				change_dept('college');
+// 			});
 			
 			<%-- 變更院系系所(第二層) --%>
-			$('#dh_donate_department').on('change', function(){
-				change_dept('department');
-			});
+// 			$('#dh_donate_department').on('change', function(){
+// 				change_dept('department');
+// 			});
 			
 			<%-- 變更付款方式 --%>
 			$(".donatePayItem input.item_radio:radio").change(function() {
@@ -1026,6 +1029,7 @@ TableRecord download_file = app_sm.select(tblcp, "cp_code = ? AND cp_lang = ?", 
                                       
 						<form name="form0" id="form0" method="post" action="donate_update.jsp?action=add" onsubmit="return checkform(this);">                        
 <!--                         <form name="form0" id="form0" method="post" enctype="multipart/form-data" action="donate_update.jsp?action=add" onsubmit="return checkform(this);">                         -->
+                        <input type="hidden" name="csrfToken" value="<%=csrfToken %>" />
                         <div class="right_contentBg">
             
                             <div class="form_remark">
@@ -1051,7 +1055,132 @@ TableRecord download_file = app_sm.select(tblcp, "cp_code = ? AND cp_lang = ?", 
 
                                     <!--表單區-->
                                     <div class="form_area contact_area">
-                                    	<!-- 幣別 -->
+                                    	
+                                    	<input type="hidden" name="dh_donate_project" value="<%=cp.getString("cp_id")%>"/>
+                                    	<input type="hidden" name="dh_donate_project_title" value="<%=cp.getString("cp_title")%>"/>
+                                        
+                                        
+                                        <!--付款方式-->
+                                        <div class="form_list"><!--一列兩個時class內加fLType2-->
+                                            <div class="fL_tit">
+                                                付款方式
+                                                <span class="en">Donation method</span><!-- modify by david 20220913  -->
+                                                <!--必填icon-->
+                                                <div class="requirde_icon">
+                                                    *
+                                                </div> 
+                                            </div>
+                                            <div class="fL_info donatePay_info">
+                                            	<%for(TableRecord payment : payments){ %>
+												 <div class="donatePayItem <%=payment.getString("cp_category").equals(default_values.get("dh_paymethod"))?"active":"" %>">
+                                                    <input class="item_radio" type="radio" name="dh_paymethod" id="<%=payment.getString("cp_category") %>" value="<%=payment.getString("cp_category") %>" <%=payment.getString("cp_category").equals(default_values.get("dh_paymethod"))?"checked":"" %>>
+                                                    <label class="" for="<%=payment.getString("cp_category") %>">                                                        
+                                                        <img src="<%=app_fetchpath+"/"+"guide"+"/"+lang+"/"+payment.getString("cp_image")%>" alt="">
+                                                        <h3><%=payment.getString("cp_title") %></h3>
+                                                        <span class="en"><%=payment.getString("cp_name") %></span>
+                                                    </label>
+                                                </div>
+                                                <%} %>
+                                            </div>
+
+                                            <!-- 付款方式說明文字區 -->
+                                            <ul class="donatePay_text">
+
+                                            	<%for(TableRecord payment : payments){ %>
+                                                <li class="donatePay_text credit_card_one" id="<%=payment.getString("cp_category") %>_text">
+
+                                                    <!--右側標題-->
+                                                    <div class="right_title3">
+                                                        <h2><%=payment.getString("cp_title") %></h2>
+                                                    </div>
+
+                                                    <!--簡述區塊-->
+                                                    <section class="remark">
+                                                       <%=payment.getString("cp_desc") %>
+													</section>
+													
+                                                	<%if(payment.getString("cp_category").equals("pay.newebpay.regular")){ %>
+                                                    <div class="form_list" id="regular_fields">
+                                                        <!--一列兩個時class內加fLType2-->
+                                                        <div class="fL_tit">
+                                                            扣款到期日
+                                                            <span class="en">Debit due date</span>
+                                                            <!--必填icon-->
+                                                            <div class="requirde_icon">
+                                                                *
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="fL_info item_RadioCheckArea debitDueDate">
+                                                            
+                                                            <label class="item_Radio_list">
+                                                                <input type="radio" class="item_radio" name="dh_regular_type" value="Y" <%="Y".equals(default_values.get("dh_regular_type"))?"checked":"" %> />
+                                                                <div class="custom-radio">
+                                                                    <div class="inner-circle"></div>
+                                                                </div>
+                                                                <span class="radio-text">
+                                                                    每年
+                                                                </span>
+                                                            </label>
+                                                            <label class="item_Radio_list">
+                                                                <input type="radio" class="item_radio" name="dh_regular_type" value="M" <%="M".equals(default_values.get("dh_regular_type"))?"checked":"" %> />
+                                                                <div class="custom-radio">
+                                                                    <div class="inner-circle"></div>
+                                                                </div>
+                                                                <span class="radio-text">
+                                                                    每月
+                                                                </span>
+                                                            </label>
+                                                            
+                                                        </div>
+                                                        
+                                                        <div class="fL_info birthday">
+                                                            自民國                                                                   
+                                                			<select name="debit_start_year" id="debit_start_year">
+																<option value="<%=DateTimeTool.getYear() %>">
+							                                    	<%=DateTimeTool.getYear()-1911 %>
+							                                    </option>
+                                                            </select>
+                                                			<span class="birthday_year">年</span>
+                                                			<select name="debit_start_month" id="debit_start_month">
+							                                    <option value="<%=df.format(DateTimeTool.getMonth()) %>">
+							                                    	<%=df.format(DateTimeTool.getMonth()) %>
+							                                    </option>
+                                                            </select>
+                                                            <span class="birthday_month">月，至民國</span>
+                                                			<select name="dh_debit_due_year" id="dh_debit_due_year">
+                                                                <option value="" <%="".equals(default_values.get("dh_debit_due_year"))?"selected":"" %>>
+                                                                    請選擇
+                                                                </option>
+				                                    			<%for(int i=DateTimeTool.getYear();i<=2099;i++){ %>   
+																<option value="<%=i %>" <%=String.valueOf(i).equals(default_values.get("dh_debit_due_year"))?"selected":"" %>>
+							                                    	<%=i-1911 %>
+							                                    </option>
+																<%} %>
+                                                            </select>
+                                                            <span>年</span>                                                           
+                                                			<select name="dh_debit_due_month" id="dh_debit_due_month">
+                                                    			<option value="" <%="".equals(default_values.get("dh_debit_due_month"))?"selected":"" %>>
+                                                                    請選擇
+                                                                </option>
+							                                    <%for(int i=1;i<=12;i++){
+																	String teos = df.format(i);
+																%>
+																<option value="<%=teos %>" <%=df.format(i).equals(default_values.get("dh_debit_due_month"))?"selected":"" %>>
+							                                    	<%=teos %>
+							                                    </option>
+																<%} %>                                            
+                                                			</select>
+                                                            <span class="birthday_month">月</span>
+                                                        </div>
+                                                    </div>
+                                                <%} %>
+                                                </li>
+                                                <%}%>
+                                            </ul>
+                                        </div> 
+                                        
+                                        <!-- 幣別 -->
                                             <div class="form_list">
                                                 <div class="fL_tit">
                                                     幣別
@@ -1148,8 +1277,6 @@ TableRecord download_file = app_sm.select(tblcp, "cp_code = ? AND cp_lang = ?", 
 	                                            </div>
 	                                        </div>
 	                                    </div>
-                                    	<input type="hidden" name="dh_donate_project" value="<%=cp.getString("cp_id")%>"/>
-                                    	<input type="hidden" name="dh_donate_project_title" value="<%=cp.getString("cp_title")%>"/>
                                         
                                         <!--捐款用途備註說明-->
                                         <div class="form_list deptFund" id="deptFundMemo"><!--一列兩個時class內加fLType2-->
@@ -1179,125 +1306,7 @@ TableRecord download_file = app_sm.select(tblcp, "cp_code = ? AND cp_lang = ?", 
                                     <!--表單區-->
                                     <div class="form_area contact_area">
                                         
-                                        <!--付款方式-->
-                                        <div class="form_list"><!--一列兩個時class內加fLType2-->
-                                            <div class="fL_tit">
-                                                付款方式
-                                                <span class="en">Donation method</span><!-- modify by david 20220913  -->
-                                                <!--必填icon-->
-                                                <div class="requirde_icon">
-                                                    *
-                                                </div> 
-                                            </div>
-                                            <div class="fL_info donatePay_info">
-                                            	<%for(TableRecord payment : payments){ %>
-												 <div class="donatePayItem <%=payment.getString("cp_category").equals(default_values.get("dh_paymethod"))?"active":"" %>">
-                                                    <input class="item_radio" type="radio" name="dh_paymethod" id="<%=payment.getString("cp_category") %>" value="<%=payment.getString("cp_category") %>" <%=payment.getString("cp_category").equals(default_values.get("dh_paymethod"))?"checked":"" %>>
-                                                    <label class="" for="<%=payment.getString("cp_category") %>">                                                        
-                                                        <img src="<%=app_fetchpath+"/"+"guide"+"/"+lang+"/"+payment.getString("cp_image")%>" alt="">
-                                                        <h3><%=payment.getString("cp_title") %></h3>
-                                                        <span class="en"><%=payment.getString("cp_name") %></span>
-                                                    </label>
-                                                </div>
-                                                <%} %>
-                                            </div>
-
-                                            <!-- 付款方式說明文字區 -->
-                                            <ul class="donatePay_text">
-
-                                            	<%for(TableRecord payment : payments){ %>
-                                                <li class="donatePay_text_item credit_card_one" id="<%=payment.getString("cp_category") %>_text">
-
-                                                    <!--右側標題-->
-                                                    <div class="right_title3">
-                                                        <h2><%=payment.getString("cp_title") %></h2>
-                                                    </div>
-
-                                                    <!--簡述區塊-->
-                                                    <section class="remark">
-                                                       <%=payment.getString("cp_desc") %>
-													</section>
-													
-                                                	<%if(payment.getString("cp_category").equals("pay.newebpay.regular")){ %>
-                                                    <div class="form_list" id="regular_fields">
-                                                        <!--一列兩個時class內加fLType2-->
-                                                        <div class="fL_tit">
-                                                            扣款到期日
-                                                            <span class="en">Debit due date</span>
-                                                            <!--必填icon-->
-                                                            <div class="requirde_icon">
-                                                                *
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div class="fL_info item_RadioCheckArea debitDueDate">
-                                                            
-                                                            <label class="item_Radio_list">
-                                                                <input type="radio" class="item_radio" name="dh_regular_type" value="Y" <%="Y".equals(default_values.get("dh_regular_type"))?"checked":"" %> />
-                                                                <div class="custom-radio">
-                                                                    <div class="inner-circle"></div>
-                                                                </div>
-                                                                <span class="radio-text">
-                                                                    每年
-                                                                </span>
-                                                            </label>
-                                                            <label class="item_Radio_list">
-                                                                <input type="radio" class="item_radio" name="dh_regular_type" value="M" <%="M".equals(default_values.get("dh_regular_type"))?"checked":"" %> />
-                                                                <div class="custom-radio">
-                                                                    <div class="inner-circle"></div>
-                                                                </div>
-                                                                <span class="radio-text">
-                                                                    每月
-                                                                </span>
-                                                            </label>
-                                                            
-                                                        </div>
-                                                        
-                                                        <div class="fL_info birthday">
-                                                            自民國                                                                   
-                                                			<select name="debit_start_year" id="debit_start_year">
-																<option value="<%=DateTimeTool.getYear() %>">
-							                                    	<%=DateTimeTool.getYear()-1911 %>
-							                                    </option>
-                                                            </select>
-                                                			<span class="birthday_year">年</span>
-                                                			<select name="debit_start_month" id="debit_start_month">
-							                                    <option value="<%=df.format(DateTimeTool.getMonth()) %>">
-							                                    	<%=df.format(DateTimeTool.getMonth()) %>
-							                                    </option>
-                                                            </select>
-                                                            <span class="birthday_month">月，至民國</span>
-                                                			<select name="dh_debit_due_year" id="dh_debit_due_year">
-                                                                <option value="" <%="".equals(default_values.get("dh_debit_due_year"))?"selected":"" %>>
-                                                                    請選擇
-                                                                </option>
-				                                    			<%for(int i=DateTimeTool.getYear();i<=2099;i++){ %>   
-																<option value="<%=i %>" <%=String.valueOf(i).equals(default_values.get("dh_debit_due_year"))?"selected":"" %>>
-							                                    	<%=i-1911 %>
-							                                    </option>
-																<%} %>
-                                                            </select>
-                                                            <span>年</span>                                                           
-                                                			<select name="dh_debit_due_month" id="dh_debit_due_month">
-                                                    			<option value="" <%="".equals(default_values.get("dh_debit_due_month"))?"selected":"" %>>
-                                                                    請選擇
-                                                                </option>
-							                                    <%for(int i=1;i<=12;i++){
-																	String teos = df.format(i);
-																%>
-																<option value="<%=teos %>" <%=df.format(i).equals(default_values.get("dh_debit_due_month"))?"selected":"" %>>
-							                                    	<%=teos %>
-							                                    </option>
-																<%} %>                                            
-                                                			</select>
-                                                            <span class="birthday_month">月</span>
-                                                        </div>
-                                                    </div>
-                                                <%} %>
-                                                </li>
-                                                <%}%>
-                                            </ul>
-                                        </div> 
+                                        
                                         
                                         <!-- 身份別  -->
                                             <div class="form_list">
@@ -1559,7 +1568,7 @@ TableRecord download_file = app_sm.select(tblcp, "cp_code = ? AND cp_lang = ?", 
                                                     <div class="custom-radio">
                                                         <div class="inner-circle"></div>
                                                     </div>
-                                                    <span class="radio-text">不寄收據/感謝函</span>
+                                                    <span class="radio-text">不寄收據</span>
                                                 </label>
 
                                                 <label class="item_Radio_list">
@@ -1568,7 +1577,7 @@ TableRecord download_file = app_sm.select(tblcp, "cp_code = ? AND cp_lang = ?", 
                                                         <div class="inner-circle"></div>
                                                     </div>
                                                     <span class="radio-text">
-                                                        寄收據/感謝函
+                                                        寄收據
                                                     </span>
                                                 </label>
 
@@ -2099,6 +2108,76 @@ TableRecord download_file = app_sm.select(tblcp, "cp_code = ? AND cp_lang = ?", 
                             });
                         });
                     </script>
+                    
+                    <!-- 幣別.js -->
+                <script type="text/javascript">
+                    $(function () {
+                        // 1. 控制輸入框顯示/隱藏
+                        $('input[name="dh_currency"]').change(function () {
+                            var inputField = $("#currency_other_input");
+
+                            if ($(this).val() === "other") {
+                                inputField.show(); // 顯示輸入框
+                                inputField.focus(); // 自動聚焦
+                            } else {
+                                inputField.hide(); // 隱藏輸入框
+                                inputField.val(""); // 清空內容
+                            }
+                        });
+
+                        // 2. 限制只能輸入英文 (自動轉大寫，過濾非英文字元)
+                        $("#currency_other_input").on("input", function () {
+                            var val = $(this).val();
+                            // 使用正規表達式將非英文字母替換為空字串
+                            var filtered = val.replace(/[^a-zA-Z]/g, "");
+
+                            // 如果有變更 (例如轉大寫或刪除非英文)，則更新欄位值
+                            if (val !== filtered.toUpperCase()) {
+                                $(this).val(filtered.toUpperCase());
+                            }
+                        });
+                    });
+                </script>
+                <!-- 20260330新增 當點選現金or支票時，下方幣別的其他選項才會顯示 start  -->
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const payRadios = document.querySelectorAll('input[name="dh_paymethod"]');
+                        const otherRadio = document.getElementById("currency_other_radio");
+                        const otherInput = document.getElementById("currency_other_input");
+
+                        function toggleCurrencyOther(selectedValue) {
+                            if (selectedValue === "pay.cash" || selectedValue === "pay.cheque") {
+                                // 顯示「其他」選項
+                                otherRadio.parentElement.style.display = "inline-flex";
+                            } else {
+                                // 隱藏並清空
+                                otherRadio.parentElement.style.display = "none";
+                                otherRadio.checked = false;
+                                otherInput.style.display = "none";
+                                otherInput.value = "";
+                            }
+                        }
+
+                        // 監聽付款方式變更
+                        payRadios.forEach(radio => {
+                            radio.addEventListener("change", function () {
+                                toggleCurrencyOther(this.value);
+                            });
+                        });
+
+                        // 控制「其他 input」顯示
+                        otherRadio.addEventListener("change", function () {
+                            if (this.checked) {
+                                otherInput.style.display = "inline-block";
+                            } else {
+                                otherInput.style.display = "none";
+                            }
+                        });
+
+                        // 預設隱藏（頁面載入時）
+                        otherRadio.parentElement.style.display = "none";
+                    });
+                </script>
 
                 </div>
             </div>

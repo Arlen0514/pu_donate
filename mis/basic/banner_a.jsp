@@ -8,9 +8,9 @@
 	String show_title = "首頁輪播維護";		// 模組標題
 
 	// 圖片建議尺寸
-	String image_info = "(建議尺寸2000px * 920px)";
+	String image_info = "(建議尺寸1905px * 762px)";
 	// 圖片建議尺寸
-	String mobile_info = "(建議尺寸725px * 870px)";
+	String mobile_info = "(建議尺寸750px * 900px)";
 	// 檔案建議大小
 	String file_info = "檔案上傳限制2MB";
 	// 設定圖檔上傳 K 數
