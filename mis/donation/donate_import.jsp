@@ -32,9 +32,9 @@ function MM_preloadImages() { //v3.0
 
 function checkform(F) {
 	$("#submit").prop("disabled", true);
-	var file_chk = /([^\/]+\.(?:xls))/;		//驗證副檔名
+	var file_chk = /([^\/]+\.(?:csv))/i;		//驗證副檔名
 	if($("#import_file").val()=="" || !(file_chk.test($("#import_file").val()))){
-    	alert("請上傳 .xls 檔案 , 以利作業 !!");
+    	alert("請上傳 .csv 檔案 , 以利作業 !!");
     	$("#import_file").focus();
     	$("#submit").prop("disabled", false);
         return false;
@@ -46,49 +46,15 @@ function checkform(F) {
 
 	<%-- 啟動檔案匯出功能 --%>
 	function export_file() {
-			$(".block").show();
-			var theForm = document.frm1;
-				theForm.action="export/donate_import_export.jsp";
-				theForm.target="_exportFrame";
-				theForm.submit();
+		// 下載 CSV 匯入範本
+		window.location.href='export/download_import_template.jsp';
 	}
 
-	function exportProgress(){   <%-- 檢查檔案是否已經匯出完成 --%>
-		$.ajax({
-			async:false,
-			type:"GET",
-		    url: "export/exportcheck.jsp",
-		    data: {reportType:"donate_import_export"},
-		    success: function(res){
-		    	res = $.trim(res);
-		    	// console.log(res);
-		    	if(res == "start"){
-		    		$(".block").show();
-				}else if((res.indexOf("end")>-1) || (res == "no")){
-					$(".block").hide();
-					clearProgress();
-					if(res.indexOf("end")>-1) {
-						location.href = "<%=app_fetchpath+"/report/" + app_account + "_donate_import_export.xlsx" %>";
-					}
-					else history.back();
-				}
-		    	window.setTimeout("exportProgress()",1500);
-		    }
-		}); 		
+	function exportProgress(){   <%-- 不再使用，保留相容 --%>
 	}
 
-	function clearProgress(){  <%-- 清除檔案匯出完成後之 Session 值 --%>
-		$.ajax({
-			async:false,
-			type:"GET",
-		    url: "export/exportcheck.jsp",
-		    data: {reportType:"clear_donate_import_export"},
-		    success: function(res){
-		    }
-		}); 		
+	function clearProgress(){
 	}
-
-	var timer = window.setTimeout("exportProgress()",1500);
 /*------------------------------------------------------------*/
 </script>
 <!-- InstanceBeginEditable name="head" --><!-- InstanceEndEditable -->
@@ -154,8 +120,8 @@ function checkform(F) {
                  <tr class="web_table-2-1" height="30">
                 	<td align="center" width="40%">
 <!-- 						<input type="button" name="ex_donate_import" id="ex_donate_import" value="下載範本" onclick="export_file();"> -->
-						<input type="button" id="ex_donate_import" name="ex_donate_import"  value="下載範本"
-						        onclick="window.location.href='export/donate_import_export.xlsx';"/>
+						<input type="button" id="ex_donate_import" name="ex_donate_import"  value="下載匯入範本(CSV)"
+						        onclick="window.location.href='export/download_import_template.jsp';"/>
                  	</td>                   	                 	
               	</tr>   
               	 
@@ -170,8 +136,8 @@ function checkform(F) {
               	<tr class="web_table-2-1" height="40">
                 	<td align="center" colspan="3">
                     	格式說明：<br/>
-                    	必須是 xlsx 檔，副檔名為 {.xlsx}．<br/>
-                     	
+                    	必須是 CSV 檔，副檔名為 {.csv}，編碼為 UTF-8（含 BOM）。<br/>
+                    	請先下載範本填寫後再上傳匯入。
                  	</td>
               	</tr>            	
                    	

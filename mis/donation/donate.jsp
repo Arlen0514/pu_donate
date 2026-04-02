@@ -210,6 +210,132 @@ function clearProgress2() {
 		}
 	});
 }
+
+<%-- B套 CSV 匯出 #1 --%>
+var timer_b1;
+function export_file_b1() {
+	var theForm = document.frm1;
+	timer_b1 = window.setTimeout("exportProgress_b1()", 1500);
+	$(".block").show();
+	theForm.action="export/donate_b_export_1.jsp";
+	theForm.target="_exportFrame";
+	theForm.submit();
+}
+function exportProgress_b1() {
+	$.ajax({
+		async: false,
+		type: "GET",
+		url: "export/exportcheck.jsp",
+		data: { reportType:"donate_b_export_1" },
+		success: function(res) {
+			res = $.trim(res);
+			if(res == "start") {
+				$(".block").show();
+				window.setTimeout("exportProgress_b1()", 1500);
+			} else if((res == "end") || (res == "no")) {
+				$(".block").hide();
+				clearProgress_b1();
+			} else if(res == null || res == "null") {
+				alert("B套匯出1失敗!!");
+				$(".block").hide();
+				clearProgress_b1();
+			}
+		}
+	});
+}
+function clearProgress_b1() {
+	$.ajax({
+		async:false,
+		type:"GET",
+		url: "export/exportcheck.jsp",
+		data: { reportType:"clear_donate_b_export_1" },
+		success: function(res) { clearTimeout(timer_b1); }
+	});
+}
+
+<%-- B套 CSV 匯出 #2 --%>
+var timer_b2;
+function export_file_b2() {
+	var theForm = document.frm1;
+	timer_b2 = window.setTimeout("exportProgress_b2()", 1500);
+	$(".block").show();
+	theForm.action="export/donate_b_export_2.jsp";
+	theForm.target="_exportFrame";
+	theForm.submit();
+}
+function exportProgress_b2() {
+	$.ajax({
+		async: false,
+		type: "GET",
+		url: "export/exportcheck.jsp",
+		data: { reportType:"donate_b_export_2" },
+		success: function(res) {
+			res = $.trim(res);
+			if(res == "start") {
+				$(".block").show();
+				window.setTimeout("exportProgress_b2()", 1500);
+			} else if((res == "end") || (res == "no")) {
+				$(".block").hide();
+				clearProgress_b2();
+			} else if(res == null || res == "null") {
+				alert("B套匯出2失敗!!");
+				$(".block").hide();
+				clearProgress_b2();
+			}
+		}
+	});
+}
+function clearProgress_b2() {
+	$.ajax({
+		async:false,
+		type:"GET",
+		url: "export/exportcheck.jsp",
+		data: { reportType:"clear_donate_b_export_2" },
+		success: function(res) { clearTimeout(timer_b2); }
+	});
+}
+
+<%-- B套 CSV 匯出 #3 --%>
+var timer_b3;
+function export_file_b3() {
+	var theForm = document.frm1;
+	timer_b3 = window.setTimeout("exportProgress_b3()", 1500);
+	$(".block").show();
+	theForm.action="export/donate_b_export_3.jsp";
+	theForm.target="_exportFrame";
+	theForm.submit();
+}
+function exportProgress_b3() {
+	$.ajax({
+		async: false,
+		type: "GET",
+		url: "export/exportcheck.jsp",
+		data: { reportType:"donate_b_export_3" },
+		success: function(res) {
+			res = $.trim(res);
+			if(res == "start") {
+				$(".block").show();
+				window.setTimeout("exportProgress_b3()", 1500);
+			} else if((res == "end") || (res == "no")) {
+				$(".block").hide();
+				clearProgress_b3();
+			} else if(res == null || res == "null") {
+				alert("B套匯出3失敗!!");
+				$(".block").hide();
+				clearProgress_b3();
+			}
+		}
+	});
+}
+function clearProgress_b3() {
+	$.ajax({
+		async:false,
+		type:"GET",
+		url: "export/exportcheck.jsp",
+		data: { reportType:"clear_donate_b_export_3" },
+		success: function(res) { clearTimeout(timer_b3); }
+	});
+}
 </script>
 </head>
 <%-- 20250331 modify Miles top menu.jsp  改成 RWD --%>    
@@ -334,6 +460,9 @@ function clearProgress2() {
 		            			<input type="button" value="清除" onclick="clearData(this.form);" />
 		            			<br /><br />
 		            			<input type="button" value="查詢匯出" onclick="export_file();">&nbsp;
+		            			<input type="button" value="B套匯出1" onclick="export_file_b1();">&nbsp;
+		            			<input type="button" value="B套匯出2" onclick="export_file_b2();">&nbsp;
+		            			<input type="button" value="B套匯出3" onclick="export_file_b3();">&nbsp;
 		            			<input type="button" value="出納匯出" onclick="export_file2();">
 		                  	</td>
 		              	</tr>
