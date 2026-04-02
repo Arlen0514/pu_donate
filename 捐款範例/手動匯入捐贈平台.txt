@@ -1,0 +1,2 @@
+日期,單據編號,受贈類別,身份別,匿名,捐款ID,捐款人名稱,捐贈項目(允許NULL),會計科目(允許NULL),受贈數量(當受贈類別2:物品或動產才會有,允許NULL),受贈單位(當受贈類別2:物品或動產才會有,允許NULL),支票號碼(允許NULL),金額來源(1櫃台現金、2銀行轉帳、3信用卡刷卡、4支票匯款、5校內薪資扣款、9其他),捐贈用途(不得為NULL),捐贈者全銜(捐款人名稱),通訊地址(允許NULL),備註(允許NULL),辦理情況(不得為NULL)
+dh_donatedate,dh_no,,dh_identity_type,dh_public,dh_pid,dh_name,dh_donate_project_title,,,,,dh_paymethod,,dh_name,dh_zipcode+dh_county+dh_city+dh_address,,,
