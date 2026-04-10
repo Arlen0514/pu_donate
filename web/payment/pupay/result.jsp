@@ -218,10 +218,10 @@
     }
 
     // 6. 付款方式檢查
-    if(!("信用卡".equalsIgnoreCase(method) || "LINEPAY".equalsIgnoreCase(method) || "TAIWAN PAY".equalsIgnoreCase(method))){
-        out.print("{\"success\":-1,\"message\":\"付款方式不合法\"}");
-        return;
-    }
+//     if(!("信用卡".equalsIgnoreCase(method) || "LINEPAY".equalsIgnoreCase(method) || "TAIWAN PAY".equalsIgnoreCase(method))){
+//         out.print("{\"success\":-1,\"message\":\"付款方式不合法\"}");
+//         return;
+//     }
 
     // 7. 交易狀態檢查
     if(!("SUCCESS".equalsIgnoreCase(status) || "FAIL".equalsIgnoreCase(status))){

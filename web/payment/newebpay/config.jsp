@@ -109,6 +109,6 @@ public static byte[] hexToBytes(String hexString) {
 }
 %>
 <%
-	String api_status = "online";					// 金流環境設定(test:測試/online:正式)
+	String api_status = "test";					// 金流環境設定(test:測試/online:正式)
 	boolean is_local  = false;						// 是否為本機測試
 %>

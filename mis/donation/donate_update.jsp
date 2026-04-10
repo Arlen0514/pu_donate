@@ -339,7 +339,7 @@ try {
 		}
 		
 		
-		if("N".equals(dh.getString("dh_status")))
+		if("N".equals(dh_status))
 			dh.setValue("dh_collect", "N");
 	
 		dh.setValue("dh_status", dh_status);

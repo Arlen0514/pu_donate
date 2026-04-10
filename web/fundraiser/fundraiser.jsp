@@ -766,6 +766,7 @@ TableRecord download_file = app_sm.select(tblcp, "cp_code = ? AND cp_lang = ?", 
                                     <div class="pcBanner" style="background-image:url('<%=app_fetchpath+"/"+"activity_banner"+"/"+lang+"/"+banner.getString("ap_image")%>');">                                    
                                         
 										
+	                                    <%if(!"".equals((banner.getString("ap_desc")+banner.getString("ap_content")).trim())){ %>
 	                                    <div class="indexBannerIn">
 	                                        <!--首頁banner列表標題-->
 	                                        <h2 class="indexBanner_title">
@@ -776,13 +777,14 @@ TableRecord download_file = app_sm.select(tblcp, "cp_code = ? AND cp_lang = ?", 
 	                                        <div class="indexBanner_remark">
 	                                            <%=banner.getString("ap_content")%>
 	                                        </div>
-											<%if (isLink) {%>
+											 <%if (isLink) {%>
 	                                        <!--首頁banner列表按鍵-->
 	                                        <div class="btn">
 	                                            <label><strong>了解更多</strong></label>
 	                                        </div>
-	                                        <%}%> 
+	                                        <%} %>
 	                                    </div>
+	                                    <%} %>
 	                                                                           
                                     </div>
 

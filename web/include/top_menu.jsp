@@ -180,7 +180,7 @@ Vector<TableRecord> department_category_dms = app_sm.selectAll(tbldm, "dm_code=?
                                         </a>
                                     </div>
                                     <div class="navOpenList">
-                                        <a href="../qa/qa_download.jsp">
+                                        <a href="../guide/qa_download.jsp">
                                             表單下載
                                         </a>
                                     </div>
@@ -200,7 +200,7 @@ Vector<TableRecord> department_category_dms = app_sm.selectAll(tbldm, "dm_code=?
                                         </a>
                                     </div>  
                                     <div class="navOpenList">
-                                        <a href="../qa/qa_download.jsp">
+                                        <a href="../guide/qa_download.jsp">
                                             表單下載
                                         </a>
                                     </div>

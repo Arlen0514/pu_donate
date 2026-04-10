@@ -191,7 +191,7 @@ function export_file() {
 	$(".block").show();
 
 	// 查詢資料送出
-	theForm.action="export/accumulate_export.jsp";
+	theForm.action="export/accumulate2_export.jsp";
 	theForm.target="_exportFrame";
 	theForm.submit();
 }
@@ -202,7 +202,7 @@ function exportProgress() {
 		async: false,
 		type: "GET",
 		url: "export/exportcheck.jsp",
-		data: { reportType:"accumulate_export" },
+		data: { reportType:"accumulate2_export" },
 		success: function(res) {
 			res = $.trim(res);
 			

@@ -139,7 +139,7 @@
                                  </a>
                             </div>
                             <div class="leftList">
-                                <a href="../qa/qa_download.jsp">                                    
+                                <a href="../guide/qa_download.jsp">                                    
                                     <!--功能名稱-->
                                     <div class="leftList_title">
                                         表單下載

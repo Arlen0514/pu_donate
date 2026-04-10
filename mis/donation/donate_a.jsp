@@ -559,7 +559,7 @@
 		                  		<td width="20%" align="right" class="tablebg">捐款日期 ： </td>
 		                 		<td width="30%" align="left" class="tablebg">&nbsp;&nbsp;<%=DateTimeTool.dateTimeString() %></td>
 		                  		<td width="20%" align="right" class="tablebg">捐款是否付款 ： </td>
-		                 		<td width="30%" align="left" class="tablebg">&nbsp;&nbsp;已付款</td> 		                 		                  	
+		                 		<td width="30%" align="left" class="tablebg">&nbsp;&nbsp;未付款</td> 		                 		                  	
 						  	</tr>
 
 							<tr>
@@ -780,7 +780,7 @@
 						  	</tr>
 						  	
 		                  	<tr class="information_table-2-1">		
-		                  		<td width="20%" align="right"><font color='red'>＊</font>聯絡電話 ：  </td>
+		                  		<td width="20%" align="right">聯絡電話 ：  </td>
 		                  		<td width="30%" align="left" >
 		                  			<input type="text" name="dh_cellphone" id="dh_cellphone" maxlength="50"/>
 		                  		</td>			                  					  	
@@ -791,7 +791,7 @@
 						  	</tr>	
 						  	
 						  	<tr class="information_table-2-1">
-		                  		<td align="right"><font color='red'>＊</font>通訊地址： </td>
+		                  		<td align="right">通訊地址： </td>
 		                 		<td align="left" colspan="3" >
 		                 			<label for="internal">
                                     	<input type="radio" class="item_radio" name="dh_foreign" id="internal" value="N" checked />
@@ -811,7 +811,7 @@
 		                 		</td>
 						  	</tr>
 		                  	<tr class="information_table-2-1">
-		                  		<td width="20%" align="right"><font color='red'>＊</font>E-Mail ： </td>
+		                  		<td width="20%" align="right">E-Mail ： </td>
 		                 		<td width="30%" align="left" colspan="3">
 		                 			<input type="text" name="dh_email"  id="dh_email" size="50"/>
 		                 		</td>

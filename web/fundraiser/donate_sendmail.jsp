@@ -89,7 +89,7 @@ public static String SSLreturnContent(String strURL) throws Exception{
 		String content = "";
 				
 		if(url.indexOf("https://")>-1) {
-			content = SSLreturnContent(url + "/web/mail/"+page_code+"_mail.jsp?cu_id=" + dh_id + "&lang=" + lang);
+			content = SSLreturnContent(url + "/web/mail/"+page_code+"_mail.jsp?dh_id=" + dh_id + "&lang=" + lang);
 		} else {
 			Vector urlcontent = HttpURL.returnContent(url + "/web/mail/"+page_code+"_mail.jsp?dh_id=" + dh_id + "&lang=" + lang); // 信件內容產生的 JSP 檔
 			for(int i = 0; i < urlcontent.size(); i++) {

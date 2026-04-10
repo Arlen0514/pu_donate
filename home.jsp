@@ -325,7 +325,7 @@
                                         </a>
                                     </div>
                                       <div class="navOpenList">
-                                        <a href="web/qa/qa_download.jsp">
+                                        <a href="web/guide/qa_download.jsp">
                                             表單下載
                                         </a>
                                     </div>
@@ -802,7 +802,7 @@
 
                             <!-- 首頁募款專案圖片 -->
                             <div class="indexDPimg">
-                                <a href="web/donate_project/donate_project.jsp?dm_id=<%=donate_project_dm.getString("dm_id")%>">
+                                <a href="web/donate_project/donate_project_in.jsp?dm_id=<%=donate_project_dm.getString("dm_id")%>">
                                     <img src="<%=donate_project_dm_image %>"
 	                                         alt="<%=donate_project_dm.getString("dm_title")%>"
 	                                         title="<%=donate_project_dm.getString("dm_title")%>">
@@ -812,7 +812,7 @@
                                 
                                 <!-- 首頁募款專案標題 -->
                                 <h3>
-                                    <a href="web/donate_project/donate_project.jsp?dm_id=<%=donate_project_dm.getString("dm_id")%>">
+                                    <a href="web/donate_project/donate_project_in.jsp?dm_id=<%=donate_project_dm.getString("dm_id")%>">
 	                                        <%=donate_project_dm.getString("dm_title") %>
 	                                    </a>
                                 </h3>

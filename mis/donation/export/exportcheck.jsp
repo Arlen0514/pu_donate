@@ -25,6 +25,10 @@
 	if("accumulate_export".equals(reportType)){ sessionKey = "accumulate_file";  }
 	if("clear_accumulate_export".equals(reportType)){ session.setAttribute("accumulate_file","");  }
 	
+	// 捐款累計匯出
+	if("accumulate2_export".equals(reportType)){ sessionKey = "accumulate2_file";  }
+	if("clear_accumulate2_export".equals(reportType)){ session.setAttribute("accumulate2_file","");  }
+		
 	// 回傳前端 Ajax Session 的狀態值
 	Object res = session.getAttribute(sessionKey);
 	out.print(res);

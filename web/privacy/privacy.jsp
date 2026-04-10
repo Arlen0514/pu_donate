@@ -117,7 +117,7 @@
                     
                         <!--左側表單名稱-->
                         <div class="left_title">
-                            隱私權政策
+                            個資聲明
                             <!-- <span>Recommend</span> -->
                         </div>
                         

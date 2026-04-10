@@ -426,11 +426,17 @@
                             <td width="103">捐款金額</td>
                             <td  colspan="2">
                                 <div class="list">
-                                    新台幣&nbsp;<div class="fillBlank"><%=app_df.format(dh.getInt("dh_total")) %></div>&nbsp;元整
-                                    <%if(is_foreign){ 
-                                    	TableRecord currency = app_sm.select(tbldm, "dm_subtitle=?", new Object[]{dh.getString("dh_currency")});
-                                    %>
-		                  			，<%=currency.getString("dm_title") %>&nbsp;<div class="fillBlank"><%=app_df.format(dh.getInt("dh_foreign_total"))%></div>&nbsp;元，
+<%--                                     新台幣&nbsp;<div class="fillBlank"><%=app_df.format(dh.getInt("dh_total")) %></div>&nbsp;元整 --%>
+<%--                                     <%if(is_foreign){  --%>
+<!-- //                                     	TableRecord currency = app_sm.select(tbldm, "dm_subtitle=?", new Object[]{dh.getString("dh_currency")}); -->
+<%--                                     %> --%>
+<%-- 		                  			，<%=currency.getString("dm_title") %>&nbsp;<div class="fillBlank"><%=app_df.format(dh.getInt("dh_foreign_total"))%></div>&nbsp;元， --%>
+<%-- 		                  			<%} %> --%>
+		                  			
+		                  			<%if(is_foreign){ %>
+		                  			<%=dh.getString("dh_currency_other") %>&nbsp;<div class="fillBlank"><%=app_df.format(dh.getInt("dh_total"))%></div>&nbsp;元
+		                  			<%}else{ %>
+		                  			新台幣&nbsp;<div class="fillBlank"><%=app_df.format(dh.getInt("dh_total"))%></div>&nbsp;元
 		                  			<%} %>
                                 </div>
                             </td>

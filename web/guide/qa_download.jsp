@@ -129,7 +129,7 @@ String csrfToken = generateCSRFToken(session, "normalform");
                                 </a>
                             </div>
                             <div class="leftList">
-                                 <a href="../guide/guide_2.jsp">
+                                 <a href="../guide/guide_2.jsp" >
                                      <!--功能名稱-->
                                    	<div class="leftList_title">
                                    	捐款抵稅相關辦法
@@ -137,7 +137,7 @@ String csrfToken = generateCSRFToken(session, "normalform");
                                  </a>
                             </div>
                             <div class="leftList active">
-                                <a href="../qa/qa_download.jsp">                                    
+                                <a href="../guide/qa_download.jsp">                                    
                                     <!--功能名稱-->
                                     <div class="leftList_title">
                                         表單下載
