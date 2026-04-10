@@ -142,8 +142,7 @@
 		String payMethodCode = dh.getString("dh_paymethod");
 		String payMethodTitle = paymentTitleMap.containsKey(payMethodCode) ? paymentTitleMap.get(payMethodCode) : "";
 		String donateDate = toRocDate(dh.getString("dh_donatedate"));
-		String receiptNo = nvl(dh.getString("rs_no"));
-		if("".equals(receiptNo)) receiptNo = nvl(dh.getString("dr_no"));
+		String receiptNo = "";
 
 		String donorId = nvl(dh.getString("dh_pid"));
 		if(donorId.contains("==")) {
