@@ -100,6 +100,20 @@ function clearData(F){
 	$("#_qcollect").val("");
 }
 
+<%-- 捐款資料 CSV 匯出 --%>
+function export_csv() {
+	var theForm = document.form_search;
+	if(!checkform(theForm)) return;
+
+	var orgAction = theForm.action;
+	var orgTarget = theForm.target;
+	theForm.action = "export/donation_csv_export.jsp";
+	theForm.target = "_blank";
+	theForm.submit();
+	theForm.action = orgAction;
+	theForm.target = orgTarget;
+}
+
 <%-- 確認是否作廢捐款單 20221117 May --%>
 function checkOrderDisable(F){
 	if(confirm("確定要作廢捐款單？")){
@@ -137,7 +151,7 @@ function exportProgress() {
 			} else if((res == "end") || (res == "no")) {
 				$(".block").hide();
 				clearProgress();
-				if(res == "end") window.open("export/download.jsp?file=<%=app_account %>_donate_export.xlsx", "捐款查詢匯出" );
+					if(res == "end") window.open("export/download.jsp?file=<%=app_account %>_donate_export.csv", "捐款查詢匯出" );
 			} else if(res == null || res == "null") {
 				alert("查詢匯出失敗!!");
 				$(".block").hide();
@@ -269,7 +283,8 @@ function clearProgress2() {
 			    		  <span><input type="button" value="新增捐款單" onclick="javascript:location.href='<%=code %>_a.jsp'" /></span>&nbsp;
 						  <span><input type="button" value="捐款單列表" onclick="javascript:location.href='<%=code %>.jsp'" /></span>&nbsp;
 						  <span><input type="button" value="設定收件者" onclick="javascript:location.href='<%=code %>_pop.jsp'" /></span>	
-						  <span><input type="button" value="批次匯入" onclick="javascript:location.href='<%=code %>_import.jsp'" /></span>&nbsp;	    		  
+						  <span><input type="button" value="批次匯入" onclick="javascript:location.href='<%=code %>_import.jsp'" /></span>&nbsp;
+						  <span><input type="button" value="CSV匯入" onclick="javascript:location.href='<%=code %>_csv_import.jsp'" /></span>&nbsp;
 					    </td>
 				      </tr>         
 			          <tr class="information_bk-2">
@@ -333,8 +348,9 @@ function clearProgress2() {
 		                        <input name="query" type="submit" value="查詢">&nbsp;
 		            			<input type="button" value="清除" onclick="clearData(this.form);" />
 		            			<br /><br />
-		            			<input type="button" value="查詢匯出" onclick="export_file();">&nbsp;
-		            			<input type="button" value="出納匯出" onclick="export_file2();">
+									<input type="button" value="CSV匯出" onclick="export_csv();">&nbsp;
+									<input type="button" value="匯出 CSV" onclick="export_file();">&nbsp;
+									<input type="button" value="出納匯出" onclick="export_file2();">
 		                  	</td>
 		              	</tr>
 			  		  </form>				  
