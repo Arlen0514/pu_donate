@@ -348,8 +348,7 @@ function clearProgress2() {
 		                        <input name="query" type="submit" value="查詢">&nbsp;
 		            			<input type="button" value="清除" onclick="clearData(this.form);" />
 		            			<br /><br />
-									<input type="button" value="CSV匯出" onclick="export_csv();">&nbsp;
-									<input type="button" value="查詢匯出" onclick="export_file();">&nbsp;
+									<input type="button" value="查詢匯出" onclick="export_csv();">&nbsp;
 									<input type="button" value="出納匯出" onclick="export_file2();">
 		                  	</td>
 		              	</tr>
