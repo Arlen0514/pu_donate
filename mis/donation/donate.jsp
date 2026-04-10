@@ -283,7 +283,8 @@ function clearProgress2() {
 			    		  <span><input type="button" value="新增捐款單" onclick="javascript:location.href='<%=code %>_a.jsp'" /></span>&nbsp;
 						  <span><input type="button" value="捐款單列表" onclick="javascript:location.href='<%=code %>.jsp'" /></span>&nbsp;
 						  <span><input type="button" value="設定收件者" onclick="javascript:location.href='<%=code %>_pop.jsp'" /></span>	
-						  <span><input type="button" value="批次匯入" onclick="javascript:location.href='<%=code %>_import.jsp'" /></span>&nbsp;	    		  
+						  <span><input type="button" value="批次匯入" onclick="javascript:location.href='<%=code %>_import.jsp'" /></span>&nbsp;
+						  <span><input type="button" value="CSV匯入" onclick="javascript:location.href='<%=code %>_csv_import.jsp'" /></span>&nbsp;
 					    </td>
 				      </tr>         
 			          <tr class="information_bk-2">
