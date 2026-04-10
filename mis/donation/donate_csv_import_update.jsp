@@ -2,15 +2,17 @@
 <%@include file="/WEB-INF/jspf/config.jspf"%>
 <%@include file="/WEB-INF/jspf/mis/check.jspf"%>
 <%@ include file="/web/include/encryption.jsp"%>
-<%@ page import="java.util.*" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Iterator" %>
+<%@ page import="java.util.Random" %>
 <%@ page import="java.io.*" %>
 <%@ page import="org.apache.commons.fileupload.*" %>
 <%@ page import="org.apache.commons.fileupload.disk.*" %>
 <%! 
 	private String nvl(String val) { return val == null ? "" : val.trim(); }
 
-	private List<String> parseCsvRecords(String content) {
-		List<String> rows = new ArrayList<String>();
+	private java.util.List<String> parseCsvRecords(String content) {
+		java.util.List<String> rows = new ArrayList<String>();
 		StringBuilder sb = new StringBuilder();
 		boolean inQuotes = false;
 		for (int i = 0; i < content.length(); i++) {
@@ -36,8 +38,8 @@
 		return rows;
 	}
 
-	private List<String> parseCsvRow(String row) {
-		List<String> values = new ArrayList<String>();
+	private java.util.List<String> parseCsvRow(String row) {
+		java.util.List<String> values = new ArrayList<String>();
 		StringBuilder sb = new StringBuilder();
 		boolean inQuotes = false;
 		for (int i = 0; i < row.length(); i++) {
@@ -105,8 +107,8 @@
 	};
 
 	int totalCount = 0, updateSuccess = 0, insertSuccess = 0, failCount = 0;
-	List<String> failDetails = new ArrayList<String>();
-	List<String> notes = new ArrayList<String>();
+	java.util.List<String> failDetails = new ArrayList<String>();
+	java.util.List<String> notes = new ArrayList<String>();
 	notes.add("欄位「通訊地址」目前僅先寫入 dh_address，未拆解 dh_zipcode / dh_county / dh_city。");
 	notes.add("欄位「辦理情況(指定捐贈用途)」先對應 dh_donate_project_title。");
 	notes.add("欄位「受贈類別*現金」為固定值，匯入時不回寫資料表。");
@@ -117,7 +119,7 @@
 		DiskFileUpload fu = new DiskFileUpload();
 		fu.setHeaderEncoding("UTF-8");
 		fu.setSizeMax(10485760);
-		List fileItems = fu.parseRequest(request);
+		java.util.List fileItems = fu.parseRequest(request);
 		Iterator iter = fileItems.iterator();
 		while(iter.hasNext()) {
 			FileItem fi = (FileItem) iter.next();
@@ -139,11 +141,11 @@
 		failDetails.add("檔案編碼必須為 UTF-8 BOM");
 	} else {
 		String content = new String(uploadData, 3, uploadData.length - 3, "UTF-8");
-		List<String> rows = parseCsvRecords(content);
+		java.util.List<String> rows = parseCsvRecords(content);
 		if(rows.size() == 0) {
 			failDetails.add("CSV 無資料列");
 		} else {
-			List<String> headers = parseCsvRow(rows.get(0));
+			java.util.List<String> headers = parseCsvRow(rows.get(0));
 			boolean headerOk = headers.size() == requiredHeaders.length;
 			if(headerOk) {
 				for(int i=0;i<requiredHeaders.length;i++) {
@@ -158,7 +160,7 @@
 			} else {
 				for(int r=1;r<rows.size();r++) {
 					String rowText = rows.get(r);
-					List<String> cols = parseCsvRow(rowText);
+					java.util.List<String> cols = parseCsvRow(rowText);
 					boolean isBlankRow = true;
 					for(int i=0;i<cols.size();i++){
 						if(!"".equals(nvl(cols.get(i)))) { isBlankRow = false; break; }
