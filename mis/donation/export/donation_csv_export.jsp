@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/csv; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jspf/config.jspf"%>
 <%@ include file="/WEB-INF/jspf/mis/check.jspf"%>
 <%@ include file="/web/include/encryption.jsp"%>
