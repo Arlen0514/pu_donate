@@ -100,6 +100,20 @@ function clearData(F){
 	$("#_qcollect").val("");
 }
 
+<%-- 捐款資料 CSV 匯出 --%>
+function export_csv() {
+	var theForm = document.form_search;
+	if(!checkform(theForm)) return;
+
+	var orgAction = theForm.action;
+	var orgTarget = theForm.target;
+	theForm.action = "export/donation_csv_export.jsp";
+	theForm.target = "_blank";
+	theForm.submit();
+	theForm.action = orgAction;
+	theForm.target = orgTarget;
+}
+
 <%-- 確認是否作廢捐款單 20221117 May --%>
 function checkOrderDisable(F){
 	if(confirm("確定要作廢捐款單？")){
@@ -333,8 +347,9 @@ function clearProgress2() {
 		                        <input name="query" type="submit" value="查詢">&nbsp;
 		            			<input type="button" value="清除" onclick="clearData(this.form);" />
 		            			<br /><br />
-		            			<input type="button" value="查詢匯出" onclick="export_file();">&nbsp;
-		            			<input type="button" value="出納匯出" onclick="export_file2();">
+									<input type="button" value="CSV匯出" onclick="export_csv();">&nbsp;
+									<input type="button" value="查詢匯出" onclick="export_file();">&nbsp;
+									<input type="button" value="出納匯出" onclick="export_file2();">
 		                  	</td>
 		              	</tr>
 			  		  </form>				  
